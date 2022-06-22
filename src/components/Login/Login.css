@@ -1,0 +1,19 @@
+.form-outline .form-control {
+    border: 1px solid #85224A;
+}
+
+.btn-dark {
+    background-color: #85224A;
+}
+.btn-dark:hover, .btn-dark:focus {
+    background-color: #85224A;
+}
+.form-outline .form-control.active~.form-label, .form-outline .form-control:focus~.form-label {
+    transform: translateY(-1.5rem) translateY(0.1rem) scale(0.8);
+}
+.form-outline .form-control:focus~.form-label {
+    color: grey;
+}
+.fw-bold {
+    color:#85224A;
+}

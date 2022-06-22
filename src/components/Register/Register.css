@@ -1,0 +1,19 @@
+.cascading-right {
+    margin-right: -50px;
+  }
+
+  @media (max-width: 991.98px) {
+    .cascading-right {
+      margin-right: 0;
+    }
+}
+.img-register{
+    width: 500px;
+    height: 600px;
+}
+.btn-primary {
+    background-color: #AD0279;
+}
+.fa-facebook-f, .fa-google, .fa-twitter {
+    color:#AD0279;
+}

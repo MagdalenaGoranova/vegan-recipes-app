@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+.recipes-header-title {
+    font-family: 'Arizonia', cursive;
+    font-size: 2.5rem;
+    margin-top: 15px;
+    text-align: center;
+}
+.recipes-container{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-direction: row;
+}
+  
+#recipes-card-wrapper{
+    width:430px;
+    height:600px;
+    color:black;
+    box-shadow: 5px 5px 15px; 
+    font-family: 'Abril Fatface', cursive;
+    margin-top:20px;
+} 
+  
+.recipes-inner-card{
+    width: 100%;
+    height: 100%;
+}
+#recipes-img-container {
+    width: 100%;
+    height: 50%;
+}
+#recipes-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h3{
+    font-size:1rem;
+    margin-top:25px;
+}
+#recipes-top-details{
+    width: 100%;
+    height: 10%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    
+}
+#recipes-bottom-details{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+    flex-wrap: wrap;
+    padding-left: 1rem;
+    flex-direction: column;  
+    
+}
+.recipe-details {
+    font-size: 14px;
+    width: 30%;
+  
+}
+.recipes-start-btn{
+    display:flex;
+    justify-content:center;
+    margin-bottom:50px;
+    float: right;
+    margin-top: -60px;
+    margin-right: 20px;
+}
+.recipes-start-btn a{
+    background:#ee8235;
+    color:white;
+    padding:.6em;
+    width:155px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow: .5px 1px 5px;
+    text-decoration:none;
+
+    
+}
+  
+.start-btn .fas{
+    margin-left:10px;
+}
+i {
+    margin-right: 3px;
+    color: #ee8235;
+}
+.recipe-author p{
+    font-size: 1.2rem;
+    color: #ee8235;
+}
+.recipe-category p {
+    font-size: 1.2rem;
+    color: black
+
+}
+.recipe-level p {
+    font-size: 1.2rem;
+
+}
+.fa-long-arrow-alt-right {
+    color: white;
+}
+.body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+}
+#recipe-title {
+    padding-left: 1rem;
+}
