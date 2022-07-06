@@ -25,7 +25,8 @@ const [user, setUser] = useState({
   useEffect(() => {
       recipeService.getAll()
           .then(result => {
-              setCards(Object.values(Object.values(result)[0]));
+            console.log(result);
+              setCards([...result]);
               
           })
           .catch(err => {
@@ -36,18 +37,18 @@ const [user, setUser] = useState({
   const login = (authData) => {
     setUser(authData);
   }
-
+  console.log(cards);
 
   return (
     <div className="App">
 
-      <AuthContext.Provider value={{user, login}}>
+      <AuthContext.Provider value={{user}}>
         <Header />
         <Routes>
           <Route path='home' element={<Home cards={cards}/>}/>
           <Route path='all-recipes' element={<AllRecipes cards={cards}/>}/>
-          <Route path='login' element={<Login/>}/>
-          <Route path='register' element={<Register />}/>
+          <Route path='login' element={<Login login={login}/> }/>
+          <Route path='register' element={<Register login={login}/>}/>
           <Route path='create-recipe' element={<RecipeCreate />}/>
         </Routes>
       </AuthContext.Provider>

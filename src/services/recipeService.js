@@ -1,15 +1,15 @@
 const baseUrl = 'http://localhost:3030';
 
 export const getAll = async () => {
-    const response = await fetch(`${baseUrl}/jsonstore/vegan-recipes`);
+    const response = await fetch(`${baseUrl}/data/vegan-recipes`);
     return await response.json();
 }
-export const createRecipe = async(recipeData) => {
-    const response = await fetch(`${baseUrl}/collectionss/vegan-recipes`, {
+export const createRecipe = async(recipeData, authToken) => {
+    const response = await fetch(`${baseUrl}/data/vegan-recipes`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Authorization': 'accessToken'
+            'X-Authorization': authToken
         },
         body: JSON.stringify(recipeData)
     })

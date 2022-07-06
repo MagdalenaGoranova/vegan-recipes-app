@@ -2,12 +2,9 @@ import './Register.css'
 import * as authService from '../../services/authService';
 
 import { useNavigate } from 'react-router';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useContext } from 'react';
 
-export default function Register() {
 
-  const {login} = useContext(AuthContext);
+export default function Register({login}) {
 
   const navigate = useNavigate();
   
