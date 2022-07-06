@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'; 
-import { useState, useEffect } from "react";
+import { useCallback, useState} from "react";
 
 import './App.css';
 import * as recipeService from './services/recipeService';
@@ -11,6 +11,7 @@ import AllRecipes from './components/AllRecipes/AllRecipes';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import RecipeCreate from './components/RecipeCreate/RecipeCreate';
+import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 
 
 function App() {
@@ -21,21 +22,13 @@ const [user, setUser] = useState({
   _id: ''
 });
 
-  useEffect(() => {
-      recipeService.getAll()
-          .then(result => {
-            console.log(result);
-              setCards([...result]);
-              
-          })
-          .catch(err => {
-              console.log(err);
-          })
-  }, []);
-
   const login = (authData) => {
     setUser(authData);
   }
+  const setAllRecipes = useCallback((result) => {
+    setCards(result);
+
+  },[]);
   console.log(cards);
 
 
@@ -46,12 +39,12 @@ const [user, setUser] = useState({
       <AuthContext.Provider value={{user}}>
         <Header />
         <Routes>
-          <Route path='home' element={<Home cards={cards}/>}/>
-          <Route path='all-recipes' element={<AllRecipes cards={cards}/>}/>
+          <Route path='home' element={<Home setAllRecipes={setAllRecipes} cards={cards}/>}/>
+          <Route path='all-recipes' element={<AllRecipes setAllRecipes={setAllRecipes} cards={cards}/>}/>
           <Route path='login' element={<Login login={login}/> }/>
           <Route path='register' element={<Register login={login}/>}/>
-          <Route path='create-recipe' element={<RecipeCreate />}/>
-
+          <Route path='create-recipe' element={<RecipeCreate recipeService={recipeService}/>}/>
+          <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
         </Routes>
       </AuthContext.Provider>
     </div>

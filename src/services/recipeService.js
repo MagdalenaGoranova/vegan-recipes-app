@@ -15,3 +15,7 @@ export const createRecipe = async(recipeData, authToken) => {
     })
     return await response.json();
 }
+export const getOne = async (recipeId) => {
+    const response = await fetch(`${baseUrl}/data/vegan-recipes/${recipeId}`);
+    return await response.json();
+}

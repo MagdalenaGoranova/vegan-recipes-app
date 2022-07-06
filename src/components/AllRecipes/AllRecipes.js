@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import './AllRecipes.css';
 import AllRecipesCard from './AllRecipesCard';
+import * as recipeService from '../../services/recipeService';
 
-export default function AllRecipes({cards}) {
+export default function AllRecipes({setAllRecipes, cards}) {
+    useEffect(() => {
+        recipeService.getAll()
+        .then(result => {
+            setAllRecipes(result);
+        })
+
+    },[setAllRecipes]);
     return (
         <div className="recipes-page">
             <div className="recipes-header">

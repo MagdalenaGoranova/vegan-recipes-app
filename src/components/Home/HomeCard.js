@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 
 export default function HomeCard({card}) {
     return (
@@ -50,7 +51,9 @@ export default function HomeCard({card}) {
                 <h3><i className="fa-solid fa-comments"></i>12</h3>
                 </div>
 
-                <div className="start-btn"><a href="/">Details<i className="fas fa-long-arrow-alt-right"></i></a></div>
+                <div className="start-btn">
+                    <NavLink to={`/recipe/details/${card._id}`}>Details<i className="fas fa-long-arrow-alt-right"></i></NavLink>
+                </div>
       
             </div>
 

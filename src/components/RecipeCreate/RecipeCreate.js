@@ -2,20 +2,20 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import './RecipeCreate.css';
-import * as recipeService from '../../services/recipeService';
 import { AuthContext } from '../../contexts/AuthContext';
 
 
 
-export default function RecipeCreate() {
+export default function RecipeCreate({recipeService}) {
 
-    const user = useContext(AuthContext);
-    console.log({user});
+    const {user} = useContext(AuthContext);
+    
 
     const navigate = useNavigate();
 
     const [recipe, setRecipe] = useState({
         step: 1,
+        author:user.username,
         title: '',
         description: '',
         level: '',
@@ -44,6 +44,7 @@ export default function RecipeCreate() {
 
         setRecipe({
             ...recipe,
+            author: user.username,
             title: title,
             description: description,
             level: level, 
@@ -110,7 +111,7 @@ export default function RecipeCreate() {
     function createRecipeHandler(e) {
         console.log(recipe);
 
-        recipeService.createRecipe(recipe, user.user.accessToken)
+        recipeService.createRecipe(recipe, user.accessToken)
         .then((result) => {
             console.log(result);
             navigate('/all-recipes');

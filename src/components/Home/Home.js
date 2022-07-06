@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import './Home.css';
 import HomeCard from './HomeCard';
+import * as recipeService from '../../services/recipeService';
 
-export default function Home({cards}) {
+export default function Home({setAllRecipes, cards}) {
+    useEffect(() => {
+        recipeService.getAll()
+        .then(result => {
+            setAllRecipes(result);
+        })
+
+    },[setAllRecipes]);
     return (
         <div className="home-page">
             <div className="latest-recipes-header">
