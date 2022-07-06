@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 import './App.css';
 import * as recipeService from './services/recipeService';
-//import * as authService from './services/authService';
 import { AuthContext } from './contexts/AuthContext';
 
 import Header from './components/Header/Header';
@@ -39,6 +38,8 @@ const [user, setUser] = useState({
   }
   console.log(cards);
 
+
+
   return (
     <div className="App">
 
@@ -50,6 +51,7 @@ const [user, setUser] = useState({
           <Route path='login' element={<Login login={login}/> }/>
           <Route path='register' element={<Register login={login}/>}/>
           <Route path='create-recipe' element={<RecipeCreate />}/>
+
         </Routes>
       </AuthContext.Provider>
     </div>

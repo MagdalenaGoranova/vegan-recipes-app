@@ -37,4 +37,30 @@ export const register = async (email, password) => {
         throw jsonResult.message;
     }
 }
+export const getMyProfile = async(authToken) => {
+    const response = await fetch(`${baseUrl}/users/me`, {
+        headers: {
+            'X-Authorization': authToken
+        }  
+    });
+
+    let jsonResult = await response.json();
+    console.log(jsonResult);
+
+    if(response.ok) {
+        return jsonResult;
+    } else {
+        throw jsonResult.message;
+    }
+}
+export const logout = async(authToken) => {
+    const response = await fetch(`${baseUrl}/users/logout`, {
+        headers: {
+            'X-Authorization': authToken
+        }
+      
+    });
+    console.log(response);  
+}
+
 

@@ -3,9 +3,16 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import './Header.css';
 import { AuthContext } from "../../contexts/AuthContext";
+import * as AuthService from '../../services/authService'
 
 export default function Header() {
     const { user } = useContext(AuthContext);
+    
+
+    function logout() {
+        AuthService.logout(user.accessToken);
+
+    }
     return (
         <header>
             <article className="logo">
@@ -24,7 +31,7 @@ export default function Header() {
                         <NavLink to="/my-profile">My Profile</NavLink>
                         <NavLink to="/my-recipes">My Recipes</NavLink>
                         <NavLink to="/create-recipe">Create Recipe</NavLink>
-                        <NavLink to="/logout">Logout</NavLink>
+                        <a onClick={logout} href="/home">Logout</a>
                     </div>
                 </div>
             </nav>
@@ -36,6 +43,7 @@ export default function Header() {
                     <li><NavLink to="/all-recipes">All Recipes</NavLink></li>
                     <li><NavLink to="/login">Login</NavLink></li>
                     <li><NavLink to="/register">Register</NavLink></li>
+                    
                 </ul>
             </nav>
                 
