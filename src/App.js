@@ -12,15 +12,13 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import RecipeCreate from './components/RecipeCreate/RecipeCreate';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
+import MyProfile from './components/MyProfile/MyProfile';
+import MyRecipes from './components/MyRecipes/MyRecipes';
 
 
 function App() {
 const  [cards, setCards] = useState({});
-const [user, setUser] = useState({
-  accessToken: '',
-  email: '',
-  _id: ''
-});
+const [user, setUser] = useState({});
 
   const login = (authData) => {
     console.log(authData);
@@ -46,6 +44,8 @@ const [user, setUser] = useState({
           <Route path='register' element={<Register login={login}/>}/>
           <Route path='create-recipe' element={<RecipeCreate recipeService={recipeService}/>}/>
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
+          <Route path='my-profile' element={<MyProfile/>}/>
+          <Route path='my-recipes' element={<MyRecipes/>}/>
         </Routes>
       </AuthContext.Provider>
     </div>

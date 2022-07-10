@@ -19,3 +19,12 @@ export const getOne = async (recipeId) => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes/${recipeId}`);
     return await response.json();
 }
+export const getMyRecipes = async(ownerId, authToken) => {
+    const response = await fetch(`${baseUrl}/data/vegan-recipes?where=_ownerId%3D%22${ownerId}%22`, {
+        headers: {
+            'X-Authorization': authToken
+        }
+    });
+    return await response.json();
+    
+}
