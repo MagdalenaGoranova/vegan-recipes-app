@@ -13,13 +13,16 @@ export default function Register({login}) {
   
     let formData = new FormData(e.currentTarget);
   
-    //let firstName = formData.get('firstName');
-    //let lastName = formData.get('lastName');
+    let firstName = formData.get('firstName');
+    let lastName = formData.get('lastName');
     let email = formData.get('email');  
     let password = formData.get('password');
+    let username = formData.get('username');
+    let info = formData.get('info');
+    let image = formData.get('img')
     
   
-    authService.register(email, password)
+    authService.register(firstName, lastName, email, password, username, info, image)
     .then((authData) => {
       console.log(authData);
       login(authData);
@@ -44,7 +47,7 @@ export default function Register({login}) {
                     backdropFilter: 'blur(30px)'
                 }}>
                   <div className="card-body p-5 shadow-5 text-center">
-                    <h2 className="fw-bold mb-5">Sign up now</h2>
+                    <h2 className="fw-bold mb-5">Register</h2>
                     <form method='POST' onSubmit={(e) => registerHandler(e)}>
                       <div className="row">
                         <div className="col-md-6 mb-4">
@@ -60,7 +63,7 @@ export default function Register({login}) {
                           </div>
                         </div>
                       </div>
-        
+
                       
                       <div className="form-outline mb-4">
                         <input type="email" id="form3Example3" className="form-control" name="email"/>
@@ -72,9 +75,25 @@ export default function Register({login}) {
                         <input type="password" id="form3Example4" className="form-control" name="password"/>
                         <label className="form-label" htmlFor="form3Example4">Password</label>
                       </div>
+
+                      <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="form3Example3">Add username</label>
+                        <input type="text" id="form3Example3" className="form-control" name="username"/>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="form3Example4">Say a few words about yourself</label>
+                        <input type="text" id="form3Example4" className="form-control" name="info"/>
+                        
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="form3Example4">Add an image for you profile</label>
+                        <input type="url" id="form3Example4" className="form-control" name="img"/>
+                      </div>
         
                       <button type="submit" className="btn btn-primary btn-block mb-4">
-                        Sign up
+                        Register
                       </button>
         
                       <div className="text-center">

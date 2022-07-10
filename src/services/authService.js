@@ -18,13 +18,13 @@ export const login = async (email, password) => {
         throw jsonResult.message;
     }
 }
-export const register = async (email, password) => {
+export const register = async (firstName, lastName, email, password, username, info, image) => {
     const response = await fetch(`${baseUrl}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({firstName, lastName, email, password, username, info, image})
         
     });
 
@@ -37,7 +37,7 @@ export const register = async (email, password) => {
         throw jsonResult.message;
     }
 }
-export const getMyProfile = async(authToken) => {
+export const getMyProfileInfo = async(authToken) => {
     const response = await fetch(`${baseUrl}/users/me`, {
         headers: {
             'X-Authorization': authToken

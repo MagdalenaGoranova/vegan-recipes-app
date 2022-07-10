@@ -23,6 +23,7 @@ const [user, setUser] = useState({
 });
 
   const login = (authData) => {
+    console.log(authData);
     setUser(authData);
   }
   const setAllRecipes = useCallback((result) => {
