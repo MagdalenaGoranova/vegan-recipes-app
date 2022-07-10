@@ -97,7 +97,7 @@ export default function Register({login}) {
                       </button>
         
                       <div className="text-center">
-                        <p>or sign up with:</p>
+                        <p>or register with:</p>
                         <button type="button" className="btn btn-link btn-floating mx-1">
                           <i className="fab fa-facebook-f"></i>
                         </button>
