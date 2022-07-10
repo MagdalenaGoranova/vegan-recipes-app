@@ -10,11 +10,21 @@ export default function MyRecipes() {
     const [myRecipes, setMyRecipes] = useState([]);
     useEffect(() => {
         recipeService.getMyRecipes(user._id, user.accessToken)
-        .then(result => {
-            setMyRecipes(result);
-        })
+            .then(result => {
+                setMyRecipes(result);
+            })
 
     }, [user._id, user.accessToken]);
+
+    function deleteMyRecipe(id, accessToken) {
+        recipeService.deleteRecipe(id, accessToken)
+            .then(result => {
+                recipeService.getMyRecipes(user._id, user.accessToken)
+                    .then(result => {
+                        setMyRecipes(result);
+                    })
+            })
+    }
 
     return (
         <div className="recipes-page">
@@ -22,14 +32,14 @@ export default function MyRecipes() {
                 <h2 className='recipes-header-title'>My Recipes</h2>
             </div>
             {myRecipes.length > 0
-                ?  (
-                <section className="recipes-container">
-                    {myRecipes.map(recipe => <MyRecipesCard key={recipe._id} myRecipe={recipe}/>)}
-                 </section>
+                ? (
+                    <section className="recipes-container">
+                        {myRecipes.map(recipe => <MyRecipesCard key={recipe._id} myRecipe={recipe} deleteMyRecipe={deleteMyRecipe} />)}
+                    </section>
                 )
                 : <h1 className='no-recipes'>You don't have recipes!</h1>
-            }     
+            }
         </div>
     )
-    
+
 }

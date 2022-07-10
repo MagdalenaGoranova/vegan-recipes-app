@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
-export default function MyRecipesCard ({myRecipe}) {
+export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
+
+    const {user} = useContext(AuthContext);
+
     return (
     <div id="recipes-card-wrapper">
 
@@ -61,7 +66,7 @@ export default function MyRecipesCard ({myRecipe}) {
             </div>
             <div className="recipes-start-btn"><NavLink to="/">Edit</NavLink></div>
             
-            <div className="recipes-start-btn"><a href="/">Delete</a></div>
+           <button onClick={() => deleteMyRecipe(myRecipe._id, user.accessToken)}>Delete</button>
 
         </div>
 
