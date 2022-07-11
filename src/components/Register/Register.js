@@ -1,10 +1,15 @@
 import './Register.css'
 import * as authService from '../../services/authService';
 
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+
 import { useNavigate } from 'react-router';
 
 
-export default function Register({login}) {
+export default function Register() {
+
+  const {login} = useContext(AuthContext);
 
   const navigate = useNavigate();
   
@@ -24,7 +29,6 @@ export default function Register({login}) {
   
     authService.register(firstName, lastName, email, password, username, info, image)
     .then((authData) => {
-      console.log(authData);
       login(authData);
   
       navigate('/home');

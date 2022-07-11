@@ -3,7 +3,7 @@ import { useCallback, useState} from "react";
 
 import './App.css';
 import * as recipeService from './services/recipeService';
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -18,12 +18,7 @@ import MyRecipes from './components/MyRecipes/MyRecipes';
 
 function App() {
 const  [cards, setCards] = useState({});
-const [user, setUser] = useState({});
-
-  const login = (authData) => {
-    console.log(authData);
-    setUser(authData);
-  }
+  
   const setAllRecipes = useCallback((result) => {
     setCards(result);
 
@@ -35,19 +30,19 @@ const [user, setUser] = useState({});
   return (
     <div className="App">
 
-      <AuthContext.Provider value={{user}}>
+      <AuthProvider>
         <Header />
         <Routes>
           <Route path='home' element={<Home setAllRecipes={setAllRecipes} cards={cards}/>}/>
           <Route path='all-recipes' element={<AllRecipes setAllRecipes={setAllRecipes} cards={cards}/>}/>
-          <Route path='login' element={<Login login={login}/> }/>
-          <Route path='register' element={<Register login={login}/>}/>
+          <Route path='login' element={<Login/> }/>
+          <Route path='register' element={<Register/>}/>
           <Route path='create-recipe' element={<RecipeCreate recipeService={recipeService}/>}/>
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
           <Route path='my-profile' element={<MyProfile/>}/>
           <Route path='my-recipes' element={<MyRecipes/>}/>
         </Routes>
-      </AuthContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

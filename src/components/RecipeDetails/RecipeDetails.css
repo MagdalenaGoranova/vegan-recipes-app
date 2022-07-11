@@ -1,0 +1,60 @@
+.recipe-page {
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    height: 100vh;
+    margin: 30px;   
+    
+}
+.side-details-div {
+    width: 100%;
+    height: 100%;
+   
+}
+.recipe-img img{
+    
+}
+.recipe-img {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+.recipe-title {
+    font-family: 'Arizonia', cursive;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.recipe-details, .recipe-instructions, .recipe-ingredients {
+    border: 2px solid coral;
+    width: 100%; 
+    height: 100%;
+   
+}
+.recipe-details h2, .recipe-instructions h2, .recipe-ingredients h2 {
+    text-align: center;
+    font-family: 'Arizonia', cursive;
+   
+}
+.recipe-details {
+    margin-bottom: 10px;
+}
+.recipe-details span {
+    font-family: 'Arizonia', cursive;
+    font-size: 20px;
+    color: coral;
+    margin-right: 10px;
+}
+.recipe-details p {
+    font-size: 10px;
+}
+.recipe-additional-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    
+}

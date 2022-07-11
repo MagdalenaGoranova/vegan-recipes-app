@@ -1,4 +1,5 @@
 import * as recipeService from '../../services/recipeService';
+import './RecipeDetails.css'
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -23,66 +24,39 @@ import { isAuth } from '../../HOC/isAuth';
     console.log(recipe);
 
     return (
-        <div id="recipes-card-wrapper">
-
-        <div className="recipes-inner-card">
-
-            <div id="recipes-img-container">
-                <img src={recipe.img} alt='recipe-img'/>
+        <>
+        <h1 className="recipe-title">{recipe.title}</h1>
+        <div className="recipe-page">
+            <section className="side-details-div">
+                <div className="recipe-img">
+                    <img src={recipe.img} alt="recipeImage"/>
+                </div>  
+            </section>
+            <section className='recipe-details' >
+                    <h2>Recipe Details</h2>
+                    <p><span>Recipe Author</span>{recipe.author}</p>
+                    <p><span>Category</span>{recipe.category}</p>
+                    <p><span>Difficulty level</span>{recipe.level}</p>
+                    <p><span>Time for preparation</span>{recipe.time}</p>
+                    <p><span>Serving size</span>{recipe.servingSize}</p>
+                    <p><span>Description</span>{recipe.body}</p>
+            </section>
+            <div className="recipe-additional-details">
+                <section className="recipe-ingredients">
+                    <h2>Ingredients</h2>
+                    <p>{recipe.ingredients}</p>
+                    
+                </section>
+                <section className="recipe-instructions">
+                    <h2>Method</h2>
+                    <p>{recipe.instructions}</p>
+                    
+                </section>
             </div>
-
-            <div id="recipe-title">
-                <h2>{recipe.title}</h2>
-            </div>
-
-            <div id="recipes-top-details">
-
-                <div className="recipe-author">
-                <p><i className="fa-solid fa-user"></i>{recipe.author}</p>
-                </div>
-
-                <div className="recipe-category">
-                <p><i className="fa-solid fa-tag"></i>{recipe.category}</p>
-                </div>
-
-                <div className="recipe-level">
-                <p><i className="fa-solid fa-user-graduate"></i>{recipe.level}</p>
-                </div>
-
-            </div>
-
-            <div className="body">
-                <p>{recipe.body}</p>
-            </div>
-
-   
-            <div id="recipes-bottom-details">
-      
             
-                <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{recipe.time}</p>
-                </div>
         
-                <div className="recipe-details">
-                <p><i className="fa-solid fa-people-group"></i>{recipe.servingSize}</p>
-                </div>
-
-                <div className="recipe-details">
-                <p><i className="fa-solid fa-comments"></i>12</p>
-                </div>
-
-                <div className="recipe-rating">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="far fa-star"></i>
-                </div>
-
-            </div>
-
         </div>
-    </div>
+    </>
     )
 }
 export default isAuth(RecipeDetails)
