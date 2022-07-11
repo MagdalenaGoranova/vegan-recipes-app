@@ -3,9 +3,10 @@ import MyRecipesCard from './MyRecipesCard';
 import * as recipeService from '../../services/recipeService';
 import { useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
+import { isAuth } from '../../HOC/isAuth';
 
 
-export default function MyRecipes() {
+ function MyRecipes() {
     const { user } = useContext(AuthContext);
     const [myRecipes, setMyRecipes] = useState([]);
     useEffect(() => {
@@ -43,3 +44,4 @@ export default function MyRecipes() {
     )
 
 }
+export default isAuth(MyRecipes);

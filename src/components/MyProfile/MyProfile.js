@@ -2,8 +2,9 @@ import { useContext } from "react";
 
 import './MyProfile.css';
 import { AuthContext } from "../../contexts/AuthContext";
+import { isAuth } from "../../HOC/isAuth";
 
-export default function MyProfile() {
+ function MyProfile() {
     const { user } = useContext(AuthContext);
     return (
         <>
@@ -30,3 +31,4 @@ export default function MyProfile() {
     
     
 }
+export default isAuth(MyProfile);

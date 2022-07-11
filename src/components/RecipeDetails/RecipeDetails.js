@@ -2,7 +2,9 @@ import * as recipeService from '../../services/recipeService';
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-export default function RecipeDetails() {
+import { isAuth } from '../../HOC/isAuth';
+
+ function RecipeDetails() {
 
     const [recipe, setRecipe] = useState({});
 
@@ -83,3 +85,4 @@ export default function RecipeDetails() {
     </div>
     )
 }
+export default isAuth(RecipeDetails)

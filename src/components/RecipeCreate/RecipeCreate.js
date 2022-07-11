@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router';
 
 import './RecipeCreate.css';
 import { AuthContext } from '../../contexts/AuthContext';
+import { isAuth } from '../../HOC/isAuth';
 
 
 
-export default function RecipeCreate({recipeService}) {
+function RecipeCreate({recipeService}) {
 
     const {user} = useContext(AuthContext);
     
@@ -61,11 +62,6 @@ export default function RecipeCreate({recipeService}) {
                 ...recipe,
                 step:recipe.step + 1,
             });
-
-        }
-        //TODO: add submit on the whole form and send all data
-        if (e.currentTarget.parentElement.className === 'step-3') {
-            
 
         }
     } 
@@ -229,3 +225,4 @@ export default function RecipeCreate({recipeService}) {
     )
 
 }
+export default isAuth(RecipeCreate);
