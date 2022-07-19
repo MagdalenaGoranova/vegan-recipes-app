@@ -38,4 +38,15 @@ export const deleteRecipe = async(recipeId, authToken) => {
     return await response.json();
     
 }
+export const editRecipe = async(recipeId, authToken) => {
+    const response = await fetch(`${baseUrl}/data/vegan-recipes/${recipeId}`, {
+        method: 'PUT',
+        headers: {
+            'X-Authorization': authToken
+        }
+    });
+    return await response.json();
+    
+}
+
 

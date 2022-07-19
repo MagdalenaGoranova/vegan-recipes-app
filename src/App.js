@@ -14,6 +14,7 @@ import RecipeCreate from './components/RecipeCreate/RecipeCreate';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import MyProfile from './components/MyProfile/MyProfile';
 import MyRecipes from './components/MyRecipes/MyRecipes';
+import RecipeEdit from './components/RecipeEdit/RecipeEdit';
 
 
 function App() {
@@ -41,6 +42,7 @@ const  [cards, setCards] = useState({});
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
           <Route path='my-profile' element={<MyProfile/>}/>
           <Route path='my-recipes' element={<MyRecipes/>}/>
+          <Route path='recipe/edit/:id' element={<RecipeEdit/>}/>
         </Routes>
       </AuthProvider>
     </div>

@@ -105,6 +105,7 @@ function RecipeCreate({recipeService}) {
 
     }
     function createRecipeHandler(e) {
+        e.preventDefault();
         console.log(recipe);
 
         recipeService.createRecipe(recipe, user.accessToken)
@@ -202,6 +203,10 @@ function RecipeCreate({recipeService}) {
                             <h3>Press Previous if you want to go back to the prevous step and add or correct something</h3>
                         <button onClick={(e)=> previousStepHandler(e)}>Previous</button>
                         <button type="submit" onClick={(e)=> nextStepHandler(e)}>Next</button>
+
+                        <ul>
+                            {recipe.ingredients.map(recipe => <li>{recipe.ingredient} - {recipe.quantity} {recipe.measures}</li>)}
+                        </ul>
                     </form>
 
                 ) : (
@@ -217,6 +222,10 @@ function RecipeCreate({recipeService}) {
                             <h3>Press Previous if you want to go back to the prevous step and add or correct something</h3>
                             <button onClick={(e)=> previousStepHandler(e)}>Previous</button>
                         <button className='create-btn' onClick={(e)=> createRecipeHandler(e)}>Create</button>
+
+                        <ul>
+                            {recipe.instructions.map(instruction => <li>{instruction}</li>)}
+                        </ul>
                     </form>
                 )}
 

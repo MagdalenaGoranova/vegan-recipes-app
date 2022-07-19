@@ -65,7 +65,7 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
 
             </div>
             <NavLink to={`/recipe/details/${myRecipe._id}`}>Details<i className="fas fa-long-arrow-alt-right"></i></NavLink>
-            <div className="recipes-start-btn"><NavLink to="/">Edit</NavLink></div>
+            <NavLink to={`/recipe/edit/${myRecipe._id}`}>Edit</NavLink>
             
            <button onClick={() => deleteMyRecipe(myRecipe._id, user.accessToken)}>Delete</button>
 
