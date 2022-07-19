@@ -1,9 +1,8 @@
 import { isAuth } from "../../HOC/isAuth"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import './RecipeEdit.css'
-
-
+import { AuthContext } from "../../contexts/AuthContext";
 
 import * as recipeService from '../../services/recipeService';
 
@@ -11,15 +10,15 @@ function RecipeEdit() {
 
     let { id } = useParams();
 
+    let { user } = useContext(AuthContext);
+
     const [recipe, setRecipe] = useState({ingredients:[], instructions:[]});
 
     useEffect(() => {
         recipeService.getOne(id)
         .then(result => {
-           
             setRecipe(result)
         })
-
     },[id])
 
 function addNewIngredient(e) {
@@ -31,7 +30,6 @@ function addNewIngredient(e) {
     let quantity = formData.get('quantity');
     let measures = formData.get('measures');
     
-
     setRecipe({
         ...recipe,
         ingredients: [...recipe.ingredients, {ingredient, quantity, measures}]
@@ -51,29 +49,38 @@ function addNewInstruction(e) {
     });       
 }
 function deleteIngredient(e) {
-    console.log(e.currentTarget.parentElement.childNodes[0]);
     let currentIngredient = e.currentTarget.parentElement.childNodes[0].value;
-    setRecipe({
-        ...recipe, 
-       ingredients: recipe.ingredients.filter(x =>  x.ingredient !== currentIngredient)
-       
-    })  
-    console.log(recipe); 
+    setRecipe(oldState => ({...oldState, ingredients: recipe.ingredients.filter(x =>  x.ingredient !== currentIngredient)}))  
+    
 }
+function editIngredient(e) {
+    let currentIngredient = e.currentTarget.parentElement.childNodes[0].value;
+    let currentQuantity = e.currentTarget.parentElement.childNodes[1].value;
+    let currentMeasure = e.currentTarget.parentElement.childNodes[2].value;
+    let index = recipe.ingredients.findIndex((x => x.ingredient == currentIngredient));
+    let ingredients = recipe.ingredients;
+    ingredients[index] = {ingredient: currentIngredient, quantity: currentQuantity, measures: currentMeasure};
+    console.log();
+    setRecipe(oldState => ({
+        ...oldState,
+        ingredients: ingredients,
+    }))
+
+    
+}
+console.log(recipe);
+
 
 function deleteInstruction(e) {
-    console.log(e.target.parentElement.childNodes[0]);
-    let currentInstruction = e.target.parentElement.childNodes[0].value;
-    setRecipe({
-        ...recipe, 
-       instructions: recipe.instructions.filter(x => x !== currentInstruction)
-       
-    }) 
-     
+    e.preventDefault();
+    let currentInstruction = e.currentTarget.parentElement.childNodes[0].value;
+    setRecipe(oldState => ({...oldState, instructions: recipe.instructions.filter(x =>  x !== currentInstruction)}))  
+    console.log(recipe);
+   
+    
+    
 }
-function instructionChangeHandler(e) {
-    console.log(e.target.value)
-}
+
 
     return (
         <section className="create-recipe-container">
@@ -140,15 +147,15 @@ function instructionChangeHandler(e) {
                         <h3>Edit or remove and existing ingredient here:</h3>
                             <ul>
                                 {recipe.ingredients.map((x) =>
-                                <li>
+                                <li key={x.ingredient}>
                                     <input type="text" id="ingredient" name="ingredient" placeholder='e.g.Carrots' defaultValue={x.ingredient} required/>
                                     <input type="number" id="quantity" name="quantity" placeholder='e.g.3' defaultValue={x.quantity} required/>
-                                    <select name="measures" id="measures1">
+                                    <select name="measures" id="measures" defaultValue={x.measures}>
                                     <option value="cups">Cups</option>
                                     <option value="grams">Grams</option>
                                     <option value="singles">Singles</option>
                                 </select>
-                                <button>Edit</button>
+                                <button onClick={(e) => editIngredient(e)}>Edit</button>
                                 <button onClick={(e) => deleteIngredient(e)}>Delete</button>
                                     </li>)}
                             </ul>
@@ -177,8 +184,8 @@ function instructionChangeHandler(e) {
                         <h1 className='page-title'>Edit step 3</h1>
                         <h3>Edit or remove an existing instruction here:</h3>
                             <ul>
-                                {recipe.instructions.map(x => <li>
-                                    <input type="text" id="instruction" name="instruction" placeholder='e.g Step 1: Preheat oven on 175 degrees C.' defaultValue={x} onChange={(e) => instructionChangeHandler(e)}  required/>
+                                {recipe.instructions.map(x => <li key={x}>
+                                    <input type="text" id="instruction" name="instruction" placeholder='e.g Step 1: Preheat oven on 175 degrees C.' defaultValue={x} required/>
                                     <button>Edit</button>
                                     <button onClick={(e) => deleteInstruction(e)}>Delete</button>
                                     </li>)}
