@@ -29,7 +29,7 @@ export default function Register() {
       profileService.createProfile(authData, authData.accessToken)
         .then(result => {
           console.log(result);
-          navigate(`/my-profile/${result._id}`);
+          navigate(`/profile/${result._id}`);
         })
     })
     .catch(err => {
@@ -53,18 +53,18 @@ export default function Register() {
                     <form method='POST' onSubmit={(e) => registerHandler(e)}>
                       
                       <div className="form-outline mb-4">
-                        <input type="email" id="form3Example3" className="form-control" name="email"/>
                         <label className="form-label" htmlFor="form3Example3">Email address</label>
+                        <input type="email" id="form3Example3" className="form-control" name="email"/>
                       </div>
         
                      
                       <div className="form-outline mb-4">
-                        <input type="password" id="form3Example4" className="form-control" name="password"/>
                         <label className="form-label" htmlFor="form3Example4">Password</label>
+                        <input type="password" id="form3Example4" className="form-control" name="password"/>
                       </div>
 
                       <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example3">Add username</label>
+                        <label className="form-label" htmlFor="form3Example3">Add username</label>
                         <input type="text" id="form3Example3" className="form-control" name="username"/>
                       </div>
 

@@ -11,8 +11,8 @@ export const createProfile = async(profileData, authToken) => {
     })
     return await response.json();
 }
-export const getMyProfile = async(authToken, userId) => {
-    const response = await fetch(`${baseUrl}/data/profiles?where=_ownerId%3D%22${userId}%22`, {
+export const getProfile = async(authToken, ownerId) => {
+    const response = await fetch(`${baseUrl}/data/profiles?where=_ownerId%3D%22${ownerId}%22`, {
         headers: {
             'X-Authorization': authToken
         }
@@ -25,3 +25,21 @@ export const getMyProfile = async(authToken, userId) => {
         throw result.message;
     }
 }
+export const editProfile = async(id, authToken, recipeData) => {
+    const response = await fetch(`${baseUrl}/data/profiles/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': authToken
+        },
+        body: JSON.stringify(recipeData)
+    })
+    const result = await response.json()
+
+    if(response.ok) {
+        return result;
+    } else {
+        throw result.message;
+    }
+}
+

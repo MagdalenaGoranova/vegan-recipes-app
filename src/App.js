@@ -12,9 +12,10 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import RecipeCreate from './components/RecipeCreate/RecipeCreate';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
-import MyProfile from './components/MyProfile/MyProfile';
 import MyRecipes from './components/MyRecipes/MyRecipes';
 import RecipeEdit from './components/RecipeEdit/RecipeEdit';
+import Profile from './components/Profile/Profile';
+import ProfileEdit from './components/Profile/ProfileEdit';
 
 
 function App() {
@@ -40,7 +41,8 @@ const  [cards, setCards] = useState({});
           <Route path='register' element={<Register/>}/>
           <Route path='create-recipe' element={<RecipeCreate recipeService={recipeService}/>}/>
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
-          <Route path='my-profile/:id' element={<MyProfile/>}/>
+          <Route path='profile/:id' element={<Profile/>}/>
+          <Route path='profile/:id/edit-profile' element={<ProfileEdit/>}/>
           <Route path='my-recipes' element={<MyRecipes/>}/>
           <Route path='recipe/edit/:id' element={<RecipeEdit/>}/>
         </Routes>
