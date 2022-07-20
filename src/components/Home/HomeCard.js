@@ -28,7 +28,7 @@ export default function HomeCard({card}) {
                 </div>
         
                 <div className="details">
-                <h3><i className="fa-regular fa-clock"></i>{card.time}</h3>
+                <h3><i className="fa-regular fa-clock"></i>{card.hours}:{card.minutes}</h3>
                 </div>
         
                 <div className="details">

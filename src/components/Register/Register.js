@@ -1,5 +1,6 @@
 import './Register.css'
 import * as authService from '../../services/authService';
+import * as profileService from '../../services/profileService';
 
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -10,7 +11,7 @@ import { useNavigate } from 'react-router';
 export default function Register() {
 
   const {login} = useContext(AuthContext);
-
+  
   const navigate = useNavigate();
   
   function registerHandler(e) {
@@ -18,26 +19,23 @@ export default function Register() {
   
     let formData = new FormData(e.currentTarget);
   
-    let firstName = formData.get('firstName');
-    let lastName = formData.get('lastName');
     let email = formData.get('email');  
     let password = formData.get('password');
     let username = formData.get('username');
-    let info = formData.get('info');
-    let image = formData.get('img')
-    
   
-    authService.register(firstName, lastName, email, password, username, info, image)
+    authService.register(email, password, username)
     .then((authData) => {
-      login(authData);
-  
-      navigate('/home');
+      login(authData)
+      profileService.createProfile(authData, authData.accessToken)
+        .then(result => {
+          console.log(result);
+          navigate(`/my-profile/${result._id}`);
+        })
     })
     .catch(err => {
       console.log(err);
-  
+
     })
-  
   }
     return (
         <section className="text-center text-lg-start">
@@ -53,21 +51,6 @@ export default function Register() {
                   <div className="card-body p-5 shadow-5 text-center">
                     <h2 className="fw-bold mb-5">Register</h2>
                     <form method='POST' onSubmit={(e) => registerHandler(e)}>
-                      <div className="row">
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            <input type="text" id="form3Example1" className="form-control" name="firstName"/>
-                            <label className="form-label" htmlFor="form3Example1">First name</label>
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            <input type="text" id="form3Example2" className="form-control" name="lastName"/>
-                            <label className="form-label" htmlFor="form3Example2">Last name</label>
-                          </div>
-                        </div>
-                      </div>
-
                       
                       <div className="form-outline mb-4">
                         <input type="email" id="form3Example3" className="form-control" name="email"/>
@@ -85,17 +68,6 @@ export default function Register() {
                         <input type="text" id="form3Example3" className="form-control" name="username"/>
                       </div>
 
-                      <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example4">Say a few words about yourself</label>
-                        <input type="text" id="form3Example4" className="form-control" name="info"/>
-                        
-                      </div>
-
-                      <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="form3Example4">Add an image for you profile</label>
-                        <input type="url" id="form3Example4" className="form-control" name="img"/>
-                      </div>
-        
                       <button type="submit" className="btn btn-primary btn-block mb-4">
                         Register
                       </button>

@@ -39,7 +39,8 @@ function RecipeCreate({recipeService}) {
         let description = formData.get('description');
         let level = formData.get('level');
         let servingSize = formData.get('servingSize');
-        let time = formData.get('time');
+        let hours = formData.get('hours');
+        let minutes = formData.get('minutes');
         let category = formData.get('category');
         let img = formData.get('img');
 
@@ -50,7 +51,8 @@ function RecipeCreate({recipeService}) {
             description: description,
             level: level, 
             servingSize: servingSize,
-            time: time,
+            hours: hours,
+            minutes: minutes,
             category: category,
             img: img,
             step:recipe.step + 1,
@@ -122,7 +124,7 @@ function RecipeCreate({recipeService}) {
                 {recipe.step === 1 ? (
                     <form className="step-1">
                          <h1 className='page-title'>Step 1: Add all the initial information about your recipe</h1>
-                            <div className="recipe-title">
+                            <div className="title">
                                 <label htmlFor="recipe-title">Add Title</label>
                                 <input type="text" id="title" name="recipe-title" placeholder='e.g.Carrot Banana Bread' defaultValue={recipe.title} required/>
                             </div>
@@ -147,14 +149,13 @@ function RecipeCreate({recipeService}) {
 
                             <div className="servingSize">
                                 <label htmlFor="servingSize">Serving size</label>
-                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.8' required/>-
-                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.10'/>
+                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.8' required/>
                             </div>
 
                             <div className="time">
                                 <label htmlFor="time">Total cooking time</label>
-                                <input type="number" id="hours" name="time" placeholder='hours' required/>:
-                                <input type="number" id="minutes" name="time" placeholder='minutes' required/>
+                                <input type="number" id="hours" name="hours" placeholder='hours' required/>:
+                                <input type="number" id="minutes" name="minutes" placeholder='minutes' required/>
 
                             </div>
 

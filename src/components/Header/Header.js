@@ -28,7 +28,7 @@ export default function Header() {
                 <button className="header-btn"></button>
                     <div className="dropdown-content">
                         <p className="greeting">Welcome, {user.username}</p>
-                        <NavLink to="/my-profile">My Profile</NavLink>
+                        <NavLink to={`/my-profile/${user._id}`}>My Profile</NavLink>
                         <NavLink to="/my-recipes">My Recipes</NavLink>
                         <NavLink to="/create-recipe">Create Recipe</NavLink>
                         <a onClick={logout} href="/home">Logout</a>

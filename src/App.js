@@ -24,7 +24,7 @@ const  [cards, setCards] = useState({});
     setCards(result);
 
   },[]);
-  console.log(cards);
+  
 
 
 
@@ -40,7 +40,7 @@ const  [cards, setCards] = useState({});
           <Route path='register' element={<Register/>}/>
           <Route path='create-recipe' element={<RecipeCreate recipeService={recipeService}/>}/>
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
-          <Route path='my-profile' element={<MyProfile/>}/>
+          <Route path='my-profile/:id' element={<MyProfile/>}/>
           <Route path='my-recipes' element={<MyRecipes/>}/>
           <Route path='recipe/edit/:id' element={<RecipeEdit/>}/>
         </Routes>

@@ -18,18 +18,18 @@ export const login = async (email, password) => {
         throw jsonResult.message;
     }
 }
-export const register = async (firstName, lastName, email, password, username, info, image) => {
+export const register = async (email, password, username) => {
     const response = await fetch(`${baseUrl}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({firstName, lastName, email, password, username, info, image})
+        body: JSON.stringify({email, password, username})
         
     });
 
     let jsonResult = await response.json();
-    console.log(jsonResult);
+    
 
     if(response.ok) {
         return jsonResult;
@@ -45,8 +45,7 @@ export const getMyProfileInfo = async(authToken) => {
     });
 
     let jsonResult = await response.json();
-    console.log(jsonResult);
-
+   
     if(response.ok) {
         return jsonResult;
     } else {
@@ -58,9 +57,16 @@ export const logout = async(authToken) => {
         headers: {
             'X-Authorization': authToken
         }
-      
     });
-    console.log(response);  
+    let jsonResult = await response.json();
+
+
+    if(response.ok) {
+        return jsonResult;
+    } else {
+        throw jsonResult.message;
+    }
+   
 }
 
 

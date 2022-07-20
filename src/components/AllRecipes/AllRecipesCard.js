@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 export default function AllRecipesCard({card}) {
+
     return (
     <div id="recipes-card-wrapper">
 
@@ -39,7 +40,7 @@ export default function AllRecipesCard({card}) {
       
             
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{card.time}</p>
+                <p><i className="fa-regular fa-clock"></i>{card.hours}:{card.minutes}</p>
                 </div>
         
                 <div className="recipe-details">

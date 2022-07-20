@@ -1,26 +1,44 @@
-import { useContext } from "react";
+import { useEffect, useState, useContext } from 'react';
 
+
+import { AuthContext } from '../../contexts/AuthContext';
 import './MyProfile.css';
-import { AuthContext } from "../../contexts/AuthContext";
-import { isAuth } from "../../HOC/isAuth";
+import {isAuth} from '../../HOC/isAuth';
+import * as profileService from '../../services/profileService';
+
+
 
  function MyProfile() {
-    const { user } = useContext(AuthContext);
+
+    const [profile, setProfile] = useState({});
+    let {user } = useContext(AuthContext);
+   
+
+    useEffect(() => {
+        profileService.getMyProfile(user.accessToken, user._id)
+        .then(result => {
+            console.log(result);
+            setProfile(result[0]);
+            
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+    }, [user._id, user.accessToken])
     return (
         <>
         <h1 className="profile-title">My profile information</h1>
         <div className="profile-page">
             <section className="side-profile-div">
                 <div className="profile-img">
-                    <img src={user.image} alt="profileImage"/>
-                    <h4 className="username"><i className="fa-solid fa-user"></i>{user.username}</h4>
+                    <h4 className="username"><i className="fa-solid fa-user"></i>{profile.username}</h4>
+                    <p><span>Email:</span>{profile.email}</p>
                 </div>  
             </section>
             <section className="profile-info">
-                <p><span>First Name:</span>{user.firstName}</p>
-                <p><span>Last Name:</span>{user.lastName}</p>
-                <p><span>Email:</span>{user.email}</p>
-                <p><span>About you:</span>{user.info}</p>
+               
+               
             </section>
             
         
