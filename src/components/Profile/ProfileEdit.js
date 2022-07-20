@@ -23,15 +23,14 @@ function ProfileEdit() {
         console.log(e.currentTarget.parentElement);
 
         let formData = new FormData(e.currentTarget.parentElement);
-
-        let email = formData.get('email');
+        
         let username = formData.get('username');
         let firstName = formData.get('firstName');
         let lastName = formData.get('lastName');
         let aboutYou = formData.get('aboutYou');
         let imgUrl = formData.get('imgUrl');
 
-        profileService.editProfile(profile._id, user.accessToken, {email, username, firstName, lastName, aboutYou, imgUrl})
+        profileService.editProfile(profile._id, user.accessToken, {username, firstName, lastName, aboutYou, imgUrl})
         .then(result => {
             console.log(result);
             navigate(`/profile/${profile._id}`)
@@ -56,35 +55,29 @@ function ProfileEdit() {
                   <div className="card-body p-5 shadow-5 text-center">
                     <h2 className="fw-bold mb-5">Edit profile</h2>
                     <form>
-                      
-                      <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="form3Example3">Edit email address</label>
-                        <input type="email" id="form3Example3-1" className="form-control" name="email" defaultValue={profile.email}/>
-                      </div>
-        
                       <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Example3"> Edit username</label>
-                        <input type="text" id="form3Example3-2" className="form-control" name="username" defaultValue={profile.username}/>
+                        <input type="text" id="form3Example3-2" className="form-control" name="username" defaultValue={profile.username} required/>
                       </div>
 
                       <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Example3">Add/Edit first name</label>
-                        <input type="text" id="form3Example3-3" className="form-control" name="firstName" defaultValue={profile.firstName}/>
+                        <input type="text" id="form3Example3-3" className="form-control" name="firstName" defaultValue={profile.firstName}required/>
                       </div>
 
                       <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Example3">Add/Edit last name</label>
-                        <input type="text" id="form3Example3-4" className="form-control" name="lastName" defaultValue={profile.lastName}/>
+                        <input type="text" id="form3Example3-4" className="form-control" name="lastName" defaultValue={profile.lastName} required/>
                       </div>
 
                       <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Example3">Edit/Add Information about you</label>
-                        <input type="text" id="form3Example3-5" className="form-control" name="aboutYou" defaultValue={profile.aboutYou}/>
+                        <input type="text" id="form3Example3-5" className="form-control" name="aboutYou" defaultValue={profile.aboutYou} required/>
                       </div>
 
                       <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Example3">Edit/Add photo</label>
-                        <input type="text" id="form3Example3-6" className="form-control" name="imgUrl" defaultValue={profile.imgUrl}/>
+                        <input type="text" id="form3Example3-6" className="form-control" name="imgUrl" defaultValue={profile.imgUrl} required/>
                       </div>
 
                       

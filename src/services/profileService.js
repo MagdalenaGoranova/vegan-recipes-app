@@ -25,8 +25,8 @@ export const getProfile = async(authToken, ownerId) => {
         throw result.message;
     }
 }
-export const editProfile = async(id, authToken, recipeData) => {
-    const response = await fetch(`${baseUrl}/data/profiles/${id}`, {
+export const editProfile = async(profileId, authToken, recipeData) => {
+    const response = await fetch(`${baseUrl}/data/profiles/${profileId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

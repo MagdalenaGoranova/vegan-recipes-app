@@ -40,8 +40,12 @@ import { NavLink } from 'react-router-dom';
                    
                 </div> 
                 <div className='profile-info'>
-                    <h4 className="username">{profile.username}</h4>
-                    <p><span>Email:</span>{profile.email}</p>
+                    <h4 className="username">Hello, {profile.username}</h4>
+                    <p>First name: {profile.firstName}</p>
+                    <p>Last name: {profile.lastName}</p>
+                    <p>About you: {profile.aboutYou}</p>
+
+
                     <NavLink to='edit-profile'><i class="fa-solid fa-user-pen"></i>Edit profile</NavLink>
                 </div>
             </section>
