@@ -1,0 +1,39 @@
+.ingredients-list button, .instructions-list button {
+    border: none;
+    background:  none;
+    margin-left: 5px ;
+}
+.ingredients-list span, .instructions-list span {
+   color: black;
+   font-weight: bolder;
+}
+.step-title {
+    font-family: 'Arizonia', cursive;
+    text-align: center;
+
+}
+.edit-recipe-container {
+    width: 100vw;
+    height: 100vh;
+}
+.step-1-form {
+    width: 100%;
+    height: 30%;
+    margin-bottom: 200px;
+}
+.step-2 {
+    margin-bottom: 200px;
+}
+.step-2, .step-3 {
+    width: 100%;
+    height: 30%;
+
+}
+.step-info {
+    text-align: center;
+
+}
+.edit-submit-btn {
+    margin-top: 100px;
+    
+}

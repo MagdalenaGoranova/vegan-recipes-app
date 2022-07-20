@@ -7,7 +7,7 @@ import { isAuth } from '../../HOC/isAuth';
 
  function RecipeDetails() {
 
-    const [recipe, setRecipe] = useState({});
+    const [recipe, setRecipe] = useState({instructions:[], ingredients:[]});
 
     let { id } = useParams();
 
@@ -44,12 +44,22 @@ import { isAuth } from '../../HOC/isAuth';
             <div className="recipe-additional-details">
                 <section className="recipe-ingredients">
                     <h2>Ingredients</h2>
-                    <p>{recipe.ingredients}</p>
+                    <ul>
+                        {recipe.ingredients.map(x => 
+                            <li key={x.ingredient}>
+                            <span>{x.ingredient}</span> - {x.quantity} {x.measures}</li>
+                        )}
+                    </ul>
                     
                 </section>
                 <section className="recipe-instructions">
                     <h2>Method</h2>
-                    <p>{recipe.instructions}</p>
+                    <ul>
+                        {recipe.instructions.map((x, i) => 
+                            <li key={x}>
+                            Step {i + 1}: <span>{x}</span></li>
+                        )}
+                    </ul>
                     
                 </section>
             </div>

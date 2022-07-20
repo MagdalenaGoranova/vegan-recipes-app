@@ -1,6 +1,6 @@
 import { isAuth } from "../../HOC/isAuth"
 import { useEffect, useState, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './RecipeEdit.css'
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -11,6 +11,8 @@ function RecipeEdit() {
     let { id } = useParams();
 
     let { user } = useContext(AuthContext);
+
+    let navigate = useNavigate();
 
     const [recipe, setRecipe] = useState({ingredients:[], instructions:[]});
 
@@ -49,46 +51,61 @@ function addNewInstruction(e) {
     });       
 }
 function deleteIngredient(e) {
-    let currentIngredient = e.currentTarget.parentElement.childNodes[0].value;
+    let currentIngredient = e.currentTarget.parentElement.childNodes[0].textContent;
     setRecipe(oldState => ({...oldState, ingredients: recipe.ingredients.filter(x =>  x.ingredient !== currentIngredient)}))  
     
 }
-function editIngredient(e) {
-    let currentIngredient = e.currentTarget.parentElement.childNodes[0].value;
-    let currentQuantity = e.currentTarget.parentElement.childNodes[1].value;
-    let currentMeasure = e.currentTarget.parentElement.childNodes[2].value;
-    let index = recipe.ingredients.findIndex((x => x.ingredient == currentIngredient));
-    let ingredients = recipe.ingredients;
-    ingredients[index] = {ingredient: currentIngredient, quantity: currentQuantity, measures: currentMeasure};
-    console.log();
-    setRecipe(oldState => ({
-        ...oldState,
-        ingredients: ingredients,
-    }))
-
-    
-}
-console.log(recipe);
 
 
 function deleteInstruction(e) {
     e.preventDefault();
-    let currentInstruction = e.currentTarget.parentElement.childNodes[0].value;
+    let currentInstruction = e.currentTarget.parentElement.childNodes[3].textContent;
     setRecipe(oldState => ({...oldState, instructions: recipe.instructions.filter(x =>  x !== currentInstruction)}))  
-    console.log(recipe);
-   
-    
-    
+     
+}
+function getFormData(e) {
+    e.preventDefault();
+    let formData  = new FormData(e.currentTarget.parentElement);
+
+    let title = formData.get('recipe-title');
+    let description = formData.get('description');
+    let level = formData.get('level');
+    let servingSize = formData.get('servingSize');
+    let time = formData.get('time');
+    let category = formData.get('category');
+    let img = formData.get('img');
+
+    setRecipe( oldState => ({
+        ...oldState, 
+        ...recipe,
+        author: user.username,
+        title: title,
+        description: description,
+        level: level, 
+        servingSize: servingSize,
+        time: time,
+        category: category,
+        img: img,
+    })); 
 }
 
+function editSubmitHandler() {
+
+    recipeService.editRecipe(id, user.accessToken, recipe)
+    .then(result => {
+        console.log(result);
+        navigate('/my-recipes')
+        
+    })
+}
 
     return (
-        <section className="create-recipe-container">
-                    <form className="step-1">
-                         <h1 className='page-title'>Edit step 1</h1>
-                            <div className="recipe-title">
+        <section className="edit-recipe-container">
+                    <form className="step-1-form" >
+                         <h1 className='step-title'>Edit step 1</h1>
+                            <div className="edit-recipe-title">
                                 <label htmlFor="recipe-title">Title</label>
-                                <input type="text" id="title" name="recipe-title" placeholder='e.g.Carrot Banana Bread' defaultValue={recipe.title} required/>
+                                <input type="text" id="title" name="recipe-title" placeholder='e.g.Carrot Banana Bread' defaultValue={recipe.title} required />
                             </div>
 
                             <div className="description">
@@ -111,8 +128,7 @@ function deleteInstruction(e) {
 
                             <div className="servingSize">
                                 <label htmlFor="servingSize">Serving size</label>
-                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.8' defaultValue={recipe.servingSize}required/>-
-                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.10'/>
+                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.8' defaultValue={recipe.servingSize}required/>
                             </div>
 
                             <div className="time">
@@ -137,29 +153,23 @@ function deleteInstruction(e) {
 
                             <div className="img">
                                 <label htmlFor="img">Image link</label>
-                                <input type="url" id="img" name="img" defaultValue={recipe.img}required/>
+                                <input type="url" id="img" name="img" defaultValue={recipe.img}/>
                             </div>
+                            <button className="edit-submit-btn" onClick={(e) => getFormData(e)}>Save changes</button>
                     </form>
 
                     <div className="step-2">
 
-                    <h1 className='page-title'>Edit step 2</h1>
-                        <h3>Edit or remove and existing ingredient here:</h3>
-                            <ul>
+                    <h1 className='step-title'>Edit step 2</h1>
+                        <h4 className="step-info">Remove or add new ingredients here:</h4>
+                            <ul className="ingredients-list">
                                 {recipe.ingredients.map((x) =>
                                 <li key={x.ingredient}>
-                                    <input type="text" id="ingredient" name="ingredient" placeholder='e.g.Carrots' defaultValue={x.ingredient} required/>
-                                    <input type="number" id="quantity" name="quantity" placeholder='e.g.3' defaultValue={x.quantity} required/>
-                                    <select name="measures" id="measures" defaultValue={x.measures}>
-                                    <option value="cups">Cups</option>
-                                    <option value="grams">Grams</option>
-                                    <option value="singles">Singles</option>
-                                </select>
-                                <button onClick={(e) => editIngredient(e)}>Edit</button>
-                                <button onClick={(e) => deleteIngredient(e)}>Delete</button>
-                                    </li>)}
+                                    <span>{x.ingredient}</span> - {x.quantity} {x.measures}
+                                    <button onClick={(e) => deleteIngredient(e)}><i class="fa-solid fa-trash-can"></i></button>
+                                </li>)}
                             </ul>
-                        <form className="step-2">
+                        <form className="step-2-form">
                             <label htmlFor="ingredient">Add a new ingredient
                                 <input type="text" id="ingredient" name="ingredient" placeholder='e.g.Carrots' required/>
                             </label>
@@ -181,23 +191,23 @@ function deleteInstruction(e) {
                     </div>
                     
                     <div className="step-3">
-                        <h1 className='page-title'>Edit step 3</h1>
-                        <h3>Edit or remove an existing instruction here:</h3>
-                            <ul>
-                                {recipe.instructions.map(x => <li key={x}>
-                                    <input type="text" id="instruction" name="instruction" placeholder='e.g Step 1: Preheat oven on 175 degrees C.' defaultValue={x} required/>
-                                    <button>Edit</button>
-                                    <button onClick={(e) => deleteInstruction(e)}>Delete</button>
-                                    </li>)}
+                        <h1 className='step-title'>Edit step 3</h1>
+                        <h4 className="step-info">Remove or add new instructions here:</h4>
+                            <ul className="instructions-list">
+                                {recipe.instructions.map((x, i) => 
+                                <li key={x}>
+                                    Step {i + 1}: <span>{x}</span>
+                                    <button onClick={(e) => deleteInstruction(e)}><i class="fa-solid fa-trash-can"></i></button>
+                                </li>)}
                             </ul>
-                        <form className="step-3">
+                        <form className="step-3-form">
                             <label htmlFor="instruction">Add new instruction/step: 
                                 <input type="text" id="instruction" name="instruction" placeholder='e.g Step 1: Preheat oven on 175 degrees C.' required/>
                             </label>
                             <button onClick={(e) => addNewInstruction(e)}>+</button>
                         </form>
                     </div>
-                   
+                    <button className="edit-submit-btn" onClick={(e) => editSubmitHandler(e)}>Save changes</button>
             </section>
     )
     
