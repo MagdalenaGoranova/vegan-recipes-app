@@ -1,23 +1,22 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 
 import { AuthContext } from '../../contexts/AuthContext';
 import './Profile.css';
 import {isAuth} from '../../HOC/isAuth';
 import * as profileService from '../../services/profileService';
-import { NavLink } from 'react-router-dom';
 
-
- function Profile() {
+function Profile() {
 
     const [profile, setProfile] = useState({});
     let {user } = useContext(AuthContext);
-    let { profileId } = useParams;
+
+    let { id } = useParams(); 
    
 
     useEffect(() => {
-        profileService.getProfile(user.accessToken, user._id)
+        profileService.getProfile(user.accessToken, id)
         .then(result => {
             console.log(result);
             setProfile(result[0]);
@@ -27,8 +26,9 @@ import { NavLink } from 'react-router-dom';
             console.log(err);
         })
 
-    }, [user._id, user.accessToken])
+    }, [id, user.accessToken])
     console.log(profile);
+    // TODO: Check if own profile to show different info and buttons 
     return (
         <>
         <div className="profile-page">

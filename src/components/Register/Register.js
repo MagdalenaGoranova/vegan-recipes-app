@@ -29,7 +29,7 @@ export default function Register() {
       profileService.createProfile(authData, authData.accessToken)
         .then(result => {
           console.log(result);
-          navigate(`/profile/${result._id}`);
+          navigate(`/profile/${result._ownerId}`);
         })
     })
     .catch(err => {

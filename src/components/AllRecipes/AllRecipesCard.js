@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 export default function AllRecipesCard({card}) {
 
+    console.log(card);
+
     return (
     <div id="recipes-card-wrapper">
 
@@ -18,7 +20,7 @@ export default function AllRecipesCard({card}) {
             <div id="recipes-top-details">
 
                 <div className="recipe-author">
-                <p><i className="fa-solid fa-user"></i>{card.author}</p>
+                <NavLink to={`/profile/${card._ownerId}`}><i className="fa-solid fa-user"></i>{card.author}</NavLink>
                 </div>
 
                 <div className="recipe-category">
@@ -40,7 +42,7 @@ export default function AllRecipesCard({card}) {
       
             
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{card.hours}:{card.minutes}</p>
+                <p><i className="fa-regular fa-clock"></i>{card.hours}h: {card.minutes}min</p>
                 </div>
         
                 <div className="recipe-details">
@@ -52,10 +54,10 @@ export default function AllRecipesCard({card}) {
                 </div>
 
                 <div className="recipe-rating">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
+                <i className="far fa-star"></i>
+                <i className="far fa-star"></i>
+                <i className="far fa-star"></i>
+                <i className="far fa-star"></i>
                 <i className="far fa-star"></i>
                 </div>
 
