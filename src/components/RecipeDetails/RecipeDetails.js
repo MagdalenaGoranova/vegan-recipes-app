@@ -51,7 +51,7 @@ import { isAuth } from '../../HOC/isAuth';
             .catch(err => {
                 console.log(err);
             })
-    }, [id, user.accessToken, user._id]);
+    }, [id, user.accessToken, user._id, hasRated]);
     
     function saveRate(e) {
         setRateRecipe(e.target.value);   
@@ -62,8 +62,8 @@ import { isAuth } from '../../HOC/isAuth';
         ratingService.rateRecipe(user.accessToken, {id, rateRecipe})
             .then(result => {
                 console.log(result);
-
             })
+            setHasRated(true);
         } else {
             alert('Rating should be a number between 1 and 5');
         }
