@@ -1,11 +1,16 @@
 import * as recipeService from '../../services/recipeService';
 import * as ratingService from '../../services/ratingService';
+import * as commentsService from '../../services/commentsService';
+
+
 import { AuthContext } from '../../contexts/AuthContext';
 import './RecipeDetails.css'
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { isAuth } from '../../HOC/isAuth';
+import Comments from './Comments';
+
 
  function RecipeDetails() {
 
@@ -16,6 +21,12 @@ import { isAuth } from '../../HOC/isAuth';
     const [rating, setRating] = useState('');
 
     const [hasRated, setHasRated] = useState(false);
+
+    const [comments, setComments] = useState([]);
+
+    const [commentsCount, setCommentsCount] = useState(0);
+
+    
 
     let { id } = useParams();
 
@@ -52,7 +63,22 @@ import { isAuth } from '../../HOC/isAuth';
                 console.log(err);
             })
     }, [id, user.accessToken, user._id, hasRated]);
-    
+
+    useEffect(() => {
+        commentsService.getComments(user.accessToken, id)
+            .then(result => {
+                setComments(result)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        commentsService.getCommentsCount(user.accessToken, id)
+            .then(result => {
+                setCommentsCount(result);
+            })
+    }, [id, user.accessToken]);
+
+
     function saveRate(e) {
         setRateRecipe(e.target.value);   
     }
@@ -82,6 +108,20 @@ import { isAuth } from '../../HOC/isAuth';
         return starsArr
     }
 
+    function comment(e) {
+       let comment = e.currentTarget.parentElement.childNodes[1].value;
+
+       commentsService.commentRecipe(user.accessToken, {id, comment})
+       .then(result => {
+        setComments(oldState => ([
+            ...oldState, 
+            result, 
+        ]))
+        setCommentsCount(oldState => oldState + 1);
+       })
+       
+    }
+
     return (
         <>
         <h1 className="recipe-title">{recipe.title}</h1>
@@ -106,12 +146,11 @@ import { isAuth } from '../../HOC/isAuth';
                 <p>{rating}/5</p>
             </div>
 
-                   
-                    {!hasRated 
-                    ? ( <><label>Rate recipe: </label>
-                    <p><input onBlur={(e) => saveRate(e)} type="number" defaultValue={rateRecipe}/>/5</p>
-                    <button onClick={(e) => rate(e)}>Rate</button></>)
-                    : <p>You have rated this recipe</p>}
+            {!hasRated 
+            ? ( <><label>Rate recipe: </label>
+                <p><input onBlur={(e) => saveRate(e)} type="number" defaultValue={rateRecipe}/>/5</p>
+                <button onClick={(e) => rate(e)}>Rate</button></>)
+            : <p>You have rated this recipe</p>}
                     
             </section>
             <div className="recipe-additional-details">
@@ -136,6 +175,17 @@ import { isAuth } from '../../HOC/isAuth';
                     
                 </section>
             </div>
+            
+                <div className='comment-input'>
+                <p>Leave a comment</p>
+                <textarea></textarea>
+                <button onClick={e=> comment(e)}>Post Comment</button>
+                </div>
+            <section className='comments-section'>
+                <p>Comments for this recipe: {commentsCount}</p>
+                {comments.map(x => <Comments key={x._id} comment={x}/> )}
+            </section>
+            
             
         
         </div>
