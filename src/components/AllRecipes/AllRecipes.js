@@ -1,16 +1,19 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './AllRecipes.css';
 import AllRecipesCard from './AllRecipesCard';
 import * as recipeService from '../../services/recipeService';
 
-export default function AllRecipes({setAllRecipes, cards}) {
+export default function AllRecipes() {
+
+    const  [cards, setCards] = useState({});
+
     useEffect(() => {
         recipeService.getAll()
         .then(result => {
-            setAllRecipes(result);
+            setCards(result);
         })
 
-    },[setAllRecipes]);
+    },[]);
     return (
         <div className="recipes-page">
             <div className="recipes-header">

@@ -58,14 +58,15 @@ export const logout = async(authToken) => {
             'X-Authorization': authToken
         }
     });
-    let jsonResult = await response.json();
+    return response
+    // let jsonResult = await response.json();
 
 
-    if(response.ok) {
-        return jsonResult;
-    } else {
-        throw jsonResult.message;
-    }
+    // if(response.ok) {
+    //     return jsonResult;
+    // } else {
+    //     throw jsonResult.message;
+    // }
    
 }
 

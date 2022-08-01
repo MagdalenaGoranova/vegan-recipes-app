@@ -1,13 +1,15 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 
+
 import './RecipeCreate.css';
 import { AuthContext } from '../../contexts/AuthContext';
 import { isAuth } from '../../HOC/isAuth';
+import * as recipeService from '../../services/recipeService';
 
 
 
-function RecipeCreate({recipeService}) {
+function RecipeCreate() {
 
     const {user} = useContext(AuthContext);
     

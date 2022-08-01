@@ -3,10 +3,13 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 import * as authService from '../../services/authService';
+import { useNotificationContext } from '../../contexts/NotificationsContext'; 
 
 export default function Login() {
   
   const {login} = useContext(AuthContext);
+
+  const { addAlert } = useNotificationContext();
 
   const navigate = useNavigate();
 
@@ -21,6 +24,7 @@ function loginHandler(e) {
   authService.login(email, password)
   .then((authData) => {
     login(authData);
+    addAlert('You are logged in', 'success')
 
     navigate('/home');
   })

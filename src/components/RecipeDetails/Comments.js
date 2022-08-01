@@ -32,20 +32,5 @@ function Comments({comment}) {
            
         </div>
     )
-       
-    
-
-    
-
-    
-
-
-
-return (
-    <div className='all-comments'>
-       
-    </div>
-
-    )
-}
+}      
 export default isAuth(Comments);

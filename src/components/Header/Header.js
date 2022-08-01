@@ -3,15 +3,23 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import './Header.css';
 import { AuthContext } from "../../contexts/AuthContext";
-import * as AuthService from '../../services/authService'
+import * as authService from '../../services/authService'
+import { useNotificationContext } from "../../contexts/NotificationsContext";
 
 export default function Header() {
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+
+    const { addToast } = useNotificationContext();
     
 
-    function logout() {
-        AuthService.logout(user.accessToken);
+    function logoutHandler() {
+        authService.logout(user.accessToken)
+        .then(res => {
+            addToast('You are logged out', "success");
+            logout();
 
+        })
+       
     }
     return (
         <header>
@@ -31,7 +39,7 @@ export default function Header() {
                         <NavLink to={`/profile/${user._id}`}>My Profile</NavLink>
                         <NavLink to="/my-recipes">My Recipes</NavLink>
                         <NavLink to="/create-recipe">Create Recipe</NavLink>
-                        <a onClick={logout} href="/home">Logout</a>
+                        <NavLink onClick={logoutHandler} to="/home">Logout</NavLink>
                     </div>
                 </div>
             </nav>

@@ -2,8 +2,6 @@ import { NavLink } from "react-router-dom";
 
 export default function AllRecipesCard({card}) {
 
-    console.log(card);
-
     return (
     <div id="recipes-card-wrapper">
 

@@ -1,6 +1,7 @@
 import './Register.css'
 import * as authService from '../../services/authService';
 import * as profileService from '../../services/profileService';
+import { useNotificationContext } from '../../contexts/NotificationsContext'; 
 
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -11,6 +12,8 @@ import { useNavigate } from 'react-router';
 export default function Register() {
 
   const {login} = useContext(AuthContext);
+
+  const { addAlert } = useNotificationContext();
   
   const navigate = useNavigate();
   
@@ -30,6 +33,9 @@ export default function Register() {
         .then(result => {
           console.log(result);
           navigate(`/profile/${result._ownerId}`);
+          addAlert('You have successfully created a profile', 'success');
+          
+
         })
     })
     .catch(err => {
