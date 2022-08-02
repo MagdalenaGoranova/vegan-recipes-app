@@ -17,6 +17,7 @@ import Profile from './components/Profile/Profile';
 import ProfileEdit from './components/Profile/ProfileEdit';
 import Alerts from './components/Notifications/Alerts';
 import Toasts from './components/Notifications/Toasts';
+import PrivateRoute from './components/PrivateRoute';
 
 
 
@@ -34,16 +35,20 @@ function App() {
         <Toasts/>
 
         <Routes>
+          <Route path='/' element={<Home/>}/>
           <Route path='home' element={<Home/>}/>
           <Route path='all-recipes' element={<AllRecipes/>}/>
           <Route path='login' element={<Login/> }/>
           <Route path='register' element={<Register/>}/>
-          <Route path='create-recipe' element={<RecipeCreate/>}/>
-          <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
-          <Route path='profile/:id' element={<Profile/>}/>
-          <Route path='profile/:id/edit-profile' element={<ProfileEdit/>}/>
-          <Route path='my-recipes' element={<MyRecipes/>}/>
-          <Route path='recipe/edit/:id' element={<RecipeEdit/>}/>
+          
+          <Route element={<PrivateRoute/>}>
+            <Route path='create-recipe' element={<RecipeCreate/>}/>
+            <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
+            <Route path='profile/:id' element={<Profile/>}/>
+            <Route path='profile/:id/edit-profile' element={<ProfileEdit/>}/>
+            <Route path='my-recipes' element={<MyRecipes/>}/>
+            <Route path='recipe/edit/:id' element={<RecipeEdit/>}/>
+          </Route>
         </Routes>
         </NotificationProvider>
       </AuthProvider>

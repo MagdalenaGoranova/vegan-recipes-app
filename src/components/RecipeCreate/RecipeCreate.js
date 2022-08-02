@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 
 import './RecipeCreate.css';
 import { AuthContext } from '../../contexts/AuthContext';
-import { isAuth } from '../../HOC/isAuth';
 import * as recipeService from '../../services/recipeService';
 
 
@@ -237,4 +236,4 @@ function RecipeCreate() {
     )
 
 }
-export default isAuth(RecipeCreate);
+export default RecipeCreate;

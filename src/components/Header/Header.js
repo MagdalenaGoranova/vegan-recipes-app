@@ -24,14 +24,10 @@ export default function Header() {
     return (
         <header>
             <article className="logo">
-                <h1 className="logo-title">Healthy Vegan Recipes</h1>
+                <h1 className="logo-title"><NavLink to={'/home'}>Healthy Vegan Recipes.</NavLink></h1>
             </article>  
             {user.email ?
                 <nav className="header-nav">
-                <ul>
-                    <li><NavLink to="/home">Home</NavLink></li>
-                    <li><NavLink to="/all-recipes">All Recipes</NavLink></li>
-                </ul>
                 <div className="dropdown">
                 <button className="header-btn"></button>
                     <div className="dropdown-content">
@@ -46,14 +42,12 @@ export default function Header() {
                
                 : (
                     <nav className="header-nav">
-                <ul>
-                    <li><NavLink to="/home">Home</NavLink></li>
-                    <li><NavLink to="/all-recipes">All Recipes</NavLink></li>
-                    <li><NavLink to="/login">Login</NavLink></li>
-                    <li><NavLink to="/register">Register</NavLink></li>
-                    
-                </ul>
-            </nav>
+                        <ul>
+                            <li><NavLink to="/login">Log in</NavLink></li>
+                            <li><NavLink to="/register">Register</NavLink></li>
+                            
+                        </ul>
+                    </nav>
                 
 
                 )

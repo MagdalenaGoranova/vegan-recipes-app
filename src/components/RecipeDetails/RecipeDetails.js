@@ -1,6 +1,7 @@
 import * as recipeService from '../../services/recipeService';
 import * as ratingService from '../../services/ratingService';
 import * as commentsService from '../../services/commentsService';
+import * as ratingHandler from '../../helpers/RatingHandler';
 
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -8,7 +9,6 @@ import './RecipeDetails.css'
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
-import { isAuth } from '../../HOC/isAuth';
 import Comments from './Comments';
 
 
@@ -51,10 +51,8 @@ import Comments from './Comments';
                     return x + Number(y.rateRecipe)
                 }, 0); 
                 let averageRating = sum / result.length;
-                console.log(averageRating.toFixed(1));
                 setRating(averageRating.toFixed(1));
                 let filtered = result.filter(x => x._ownerId == user._id); 
-                console.log(filtered);
                 if(filtered.length > 0 ) {
                     setHasRated(true);
                 }
@@ -94,19 +92,6 @@ import Comments from './Comments';
             alert('Rating should be a number between 1 and 5');
         }
     }
-    function stars(number) {
-        let starsArr = [];
-        for (let index = 6; index > 1; index--) {
-            if(number > index) {
-                starsArr.push(<i className="far fa-star"></i>)
-            
-            } else {
-                starsArr.push(<i className="fas fa-star"></i>);
-                
-            }  
-        }
-        return starsArr
-    }
 
     function comment(e) {
        let comment = e.currentTarget.parentElement.childNodes[1].value;
@@ -142,7 +127,7 @@ import Comments from './Comments';
 
 
             <div className="recipe-rating">
-                {stars(rating).map(x => x)}
+                {ratingHandler.stars(rating).map(x => x)}
                 <p>{rating}/5</p>
             </div>
 
@@ -192,4 +177,4 @@ import Comments from './Comments';
     </>
     )
 }
-export default isAuth(RecipeDetails)
+export default RecipeDetails

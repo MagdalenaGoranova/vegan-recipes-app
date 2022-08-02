@@ -3,7 +3,7 @@ import MyRecipesCard from './MyRecipesCard';
 import * as recipeService from '../../services/recipeService';
 import { useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
-import { isAuth } from '../../HOC/isAuth';
+
 
 
  function MyRecipes() {
@@ -44,4 +44,4 @@ import { isAuth } from '../../HOC/isAuth';
     )
 
 }
-export default isAuth(MyRecipes);
+export default MyRecipes;

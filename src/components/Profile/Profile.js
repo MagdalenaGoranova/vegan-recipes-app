@@ -4,7 +4,6 @@ import { NavLink, useParams } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import './Profile.css';
-import {isAuth} from '../../HOC/isAuth';
 import * as profileService from '../../services/profileService';
 
 function Profile() {
@@ -56,4 +55,4 @@ function Profile() {
     
     
 }
-export default isAuth(Profile);
+export default Profile;

@@ -1,4 +1,3 @@
-import { isAuth } from "../../HOC/isAuth"
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import './RecipeEdit.css'
@@ -212,4 +211,4 @@ function editSubmitHandler() {
     )
     
 }
-export default isAuth(RecipeEdit);
+export default RecipeEdit;

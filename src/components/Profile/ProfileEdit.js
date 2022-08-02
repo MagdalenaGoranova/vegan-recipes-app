@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
-import {isAuth} from '../../HOC/isAuth';
 import * as profileService from '../../services/profileService';
 
 function ProfileEdit() {
@@ -96,4 +95,4 @@ function ProfileEdit() {
     )
   
 }
-export default isAuth(ProfileEdit);
+export default ProfileEdit;

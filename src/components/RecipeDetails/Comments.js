@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import { isAuth } from "../../HOC/isAuth";
 import * as profileService from '../../services/profileService';
 
 
@@ -33,4 +32,4 @@ function Comments({comment}) {
         </div>
     )
 }      
-export default isAuth(Comments);
+export default Comments;
