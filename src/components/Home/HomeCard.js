@@ -43,12 +43,12 @@ export default function HomeCard({card}) {
         <div className="latest-recipe-image" style={{backgroundImage:`url(${card.img})`}}>
             <div className="latest-recipe-overlay">
             <div className="latest-recipe-title">
-                <h3>{card.title}</h3>
-                <ul>
-                    <li><i className="fa-regular fa-clock"></i>{card.hours ? card.hours+'h :' : ''}{card.minutes}min</li>
-                    <li><i className="fa-solid fa-people-group"></i>{card.servingSize}</li>
-                    <li><i className="fa-solid fa-comments"></i>{commentsCount}</li>
-                    <li> 
+                <h3 className="card-title">{card.title}</h3>
+                <ul className="card-ul">
+                    <li className="card-li"><i className="fa-regular fa-clock"></i>{card.hours ? card.hours+'h :' : ''}{card.minutes}min</li>
+                    <li className="card-li"><i className="fa-solid fa-people-group"></i>{card.servingSize}</li>
+                    <li className="card-li"><i className="fa-solid fa-comments"></i>{commentsCount}</li>
+                    <li className="card-li"> 
                         {ratingHandler.stars(rating).map(x => x)}
                         <p>{rating}/5</p>
                     </li>

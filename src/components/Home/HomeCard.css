@@ -15,7 +15,7 @@
 a, a:hover { 
     text-decoration:none; color:#000; 
 }
-li { 
+.card-li { 
     display:inline; 
     margin-right:15px; 
     font-size:10.5pt;   
@@ -23,7 +23,7 @@ li {
     color: white
 }
 
-h3 {
+.card-title {
   font-family: 'Muli', sans-serif;
   font-weight:normal;
   font-size:21pt;

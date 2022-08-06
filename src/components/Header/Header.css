@@ -15,7 +15,7 @@
 
 .logo-title a:hover {
     text-decoration: none;
-    color: #ee8235;
+    color: #047A46;
 }
 header {
     width: 100%;
@@ -29,7 +29,7 @@ header {
     position: sticky;
     top:0;
     z-index: 9;
-    border-bottom: 1px solid #ee8235;
+    border-bottom: 1px solid #047A46;
 }
 
 .logo {
@@ -40,82 +40,115 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    width: 20%;  
 }
 
-.header-nav ul {
+.header-nav ul{
     display: flex;
     list-style: none;
     margin-bottom: 0px;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .header-nav ul li a{
     text-decoration: none;
-    color: #ee8235;
+    color: #047A46;
     font-size: 1.3rem;
-    border: 1px solid #ee8235;
+    border: 1px solid #047A46;
     background-color: white;
     padding: 5px 15px;
     border-radius: 7px;
     font-weight:300;
            
 }
-.header-nav ul li a:hover {
-    color:#ee8235; 
-    border: 2px solid #ee8235;
-    background-color: #fddb7c;
+.header-nav ul li a:hover{
+    color:#047A46; 
+    border: 2px solid #047A46;
+    background-color: #D1F895;
 
 }
-.header-btn {
-    color: #F7D1B9;
-    background-image: url('../../../public/images/default_user_icon-300x300.png');
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    border: 1px solid #ee8235;  
-    cursor: pointer;
-    background-size: contain;
+
+.header-nav-private ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 75%;  
+    list-style: none;
+    margin-bottom: 0px;
+    height: 100%;   
+    margin-right: 20px;
 }
-.header-btn:hover, .main-info-btn:hover, .apps-btn:hover {
-    opacity: 0.8;
+.private-nav-li {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 17px;
 }
-.dropdown {
-    position: relative;
-    display: inline-block;
+.private-nav-li a {
+    text-decoration: none; 
+    color: black; 
+    height: 100%;
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
 }
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    right: -3%;
+.private-nav-li:hover {
+    text-decoration: none; 
+    color: #047A46;
+    background-color: #D1F895; 
+    font-weight: bold;  
 }
-.dropdown-content a {
-    color: black;
-    padding: 7px 10px;
+.private-nav-li a:hover {
+    color: #047A46;
+}
+.logout-btn a{
     text-decoration: none;
-    display: block;
+    color: #047A46;
+    font-size: 1.3rem;
+    border: 1px solid #047A46;
+    background-color: white;
+    padding: 5px 15px;
+    border-radius: 7px;
+    font-weight:300;
 }
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-    background-color:#ee8235;
+.logout-btn a:hover {
+    color:#047A46; 
+    border: 2px solid #047A46;
+    background-color: #D1F895;
 }
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+
+.header-nav-private {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 65%;  
+    height: 100%;
+
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .header-btn {
-    border: 2px solid #ee8235;  
+.header-btn {
+    color: #047A46;
+    border-radius: 50%;
+    width: 80px;
+    height: 60px;
+    border: 1px solid #047A46;  
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
-.greeting {
-    color:#ee8235;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-size: 1.1rem;
+.header-btn:hover{
+    border: 2px solid #047A46;
+     
 }
+.logo-img {
+    width: 50px;
+    height: 45px;
+
+}
+

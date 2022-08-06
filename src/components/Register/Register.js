@@ -33,7 +33,7 @@ export default function Register() {
         .then(result => {
           console.log(result);
           navigate(`/profile/${result._ownerId}`);
-          addAlert('You have successfully created a profile', 'success');
+          addAlert(`Welcome, ${username}! You have successfully created a profile`, 'success');
           
 
         })

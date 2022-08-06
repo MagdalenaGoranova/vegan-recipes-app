@@ -25,14 +25,14 @@ export const getProfile = async(authToken, ownerId) => {
         throw result.message;
     }
 }
-export const editProfile = async(profileId, authToken, recipeData) => {
+export const editProfile = async(profileId, authToken, profileData) => {
     const response = await fetch(`${baseUrl}/data/profiles/${profileId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'X-Authorization': authToken
         },
-        body: JSON.stringify(recipeData)
+        body: JSON.stringify(profileData)
     })
     const result = await response.json()
 

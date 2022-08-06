@@ -207,7 +207,7 @@ function RecipeCreate() {
                         <button type="submit" onClick={(e)=> nextStepHandler(e)}>Next</button>
 
                         <ul>
-                            {recipe.ingredients.map(recipe => <li>{recipe.ingredient} - {recipe.quantity} {recipe.measures}</li>)}
+                            {recipe.ingredients.map(recipe => <li key={recipe.ingredient}>{recipe.ingredient} - {recipe.quantity} {recipe.measures}</li>)}
                         </ul>
                     </form>
 
@@ -226,7 +226,7 @@ function RecipeCreate() {
                         <button className='create-btn' onClick={(e)=> createRecipeHandler(e)}>Create</button>
 
                         <ul>
-                            {recipe.instructions.map(instruction => <li>{instruction}</li>)}
+                            {recipe.instructions.map(instruction => <li key={instruction}>{instruction}</li>)}
                         </ul>
                     </form>
                 )}
