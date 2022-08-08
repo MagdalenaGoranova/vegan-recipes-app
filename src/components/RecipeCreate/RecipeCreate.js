@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 
 import './RecipeCreate.css';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -8,27 +11,29 @@ import * as recipeService from '../../services/recipeService';
 
 
 
+
 function RecipeCreate() {
 
-    const {user} = useContext(AuthContext);
-    
+    const { user } = useContext(AuthContext);
+
 
     const navigate = useNavigate();
 
     const [recipe, setRecipe] = useState({
         step: 1,
-        author:user.username,
+        author: user.username,
         title: '',
         description: '',
         level: '',
         servingSize: '',
-        time: '',
+        hours: '',
+        minutes:'',
         category: '',
         img: '',
         ingredients: [],
         instructions: []
     })
-    
+
 
     function nextStepHandler(e) {
         e.preventDefault();
@@ -36,65 +41,65 @@ function RecipeCreate() {
 
         if (e.currentTarget.parentElement.className === 'step-1') {
 
-        let title = formData.get('recipe-title');
-        let description = formData.get('description');
-        let level = formData.get('level');
-        let servingSize = formData.get('servingSize');
-        let hours = formData.get('hours');
-        let minutes = formData.get('minutes');
-        let category = formData.get('category');
-        let img = formData.get('img');
+            let title = formData.get('recipe-title');
+            let description = formData.get('description');
+            let level = formData.get('level');
+            let servingSize = formData.get('servingSize');
+            let hours = formData.get('hours');
+            let minutes = formData.get('minutes');
+            let category = formData.get('category');
+            let img = formData.get('img');
 
-        setRecipe({
-            ...recipe,
-            author: user.username,
-            title: title,
-            description: description,
-            level: level, 
-            servingSize: servingSize,
-            hours: hours,
-            minutes: minutes,
-            category: category,
-            img: img,
-            step:recipe.step + 1,
-        });
+            setRecipe({
+                ...recipe,
+                author: user.username,
+                title: title,
+                description: description,
+                level: level,
+                servingSize: servingSize,
+                hours: hours,
+                minutes: minutes,
+                category: category,
+                img: img,
+                step: recipe.step + 1,
+            });
         }
         if (e.currentTarget.parentElement.className === 'step-2') {
 
             setRecipe({
                 ...recipe,
-                step:recipe.step + 1,
+                step: recipe.step + 1,
             });
 
         }
-    } 
+    }
     function previousStepHandler(e) {
-       
+
         setRecipe({
             ...recipe,
-            step:recipe.step - 1,
+            step: recipe.step - 1,
         });
-    
+
     }
     function addIngredientsHandler(e) {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget.parentElement);
-       
+
         let ingredient = formData.get('ingredient');
         let quantity = formData.get('quantity');
         let measures = formData.get('measures');
-        
+
 
         setRecipe({
             ...recipe,
-            ingredients: [...recipe.ingredients, {ingredient, quantity, measures}]
-            
+            ingredients: [...recipe.ingredients, { ingredient, quantity, measures }]
+
         });
         //console.log(recipe);
-       
+
     }
-    function addInstructionsHandler(e){
+    function addInstructionsHandler(e) {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget.parentElement);
@@ -112,127 +117,176 @@ function RecipeCreate() {
         console.log(recipe);
 
         recipeService.createRecipe(recipe, user.accessToken)
-        .then((result) => {
-            console.log(result);
-            navigate('/all-recipes');
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then((result) => {
+                console.log(result);
+                navigate('/all-recipes');
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
+    function deleteInstruction(e) {
+        e.preventDefault();
+        console.log(e.currentTarget.parentElement.textContent);
+        let currentInstruction = e.currentTarget.parentElement.textContent;
+        setRecipe(oldState => ({...oldState, instructions: recipe.instructions.filter(x =>  x !== currentInstruction)}))   
+         
+    }
+    function deleteIngredient(e) {
+        e.preventDefault();
+        console.log(e.currentTarget.parentElement.childNodes[0].textContent);
+        let currentIngredient = e.currentTarget.parentElement.childNodes[0].textContent;
+        setRecipe(oldState => ({...oldState, ingredients: recipe.ingredients.filter(x =>  x.ingredient !== currentIngredient)}))  
+    }
+
     return (
         <section className="create-recipe-container">
-                {recipe.step === 1 ? (
-                    <form className="step-1">
-                         <h1 className='page-title'>Step 1: Add all the initial information about your recipe</h1>
-                            <div className="title">
-                                <label htmlFor="recipe-title">Add Title</label>
-                                <input type="text" id="title" name="recipe-title" placeholder='e.g.Carrot Banana Bread' defaultValue={recipe.title} required/>
-                            </div>
+            {recipe.step === 1 ? (
+                <div className='step-1-div'>
+                    <h3 className='step1-title'>Add the initial information about your recipe</h3>
+                    <Form className='step-1'>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" placeholder="e.g. Carrot Banana Bread" name="recipe-title"/>
+                        </Form.Group>
 
-                            <div className="description">
-                                <label htmlFor="description">Add a short description</label>
-                                <input type="textarea" id="description" name="description" placeholder='e.g.Healthy vegan banana bread made with carrots' required />
-                            </div>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" placeholder="e.g.Healthy vegan banana bread made with carrots" name="description" />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                        <Form.Label>Difficulty level</Form.Label>
+                        <Form.Check 
+                            type={'radio'}
+                            id={`default-radio`}
+                            label={`Beginners`}
+                            name="level"
+                            value={'beginners'}
+                        />
+                        <Form.Check 
+                            type={'radio'}
+                            id={`default-radio`}
+                            label={`Intermediate`}
+                            name="level"
+                            value={'intermediate'}
+                        />
+                        <Form.Check 
+                            type={'radio'}
+                            id={`default-radio`}
+                            label={`Advanced`}
+                            name="level"
+                            value={'advanced'}
+                        />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Serving size</Form.Label>
+                            <Form.Control type="number" placeholder="e.g.2" name="servingSize"/>
+                        </Form.Group>
+                        <Form.Group className="mb-3 time" controlId="formBasicEmail">
+                            <Form.Label>Cooking Time</Form.Label>
+                            <Form.Control type="number" placeholder="hours" name="hours" />
+                            <p>:</p>
+                            <Form.Control type="number" placeholder="minutes" name="minutes"/>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select aria-label="Default select example" name='category'>
+                            <option value="dinner">Dinner</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="soup">Soup</option>
+                            <option value="dessert">Dessert</option>
+                            <option value="snack">Snack</option>
+                            <option value="salad">Salad</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Image Link</Form.Label>
+                            <Form.Control type="url"  name="img"/>
+                        </Form.Group>
+                        <Button variant="primary" type="submit" className="next-btn" onClick={(e) => nextStepHandler(e)}>
+                            Next
+                        </Button>
+                    </Form>
+                    </div>
+                
+            ) : recipe.step === 2 ? (
+                <div className='step-2-div'>
+                <h3 className='step2-title'>Add all ingredients</h3>
+                <div className='div-to-flex'>
+                <Form className='step-2'>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Ingredient</Form.Label>
+                                <Form.Control type="text" placeholder="Carrots" name="ingredient"/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Quantity</Form.Label>
+                                <Form.Control type="number" placeholder="3" name="quantity"/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Measurement</Form.Label>
+                                <Form.Select aria-label="Default select example" name='measures'>
+                                <option value="cups">Cups</option>
+                                <option value="grams">Grams</option>
+                                <option value="singles">Singles</option>
+                                </Form.Select>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" className="add-btn" onClick={(e) => addIngredientsHandler(e)}>
+                           Add ingredient
+                    </Button>
+                    <Button variant="primary" type="submit" className="previous-btn"onClick={(e) => previousStepHandler(e)}>
+                            Previous
+                    </Button>
+                    <Button variant="primary" type="submit" className="next-btn" onClick={(e) => nextStepHandler(e)}>
+                            Next
+                    </Button>
 
-                            <div className="level">
-                                <label htmlFor="level">Choose difficulty level</label>
-                                <label htmlFor="beginners">
-                                    <input type="radio" id="beginners" name="level" value="beginners" defaultChecked />
-                                    Beginners</label>
-                                <label htmlFor="intermidiate">
-                                    <input type="radio" id="intermidiate" name="level" value="intermidiate" />
-                                    Intermidiate</label>
-                                <label htmlFor="advanced">
-                                    <input type="radio" id="advanced" name="level" value="advanced" />
-                                    Advanced</label>
-                            </div>
+                </Form>
+                <div className='ul-container'>
+                    <p>Ingredients</p>
+                <ul className='ingredients-ul'>
+                        {recipe.ingredients.map(recipe => <li key={recipe.ingredient}>{recipe.ingredient} - {recipe.quantity} {recipe.measures}
+                            <button className='del-btn' onClick={(e) => deleteIngredient(e)}><i className="fa-solid fa-trash-can"></i></button>
+                        </li>)}
+                </ul>
+                </div>
 
-                            <div className="servingSize">
-                                <label htmlFor="servingSize">Serving size</label>
-                                <input type="number" id="servingSize" name="servingSize" placeholder='e.g.8' required/>
-                            </div>
+                </div>
+                </div>
 
-                            <div className="time">
-                                <label htmlFor="time">Total cooking time</label>
-                                <input type="number" id="hours" name="hours" placeholder='hours' required/>:
-                                <input type="number" id="minutes" name="minutes" placeholder='minutes' required/>
-
-                            </div>
-
-                            <div className="category">
-                                <label htmlFor="category">Choose a category</label>
-                                <select name="category" id="category">
-                                    <option value="dinner">Dinner</option>
-                                    <option value="breakfast">Breakfast</option>
-                                    <option value="lunch">Lunch</option>
-                                    <option value="soup">Soup</option>
-                                    <option value="dessert">Dessert</option>
-                                    <option value="snack">Snack</option>
-                                    <option value="salad">Salad</option>
-                                </select>
-                            </div>
-
-                            <div className="img">
-                                <label htmlFor="img">Add an image link</label>
-                                <input type="url" id="img" name="img" required/>
-                            </div>
-                            <button type="submit" onClick={(e)=> nextStepHandler(e)}>Next</button>
-                    </form>
-                ) : recipe.step === 2 ? (
-                    <form className="step-2">
-                             <h1 className='page-title'>Step 2: Add all ingredi</h1>
-                             <h3>Add ingredients one by one pressing the '+' button</h3>
-                            <label htmlFor="ingredient">Add ingredient
-                                <input type="text" id="ingredient" name="ingredient" placeholder='e.g.Carrots' required/>
-                            </label>
+            ) : (
+                <div className='step-3-div'>
+                    <h3 className='step-3-title'>Add all instructions</h3>
+                    <div className='div-to-flex'>
+                    <Form className='step-3'>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Instruction/Step</Form.Label>
+                            <Form.Control type="text" placeholder="Preheat the oven on 200 degrees" name="instruction"/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" className="add-btn" onClick={(e) => addInstructionsHandler(e)}>
+                          Add instruction
+                    </Button>
+                    <Button variant="primary" type="submit" className="previous-btn" onClick={(e) => previousStepHandler(e)}>
+                            Previous
+                    </Button>
+                    <Button variant="primary" type="submit" className='create-btn' onClick={(e) => createRecipeHandler(e)}>
+                           Create
+                    </Button>
+                    </Form>
+                    <div className='ul-container'>
+                    <p>Instructions</p>
+                    <ul className="instructions-ul">
+                        {recipe.instructions.map(instruction => <li key={instruction}>{instruction}
+                            <button className='del-btn' onClick={(e) => deleteInstruction(e)}><i className="fa-solid fa-trash-can"></i></button>
+                        </li>)}
+                    </ul>
+                    </div>
+                </div>
+                </div>
+            )}
 
 
-                            <label htmlFor="quantity">Select quantity
-                                <input type="number" id="quantity" name="quantity" placeholder='e.g.3' required/>
-                            </label>
-
-
-                            <label htmlFor="measures">Select your measuring tool
-                                <select name="measures" id="measures">
-                                    <option value="cups">Cups</option>
-                                    <option value="grams">Grams</option>
-                                    <option value="singles">Singles</option>
-                                </select>
-                            </label>
-                            <button type="submit" onClick={(e)=> addIngredientsHandler(e)} className='add-ingredient-btn'>+</button>
-                            <h3>When you have added ALL the neccessary ingredients press Next to go to the next step</h3>
-                            <h3>Press Previous if you want to go back to the prevous step and add or correct something</h3>
-                        <button onClick={(e)=> previousStepHandler(e)}>Previous</button>
-                        <button type="submit" onClick={(e)=> nextStepHandler(e)}>Next</button>
-
-                        <ul>
-                            {recipe.ingredients.map(recipe => <li key={recipe.ingredient}>{recipe.ingredient} - {recipe.quantity} {recipe.measures}</li>)}
-                        </ul>
-                    </form>
-
-                ) : (
-                    <form className="step-3">
-                            <h1 className='page-title'>Create a recipe: Step 3</h1>
-                            <h3>Add simple instrucions/steps one by one pressing the '+' button</h3>
-                            <label htmlFor="instruction">Add an instruction/step
-                                <input type="text" id="instruction" name="instruction" placeholder='e.g Step 1: Preheat oven on 175 degrees C.' required/>
-                            </label>
-                            <button type="submit" onClick={(e)=> addInstructionsHandler(e)} className='add-instruction-btn'>+</button>
-                       
-                            <h3>When you have added ALL the neccessary instructions and your recipe is completed press Create to add recipe to the website</h3>
-                            <h3>Press Previous if you want to go back to the prevous step and add or correct something</h3>
-                            <button onClick={(e)=> previousStepHandler(e)}>Previous</button>
-                        <button className='create-btn' onClick={(e)=> createRecipeHandler(e)}>Create</button>
-
-                        <ul>
-                            {recipe.instructions.map(instruction => <li key={instruction}>{instruction}</li>)}
-                        </ul>
-                    </form>
-                )}
-
-
-            </section>
+        </section>
     )
 
 }

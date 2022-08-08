@@ -18,6 +18,7 @@ import ProfileEdit from './components/Profile/ProfileEdit';
 import Alerts from './components/Notifications/Alerts';
 import Toasts from './components/Notifications/Toasts';
 import PrivateRoute from './components/PrivateRoute';
+import Footer from './components/Footer/Footer';
 
 
 
@@ -28,13 +29,13 @@ function App() {
     <div className="App">
 
       <AuthProvider>
-        <NotificationProvider>
-        <Header />
+      <NotificationProvider>
+      <Header />
 
-        <Alerts/>
-        <Toasts/>
+      <Alerts/>
+      <Toasts/>
 
-        <Routes>
+      <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='home' element={<Home/>}/>
           <Route path='all-recipes' element={<AllRecipes/>}/>
@@ -49,8 +50,9 @@ function App() {
             <Route path='my-recipes' element={<MyRecipes/>}/>
             <Route path='recipe/edit/:id' element={<RecipeEdit/>}/>
           </Route>
-        </Routes>
-        </NotificationProvider>
+      </Routes>
+      <Footer/>
+      </NotificationProvider>
       </AuthProvider>
     </div>
   );

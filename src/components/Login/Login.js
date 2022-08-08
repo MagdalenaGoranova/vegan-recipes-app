@@ -1,17 +1,31 @@
 import './Login.css'
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 import * as authService from '../../services/authService';
 import { useNotificationContext } from '../../contexts/NotificationsContext'; 
 
 export default function Login() {
+
+  const ref = useRef();
   
   const {login} = useContext(AuthContext);
 
   const { addAlert } = useNotificationContext();
 
   const navigate = useNavigate();
+
+
+  function togglePassword(e) {
+    if(ref.current.type == 'password') {
+      ref.current.type = 'text';
+      e.target.className = 'fa-solid fa-eye';
+    } else {
+      ref.current.type = 'password';
+      e.target.className = 'fa-solid fa-eye-slash';
+    }
+
+  }
 
 function loginHandler(e) {
   e.preventDefault();
@@ -49,27 +63,25 @@ function loginHandler(e) {
               <div className="card-body p-4 p-lg-5 text-black">
 
                 <form method="POST" onSubmit={(e) => loginHandler(e)}>
-                  <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing: '1px'}}>Sign into your account</h5>
+                  <h5 className="fw-normal mb-3 pb-3 login-title" style={{letterSpacing: '1px'}}>Log into your account</h5>
 
                   <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="form2Example17">Email address</label>
-                    <input type="email" id="form2Example17" name="email" className="form-control form-control-lg" />
+                    <label className="form-label label" htmlFor="form2Example17">Email address</label>
+                    <input type="email" id="form2Example17" name="email" className="form-control form-control-lg input-email" />
                   </div>
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="form2Example27">Password</label>
-                    <input type="password" id="form2Example27" name="password" className="form-control form-control-lg" />
+                    <input type="password" id="form2Example27" name="password" className="form-control form-control-lg" ref={ref}/>
+                    <i class="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
                   </div>
 
-                  <div className="pt-1 mb-4">
-                    <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                  <div className=" mb-4">
+                    <button className="btn btn-lg btn-block login-btn" type="submit">Login</button>
                   </div>
 
-                  <a className="small text-muted" href="/home">Forgot password?</a>
-                  <p className="mb-5 pb-lg-2" style={{color:'#85224A'}}>Don't have an account? <a href="/register"
-                      style={{color: '#85224A'}}>Register here</a></p>
-                  <a href="#!" className="small text-muted">Terms of use.</a>
-                  <a href="#!" className="small text-muted">Privacy policy</a>
+                  <p className="mb-5 pb-lg-2" style={{color:'#047a46'}}>Don't have an account? <a href="/register"
+                      style={{color: '#047a46'}}>Register here</a></p>
                 </form>
 
               </div>

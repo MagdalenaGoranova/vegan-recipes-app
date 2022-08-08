@@ -43,11 +43,9 @@ export default function Home() {
                 <div className='about-us-text'>
                     <p className='about-us-title'>You should know that... </p>
                     <ul className='about-us-list'>
-                            <li className='about-us-li'><i class="fa-solid fa-seedling"></i>We offer healthy plant-pased-only recipes suitable for all cooking abilities.</li>
                             <li className='about-us-li'><i class="fa-solid fa-seedling"></i>We give you a chance to share your own favorite recipes.</li>
                             <li className='about-us-li'><i class="fa-solid fa-seedling"></i>We are inspired by tasty and healthy food which is cruelty-free, plant-based and delicious.</li>
                             <li className='about-us-li'><i class="fa-solid fa-seedling"></i>Our recipes are here to accomodate all stages of your vegan journey- from beginners to long-time vegans- we have the recipes for you</li>
-                            <li className='about-us-li'><i class="fa-solid fa-seedling"></i>We offer wide variety of recipes and products which are easy to find and affordable</li>
                             <li className='about-us-li'><i class="fa-solid fa-seedling"></i>Our mission is to inspire more people to try vegan recipes and maybe start their plant-based journey here</li>
                     </ul>
                 </div>
@@ -56,8 +54,19 @@ export default function Home() {
             </section>
 
             <section className='info-section' id='info'> 
-                <p className='info-title'>Here we offer useful information about veganism and plant-based diets</p>
-
+                <p className='info-title'>Useful information about veganism and plant-based diets</p>
+                <div className='info-text'>
+                    <div>
+                        <p>Nutritional facts</p>
+                    </div>
+                    <div>
+                        <p>History</p>
+                    </div>
+                    <div>
+                    <p>Plant-based VS Vegan</p>
+                    </div>
+                </div>
+                <p className='more-info'> For more information and ideas: </p>
                 <a href="#home" className='to-top-btn'><i class="fa-solid fa-arrow-up"></i></a>
             </section>
           

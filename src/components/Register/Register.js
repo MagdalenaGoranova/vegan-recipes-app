@@ -3,7 +3,7 @@ import * as authService from '../../services/authService';
 import * as profileService from '../../services/profileService';
 import { useNotificationContext } from '../../contexts/NotificationsContext'; 
 
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import { useNavigate } from 'react-router';
@@ -11,11 +11,24 @@ import { useNavigate } from 'react-router';
 
 export default function Register() {
 
+  const ref = useRef(null);
+
   const {login} = useContext(AuthContext);
 
   const { addAlert } = useNotificationContext();
   
   const navigate = useNavigate();
+
+  function togglePassword(e) {
+    if(ref.current.type == 'password') {
+      ref.current.type = 'text';
+      e.target.className = 'fa-solid fa-eye';
+    } else {
+      ref.current.type = 'password';
+      e.target.className = 'fa-solid fa-eye-slash';
+    }
+
+  }
   
   function registerHandler(e) {
     e.preventDefault();
@@ -31,7 +44,7 @@ export default function Register() {
       login(authData)
       profileService.createProfile(authData, authData.accessToken)
         .then(result => {
-          console.log(result);
+         
           navigate(`/profile/${result._ownerId}`);
           addAlert(`Welcome, ${username}! You have successfully created a profile`, 'success');
           
@@ -39,9 +52,10 @@ export default function Register() {
         })
     })
     .catch(err => {
-      console.log(err);
+      
 
     })
+    
   }
     return (
         <section className="text-center text-lg-start">
@@ -59,40 +73,27 @@ export default function Register() {
                     <form method='POST' onSubmit={(e) => registerHandler(e)}>
                       
                       <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="form3Example3">Email address</label>
+                        <label className="form-label" htmlFor="form3Example3">Email</label>
                         <input type="email" id="form3Example3" className="form-control" name="email"/>
                       </div>
         
                      
                       <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="form3Example4">Password</label>
-                        <input type="password" id="form3Example4" className="form-control" name="password"/>
+                        <input type="password" id="form3Example4" className="form-control" name="password" ref={ref}/>
+                        <i class="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
+          
+
                       </div>
 
                       <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="form3Example3">Add username</label>
+                        <label className="form-label" htmlFor="form3Example3">Username</label>
                         <input type="text" id="form3Example3" className="form-control" name="username"/>
                       </div>
 
-                      <button type="submit" className="btn btn-primary btn-block mb-4">
+                      <button type="submit" className="btn btn-primary btn-block mb-4 register-btn" >
                         Register
                       </button>
-        
-                      <div className="text-center">
-                        <p>or register with:</p>
-                        <button type="button" className="btn btn-link btn-floating mx-1">
-                          <i className="fab fa-facebook-f"></i>
-                        </button>
-        
-                        <button type="button" className="btn btn-link btn-floating mx-1">
-                          <i className="fab fa-google"></i>
-                        </button>
-        
-                        <button type="button" className="btn btn-link btn-floating mx-1">
-                          <i className="fab fa-twitter"></i>
-                        </button>
-        
-                      </div>
                     </form>
                   </div>
                 </div>

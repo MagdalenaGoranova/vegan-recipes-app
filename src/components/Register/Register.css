@@ -3,17 +3,31 @@
   }
 
   @media (max-width: 991.98px) {
-    .cascading-right {
-      margin-right: 0;
+  .cascading-right {
+    margin-right: 0;
     }
 }
 .img-register{
-    width: 500px;
-    height: 600px;
+  width: 500px;
+  height: 600px;
 }
-.btn-primary {
-    background-color: #AD0279;
+.fw-bold {
+  color: #047A46;
 }
-.fa-facebook-f, .fa-google, .fa-twitter {
-    color:#AD0279;
+.form-outline .form-control {
+  border: 1px solid #047A46;
 }
+.register-btn {
+  background-color: #047A46!important;
+  border: none!important;
+}
+.fa-eye-slash, .fa-eye {
+  position: absolute;
+  top: 43px;
+  right: 15px;
+  color: #047A46;
+}
+
+
+
+
