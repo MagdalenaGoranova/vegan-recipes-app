@@ -23,11 +23,12 @@ function Comments({comment}) {
         return <p>Loading..</p>
     }
 
-    console.log(profile);
+   
 
     return (
         <div className="comment-container">
-            <p>{profile.username} says: {comment.comment}</p>
+            <p><span>{profile.username}</span> says:</p>
+            <p>{comment.comment} <i class="fa-regular fa-trash-can" ></i></p>
            
         </div>
     )

@@ -7,7 +7,7 @@ import * as ratingHandler from '../../helpers/RatingHandler';
 import { AuthContext } from '../../contexts/AuthContext';
 import './RecipeDetails.css'
 
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import Comments from './Comments';
 
@@ -18,7 +18,7 @@ import Comments from './Comments';
 
     const [rateRecipe, setRateRecipe] = useState('');
 
-    const [rating, setRating] = useState('');
+    const [rating, setRating] = useState(0);
 
     const [hasRated, setHasRated] = useState(false);
 
@@ -36,6 +36,7 @@ import Comments from './Comments';
     useEffect(() => {
         recipeService.getOne(id)
             .then(result => {
+                console.log(result);
                 setRecipe(result);
                 
             })
@@ -85,7 +86,6 @@ import Comments from './Comments';
        if(rateRecipe > 0 && rateRecipe <= 5){
         ratingService.rateRecipe(user.accessToken, {id, rateRecipe})
             .then(result => {
-                console.log(result);
             })
             setHasRated(true);
         } else {
@@ -94,7 +94,7 @@ import Comments from './Comments';
     }
 
     function comment(e) {
-       let comment = e.currentTarget.parentElement.childNodes[1].value;
+       let comment = e.currentTarget.parentElement.childNodes[0].value;
 
        commentsService.commentRecipe(user.accessToken, {id, comment})
        .then(result => {
@@ -104,77 +104,112 @@ import Comments from './Comments';
         ]))
         setCommentsCount(oldState => oldState + 1);
        })
+       e.currentTarget.parentElement.childNodes[0].value = '';
        
+    }
+    function showInputField(e) {
+       let inputField = e.target.parentElement.parentElement.childNodes[1];
+       if(inputField.className == 'input-field hidden') {
+        inputField.classList.remove('hidden');
+       } else {
+        inputField.classList.add('hidden');
+       }
     }
 
     return (
-        <>
-        <h1 className="recipe-title">{recipe.title}</h1>
-        <div className="recipe-page">
-            <section className="side-details-div">
-                <div className="recipe-img">
-                    <img src={recipe.img} alt="recipeImage"/>
-                </div>  
-            </section>
-            <section className='recipe-details' >
-                    <h2>Recipe Details</h2>
-                    <p><span>Recipe Author</span>{recipe.author}</p>
-                    <p><span>Category</span>{recipe.category}</p>
-                    <p><span>Difficulty level</span>{recipe.level}</p>
-                    <p><span>Time for preparation</span>{recipe.hours}h: {recipe.minutes}min</p>
-                    <p><span>Serving size</span>{recipe.servingSize}</p>
-                    <p><span>Description</span>{recipe.body}</p>
+        <div className='recipe-details-container'>
 
+            <div className='recipe-details-all'>
 
-            <div className="recipe-rating">
-                {ratingHandler.stars(rating).map(x => x)}
-                <p>{rating}/5</p>
-            </div>
+                <div className='recipe-details-div'>
+                    {recipe._ownerId == user._id 
+                    ? (<>
+                    <h3 className="recipe-title">{recipe.title}</h3>
+                    <NavLink to={`/recipe/edit/${recipe._id}`}>Edit<i class="fa-solid fa-pen"></i></NavLink></>)
+                    : <h3 className="recipe-title">{recipe.title}</h3>}
 
-            {!hasRated 
-            ? ( <><label>Rate recipe: </label>
-                <p><input onBlur={(e) => saveRate(e)} type="number" defaultValue={rateRecipe}/>/5</p>
-                <button onClick={(e) => rate(e)}>Rate</button></>)
-            : <p>You have rated this recipe</p>}
-                    
-            </section>
-            <div className="recipe-additional-details">
-                <section className="recipe-ingredients">
-                    <h2>Ingredients</h2>
-                    <ul>
-                        {recipe.ingredients.map(x => 
-                            <li key={x.ingredient}>
-                            <span>{x.ingredient}</span> - {x.quantity} {x.measures}</li>
-                        )}
-                    </ul>
-                    
-                </section>
-                <section className="recipe-instructions">
-                    <h2>Method</h2>
-                    <ul>
-                        {recipe.instructions.map((x, i) => 
-                            <li key={x}>
-                            Step {i + 1}: <span>{x}</span></li>
-                        )}
-                    </ul>
-                    
-                </section>
-            </div>
-            
-                <div className='comment-input'>
-                <p>Leave a comment</p>
-                <textarea></textarea>
-                <button onClick={e=> comment(e)}>Post Comment</button>
+                    <div className='recipe-details-initial-info'>
+
+                        <div className='initil-info'>
+                            <div className="recipe-rating">
+                                    <p className='stars'>{ratingHandler.stars(rating).map(x => x)}</p>
+                                    <p className='rating'>{rating}/5</p>
+
+                                { recipe._ownerId != user._id 
+                                ? !hasRated
+                                    ? ( <>
+                                        <input className="rate-input" onBlur={(e) => saveRate(e)} type="number" defaultValue={rateRecipe}/><span>/5</span>
+                                        <button  className="rate-btn" onClick={(e) => rate(e)}>Rate</button>
+                                        </>)
+                                    : <p className='rate-msg'>You have rated this recipe</p>
+                                : ''}
+                            </div>
+
+                            <p className='description-text'>{recipe.description}</p>
+
+                            <div className='details'>
+                                <p className='details-text'><span>Author:</span>{recipe.author}</p>
+                                <p className='details-text'><span>Prep time:</span>
+                                {recipe.hours == 0 || recipe.hours == '' ? recipe.minutes + 'min' : recipe.hours + 'h' + ':' + recipe.minutes + 'min'}</p>
+                                <p className='details-text'><span>Serving size:</span>{recipe.servingSize}</p>
+                                <p className='details-text'><span>Category:</span>{recipe.category}</p>
+                                <p className='details-text'><span>Level:</span>{recipe.level}</p>
+                            </div>
+
+                        </div>
+
+                        <div className='recipe-img'>
+                                <img src={recipe.img} alt="recipeImage"/>
+                        </div>
+                    </div>
+
                 </div>
-            <section className='comments-section'>
-                <p>Comments for this recipe: {commentsCount}</p>
-                {comments.map(x => <Comments key={x._id} comment={x}/> )}
-            </section>
-            
-            
-        
+
+                <div className='recipe-details-additional-info'>
+
+                        <section className="recipe-ingredients">
+                            <h3>Ingredients</h3>
+                            <ul>
+                                {recipe.ingredients.map(x => 
+                                    <li key={x.ingredient}>
+                                    <i class="fa-solid fa-basket-shopping"></i>
+                                    <span>{x.quantity} {x.measures}</span>{x.ingredient}</li>
+                                )}
+                            </ul>      
+                        </section>
+
+                        <section className="recipe-instructions">
+                            <h3>Method</h3>
+                            <ul>
+                                {recipe.instructions.map((x, i) => 
+                                    <li key={x}>
+                                    <span>Step {i + 1}:</span>{x}</li>
+                                )}
+                            </ul> 
+                        </section>
+                </div>
+
+            </div>
+            <div className='comments-container'>
+                <h3>Comments</h3>
+                <section className='all-comments'>
+                    <p className='comments-count'>This recipe has {commentsCount} comments so far!</p>
+                    <div className='comments'>{comments.map(x => <Comments key={x._id} comment={x}/> )}</div>
+                   
+                </section>
+
+                <section className='comment-input'>
+                    <p>Leave a comment<i class="fa-solid fa-comment-medical" onClick={(e) => showInputField(e)}></i></p>
+                    <div className='input-field hidden'>
+                    <textarea></textarea>
+                    <button onClick={e=> comment(e)}>Comment</button>
+                    </div>
+                    
+                </section>
+            </div>
         </div>
-    </>
+       
+    
     )
 }
 export default RecipeDetails

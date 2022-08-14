@@ -1,0 +1,125 @@
+.edit-page {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+.edit-recipe-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #047a46;
+    border-radius: 15px;
+    margin: 50px 0px;
+    width: 80%;
+    height: 100%;
+}
+.step-1-edit {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-left: 30px;
+    
+}
+.time, .ingredients-form {
+    display: flex;
+    align-items: center;
+}
+.time input{
+    width: 20%;
+
+}
+.time p {
+    font-size: 30px;
+    margin: 0px 10px;
+}
+.time label {
+   margin: 0px 10px 0px 0px;
+
+}
+.step-2-edit{
+    margin: 50px 0px 100px;
+    
+}
+.step-3-edit {
+    margin-bottom: 100px;
+}
+.step2-edit-form, .step3-edit-form {
+    display: flex;
+    margin-left: 30px;
+    align-items: center;
+    margin-bottom: 30px;
+ 
+}
+.ingredients-form {
+    margin-bottom: 0px !important;
+
+}
+.ingredients-form input, .ingredients-form select  {
+   width: 50%;
+   
+}
+.add-btn-edit {
+    background-color: #047a46 !important;
+    border: none!important;
+    margin-left: 10px;
+}
+.ingredients-form input {
+    margin-right: 10px;
+
+}
+.ingredients-list, .instructions-list {
+    margin-left: 30px;
+}
+.ingredients-list span, .ingredients-list li, .instructions-list span{
+    color: black;
+    font-size: 20px;
+    text-transform: lowercase;
+    
+}
+.instructions-list li {
+    color: black;
+    font-size: 20px;
+}
+.ingredients-list span, .instructions-list span {
+    font-weight: bold;
+    margin-right: 10px;
+    
+}
+.delete-btn-edit {
+    background-color: red!important;
+    height: 10%;
+    border: none!important;
+    border-radius: 50%!important;
+    margin-left: 10px;
+    
+}
+.instructions-form {
+    margin-bottom: 0px !important;
+    width: 55%;
+      
+}
+.instructions-form input {
+    width: 100%;
+}
+.save-changes-btn {
+    position: absolute;
+    bottom: -111.5%;
+    left:12%;
+    background-color: #047a46 !important;
+    border: none!important;
+   
+}
+.edit-submit-btn {
+    position: relative;
+    left: 85%;
+    background-color: #047a46 !important;
+    border: none!important;
+    width: 10%;
+    top: 10%;
+    margin-bottom: 10px;
+    
+}
+

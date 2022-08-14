@@ -6,7 +6,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from '../../services/authService'
 import { useNotificationContext } from "../../contexts/NotificationsContext";
 import * as profileService from '../../services/profileService';
-import { OverlayTrigger } from "react-bootstrap";
 import TooltipPositionedExample from "../Notifications/Tooltip";
 
 export default function Header() {
@@ -55,7 +54,7 @@ export default function Header() {
                         <li className="logout-btn"><NavLink onClick={logoutHandler} to="/home">Logout</NavLink></li>     
                     </ul>
                         <TooltipPositionedExample>
-                            <NavLink className={"header-btn"} to={`/profile/${user._id}`}  style={{backgroundImage:`url(${profile.imgUrl ? profile.imgUrl : '/images/default-user-image.png'})`}}>
+                            <NavLink className={"header-btn"} to={`/profile/${user._id}`}  style={{backgroundImage:`url(${profile.profileImg ? profile.profileImg : '/images/default-user-image.png'})`}}>
                             </NavLink>
                         </TooltipPositionedExample>
                         

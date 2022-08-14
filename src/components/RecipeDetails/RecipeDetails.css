@@ -1,60 +1,232 @@
-.recipe-page {
-    display: flex;
-    flex-direction: column;
-    width: 95vw;
-    height: 100vh;
-    margin: 30px;   
-    
-}
-.side-details-div {
-    width: 100%;
+.recipe-details-container {
+    width: 100vw;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
    
 }
-.recipe-img img{
-    
+.recipe-details-div {
+    margin-top: 30px;
+}
+.recipe-details-all {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #047a46;
+    border-radius: 15px;
+    margin: 50px 0px;
+    width: 80%;
+    height: 100%;
+}
+
+.recipe-details-initial-info {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.initil-info {
+    width: 55%;   
 }
 .recipe-img {
-   width: 100%;
-   height: 100%;
-   display: flex;
-   flex-direction: column;
+    width: 40%;
 }
-
 .recipe-title {
-    font-family: 'Arizonia', cursive;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    font-family:'Laila', sans-serif;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 30px;
 }
-.recipe-details, .recipe-instructions, .recipe-ingredients {
-    border: 2px solid coral;
-    width: 100%; 
-    height: 100%;
-   
+.recipe-img img {
+    object-fit: contain;
 }
-.recipe-details h2, .recipe-instructions h2, .recipe-ingredients h2 {
-    text-align: center;
-    font-family: 'Arizonia', cursive;
-   
-}
-.recipe-details {
-    margin-bottom: 10px;
-}
-.recipe-details span {
-    font-family: 'Arizonia', cursive;
+.rating, .stars, .stars i {
+    display: inline-block;
     font-size: 20px;
-    color: coral;
-    margin-right: 10px;
+    color:#047a46;
 }
-.recipe-details p {
-    font-size: 10px;
+.rate-input  {
+    margin-left: 20px;
+    width: 5%;
+    color:#047a46;
 }
-.recipe-additional-details {
+span {
+    font-size: 20px;
+    color:#047a46;
+}
+.rate-msg {
+    display: inline;
+    margin-left: 10px;
+}
+.rate-btn {
+    margin-left: 10px;
+    background-color: #047a46;
+    border: none;
+    color: white;
+}
+.description-text {
+    font-style: italic;
+    width: 90%;
+    font-size: 20px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+.details-text {
+    font-size: 20px;
+}
+.details-text span {
+    margin-right:5px
+}
+.recipe-rating {
+    margin-top: 20px;
+}
+.recipe-details-additional-info {
     display: flex;
-    flex-direction: column;
-    height: 100%;
     width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
 
+}
+.recipe-ingredients h3, .recipe-instructions h3 {
+    font-family:'Laila', sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+   
+}
+.recipe-ingredients, .recipe-instructions {
+    display: flex;
+    margin-bottom: 50px;
+    width: 80%;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.recipe-ingredients ul, .recipe-instructions ul  {
+    list-style: none;
+    padding: 0px;
+
+}
+.recipe-ingredients ul li,  .recipe-instructions ul li {
+    font-size: 20px;
     
 }
+.recipe-ingredients ul li {
+    text-transform: lowercase;
+
+}
+
+.recipe-ingredients ul li i {
+    color:#047a46;
+    margin-right: 10px;
+
+
+}
+.recipe-ingredients ul li span {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px;
+
+}
+.recipe-instructions ul li span {
+    margin-right: 10px;
+    font-weight: bold;
+   
+
+}
+.comments-container {
+    display: flex;
+    margin-bottom: 50px;
+    width: 80%;
+    flex-direction: column;
+    margin-left: 30px;
+
+}
+.comments-container h3 {
+    font-family:'Laila', sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+.comments-count {
+    font-size: 20px;
+    color: #047a46;
+
+}
+.comments {
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.comment-container span {
+    font-weight: bolder;
+    color: black;
+    
+   
+}
+.comment-container {
+    border-bottom: 1px solid #047a46;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+.comment-input p {
+    font-size: 20px;
+    color: #047a46;
+    margin-bottom: 40px;
+}
+.comment-input textarea {
+    width:700px;
+    height: 150px;
+   
+    
+}
+.comment-input button {
+    background-color: #047a46;
+    color: white;
+    border:none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    display: block;
+    margin-top: 20px;
+   
+
+}
+.fa-comment-medical {
+    font-size: 30px;
+    margin-left: 20px;
+    color: #047a46;
+}
+.hidden {
+    display: none;
+}
+.comment-container i {
+    position: relative;
+    
+
+}
+.fa-pen {
+    margin-left: 20px;
+}
+.recipe-details-div a {
+    float: right;
+    margin-right: 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.recipe-details-div a:hover {
+    color: #047a46;
+
+}
+.recipe-details-div a i {
+    color:#047a46;
+
+}
+
+
+
+
+

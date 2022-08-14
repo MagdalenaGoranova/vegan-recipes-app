@@ -26,8 +26,7 @@ function Toasts() {
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
+            <strong className="me-auto">Notification</strong>
           </Toast.Header>
           <Toast.Body >
             {toast.message}

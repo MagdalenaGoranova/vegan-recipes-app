@@ -8,23 +8,23 @@ import Form from 'react-bootstrap/Form';
 import './RecipeCreate.css';
 import { AuthContext } from '../../contexts/AuthContext';
 import * as recipeService from '../../services/recipeService';
-
-
+import { useNotificationContext } from '../../contexts/NotificationsContext'; 
 
 
 function RecipeCreate() {
 
     const { user } = useContext(AuthContext);
 
-
     const navigate = useNavigate();
+
+    const { addAlert, addToast } = useNotificationContext();
 
     const [recipe, setRecipe] = useState({
         step: 1,
         author: user.username,
         title: '',
         description: '',
-        level: '',
+        level: 'beginners',
         servingSize: '',
         hours: '',
         minutes:'',
@@ -50,19 +50,49 @@ function RecipeCreate() {
             let category = formData.get('category');
             let img = formData.get('img');
 
-            setRecipe({
-                ...recipe,
-                author: user.username,
-                title: title,
-                description: description,
-                level: level,
-                servingSize: servingSize,
-                hours: hours,
-                minutes: minutes,
-                category: category,
-                img: img,
-                step: recipe.step + 1,
-            });
+            let isValid = true; 
+
+            if(title == '') {
+                addToast('Title is required!');
+                isValid = false; 
+            }
+            if(description == '') {
+                addToast('Description is required!');
+                isValid = false; 
+
+            }
+            if(servingSize == '') {
+                addToast('Serving size is required!');
+                isValid = false; 
+            }
+            if(hours == '' && minutes == '') {
+                addToast('Hours or minutes are required!');
+                isValid = false; 
+            }
+            if(img == '') {
+                addToast('Image url is required!');
+                isValid = false; 
+            }
+            if(minutes > 59  && minutes < 0) {
+                addToast('Minutes range should be between 0 and 59');
+                isValid = false; 
+            }
+            if (isValid) {
+                setRecipe({
+                    ...recipe,
+                    author: user.username,
+                    title: title,
+                    description: description,
+                    level: level,
+                    servingSize: servingSize,
+                    hours: hours,
+                    minutes: minutes,
+                    category: category,
+                    img: img,
+                    step: recipe.step + 1,
+                });
+            }
+            
         }
         if (e.currentTarget.parentElement.className === 'step-2') {
 
@@ -90,14 +120,36 @@ function RecipeCreate() {
         let quantity = formData.get('quantity');
         let measures = formData.get('measures');
 
+        let isValid = true; 
 
-        setRecipe({
-            ...recipe,
-            ingredients: [...recipe.ingredients, { ingredient, quantity, measures }]
+        if(ingredient == '') {
+            addToast('Ingredient is required!')
+            isValid = false; 
+        }
+        if(quantity == '') {
+            addToast('Quantity is required!')
+            isValid = false; 
+        }
+        if(measures == '') {
+            addToast('Measure is required!')
+            isValid = false; 
+        }
+        if(recipe.ingredients.length > 0) {
+            isValid = true; 
+        }
+        if((recipe.ingredients.filter(x => x.ingredient == ingredient)).length > 0) {
+            addToast('Ingredient is already added!')
+            isValid= false; 
 
-        });
-        //console.log(recipe);
-
+        }
+        if (isValid) {
+            setRecipe({
+                ...recipe,
+                ingredients: [...recipe.ingredients, { ingredient, quantity, measures }]
+    
+            });
+        }
+        e.currentTarget.parentElement.reset();
     }
     function addInstructionsHandler(e) {
         e.preventDefault();
@@ -105,12 +157,27 @@ function RecipeCreate() {
         let formData = new FormData(e.currentTarget.parentElement);
         let instruction = formData.get('instruction');
 
-        setRecipe({
-            ...recipe,
-            instructions: [...recipe.instructions, instruction]
-        });
-        //console.log(recipe);
+        let isValid = true; 
 
+        if(instruction == '') {
+            addToast('Instruction is required!')
+            isValid = false; 
+        }
+        if(recipe.instructions.length > 0) {
+            isValid = true;
+        }
+        if(recipe.instructions.includes(instruction)) {
+            addToast('Instruction is already added!')
+            isValid= false; 
+
+        }
+        if(isValid) {
+            setRecipe({
+                ...recipe,
+                instructions: [...recipe.instructions, instruction]
+            });
+        }
+        e.currentTarget.parentElement.reset();
     }
     function createRecipeHandler(e) {
         e.preventDefault();
@@ -120,6 +187,7 @@ function RecipeCreate() {
             .then((result) => {
                 console.log(result);
                 navigate('/all-recipes');
+                addAlert('You have sucessfully created a recipe!', 'success');
             })
             .catch(err => {
                 console.log(err);
@@ -138,6 +206,93 @@ function RecipeCreate() {
         let currentIngredient = e.currentTarget.parentElement.childNodes[0].textContent;
         setRecipe(oldState => ({...oldState, ingredients: recipe.ingredients.filter(x =>  x.ingredient !== currentIngredient)}))  
     }
+    function checkRadioButton(level) {
+        if(level == 'beginners') {
+            return <Form.Group className="mb-3">
+                <Form.Label>Difficulty level</Form.Label>
+                <Form.Check 
+                type={'radio'}
+                id={`default-radio`}
+                label={`Beginners`}
+                name="level"
+                value={'beginners'}
+                defaultChecked
+                />
+                <Form.Check 
+                type={'radio'}
+                id={`default-radio`}
+                label={`Intermediate`}
+                name="level"
+                value={'intermediate'}
+                />
+                <Form.Check 
+                type={'radio'}
+                id={`default-radio`}
+                label={`Advanced`}
+                name="level"
+                value={'advanced'}
+                />         
+            </Form.Group>
+        }
+        if(level == 'intermediate') {
+            return <Form.Group className="mb-3">
+                <Form.Label>Difficulty level</Form.Label>
+                <Form.Check 
+                type={'radio'}
+                id={`default-radio`}
+                label={`Beginners`}
+                name="level"
+                value={'beginners'}
+               
+                />
+                <Form.Check 
+                type={'radio'}
+                id={`default-radio`}
+                label={`Intermediate`}
+                name="level"
+                value={'intermediate'}
+                defaultChecked
+                />
+                <Form.Check 
+                type={'radio'}
+                id={`default-radio`}
+                label={`Advanced`}
+                name="level"
+                value={'advanced'}
+                />         
+            </Form.Group>
+
+        }
+        if(level == 'advanced') {
+            return <Form.Group className="mb-3">
+            <Form.Label>Difficulty level</Form.Label>
+            <Form.Check 
+            type={'radio'}
+            id={`default-radio`}
+            label={`Beginners`}
+            name="level"
+            value={'beginners'}
+           
+            />
+            <Form.Check 
+            type={'radio'}
+            id={`default-radio`}
+            label={`Intermediate`}
+            name="level"
+            value={'intermediate'}
+            
+            />
+            <Form.Check 
+            type={'radio'}
+            id={`default-radio`}
+            label={`Advanced`}
+            name="level"
+            value={'advanced'}
+            defaultChecked
+            />         
+        </Form.Group>
+        }
+    }
 
     return (
         <section className="create-recipe-container">
@@ -147,50 +302,29 @@ function RecipeCreate() {
                     <Form className='step-1'>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" placeholder="e.g. Carrot Banana Bread" name="recipe-title"/>
+                            <Form.Control type="text" placeholder="e.g. Carrot Banana Bread" name="recipe-title" defaultValue={recipe.title}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" placeholder="e.g.Healthy vegan banana bread made with carrots" name="description" />
+                            <Form.Control as="textarea" type="text" placeholder="e.g.Healthy vegan banana bread made with carrots" name="description" defaultValue={recipe.description}/>
                         </Form.Group>
-                        <Form.Group className="mb-3">
-                        <Form.Label>Difficulty level</Form.Label>
-                        <Form.Check 
-                            type={'radio'}
-                            id={`default-radio`}
-                            label={`Beginners`}
-                            name="level"
-                            value={'beginners'}
-                        />
-                        <Form.Check 
-                            type={'radio'}
-                            id={`default-radio`}
-                            label={`Intermediate`}
-                            name="level"
-                            value={'intermediate'}
-                        />
-                        <Form.Check 
-                            type={'radio'}
-                            id={`default-radio`}
-                            label={`Advanced`}
-                            name="level"
-                            value={'advanced'}
-                        />
-                        </Form.Group>
+
+                        {checkRadioButton(recipe.level)}
+                        
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Serving size</Form.Label>
-                            <Form.Control type="number" placeholder="e.g.2" name="servingSize"/>
+                            <Form.Control type="number" placeholder="e.g.2" name="servingSize" defaultValue={recipe.servingSize}/>
                         </Form.Group>
                         <Form.Group className="mb-3 time" controlId="formBasicEmail">
                             <Form.Label>Cooking Time</Form.Label>
-                            <Form.Control type="number" placeholder="hours" name="hours" />
+                            <Form.Control type="number" placeholder="hours" name="hours" defaultValue={recipe.hours}/>
                             <p>:</p>
-                            <Form.Control type="number" placeholder="minutes" name="minutes"/>
+                            <Form.Control type="number" placeholder="minutes" name="minutes" defaultValue={recipe.minutes} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Category</Form.Label>
-                            <Form.Select aria-label="Default select example" name='category'>
+                            <Form.Select aria-label="Default select example" name='category' defaultValue={recipe.category}>
                             <option value="dinner">Dinner</option>
                             <option value="breakfast">Breakfast</option>
                             <option value="lunch">Lunch</option>
@@ -200,9 +334,9 @@ function RecipeCreate() {
                             <option value="salad">Salad</option>
                             </Form.Select>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-3" controlId="formBasicEmail" >
                             <Form.Label>Image Link</Form.Label>
-                            <Form.Control type="url"  name="img"/>
+                            <Form.Control type="url"  name="img" defaultValue={recipe.img}/>
                         </Form.Group>
                         <Button variant="primary" type="submit" className="next-btn" onClick={(e) => nextStepHandler(e)}>
                             Next
