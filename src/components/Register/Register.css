@@ -24,8 +24,20 @@
 .fa-eye-slash, .fa-eye {
   position: absolute;
   top: 43px;
-  right: 15px;
+  right: 34px;
   color: #047A46;
+}
+.form-text {
+  color: #047A46!important;
+}
+.form-text-error {
+  color: red!important;
+}
+.is-invalid {
+  border-color: #dc3545!important;
+}
+.register-form input{
+  margin-bottom: 0px!important;
 }
 
 
