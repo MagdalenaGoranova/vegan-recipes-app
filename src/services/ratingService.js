@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030'; 
+const baseUrl = 'https://vegan-recipes-blog.herokuapp.com'; 
 
 export const rateRecipe = async(authToken, ratingData) => {
     const response = await fetch(`${baseUrl}/data/ratings`, {

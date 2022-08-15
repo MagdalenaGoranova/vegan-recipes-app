@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030'; 
+const baseUrl = 'https://vegan-recipes-blog.herokuapp.com'; 
 
 export const createProfile = async(profileData, authToken) => {
     const response = await fetch(`${baseUrl}/data/profiles`, {
