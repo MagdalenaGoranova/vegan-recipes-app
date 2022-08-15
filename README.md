@@ -1,4 +1,4 @@
-# SoftUni React Final Project - Vegan Recipes Blog
+# SoftUni ReactJS Final Project - Vegan Recipes Blog
 
 In the project directory, you can run:
 
