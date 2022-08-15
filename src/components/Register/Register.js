@@ -82,40 +82,40 @@ export default function Register() {
                       
                       <Form.Group className="form-outline mb-4">
                         <Form.Label className="form-label" htmlFor="form3Example3">Email</Form.Label>
-                        <Form.Control type="email" id="form3Example3" className="form-control" name="email" />
+                        <Form.Control type="email" id="form3Example3" className="form-control" name="email" isValid={isValid} isInvalid={isInvalid}/>
                       </Form.Group>
         
                      
                       <Form.Group className="form-outline mb-4">
                         <Form.Label className="form-label" htmlFor="form3Example4">Password</Form.Label>
-                        <Form.Control type="password" id="form3Example4" className="form-control" name="password" ref={ref}/>
+                        <Form.Control type="password" id="form3Example4" className="form-control" name="password" ref={ref} isValid={isValid} isInvalid={isInvalid}/>
                         <i class="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
                       </Form.Group>
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example4"> Repeat password</Form.Label>
-                        <Form.Control type="password" id="form3Example4" className="form-control" name="re-password" ref={ref}/>
+                        <Form.Control type="password" id="form3Example4" className="form-control" name="re-password" ref={ref} isValid={isValid} isInvalid={isInvalid}/>
                         <i class="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
                       </Form.Group>
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example3">Username</Form.Label>
-                        <Form.Control type="text" id="form3Example3" className="form-control" name="username"/>
+                        <Form.Control type="text" id="form3Example3" className="form-control" name="username" isValid={isValid} isInvalid={isInvalid}/>
                       </Form.Group>
 
                       <Form.Group className="form-outline mb-4 names">
                         <Form.Label  className="form-label" htmlFor="form3Example3">Full name</Form.Label>
-                        <Form.Control type="text" id="form3Example3" className="form-control" name="fullName"/>
+                        <Form.Control type="text" id="form3Example3" className="form-control" name="fullName" isValid={isValid} isInvalid={isInvalid}/>
                       </Form.Group>
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example3">Profile Picture</Form.Label>
-                        <Form.Control type="url" id="form3Example3" className="form-control" name="profile-img"/>
+                        <Form.Control type="url" id="form3Example3" className="form-control" name="profile-img" isValid={isValid} isInvalid={isInvalid}/>
                       </Form.Group>
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example3">About you</Form.Label>
-                        <Form.Control as='textarea' type="text" id="form3Example3" className="form-control" name="about-you"/>
+                        <Form.Control as='textarea' type="text" id="form3Example3" className="form-control" name="about-you" isValid={isValid} isInvalid={isInvalid}/>
                       </Form.Group>
 
 
