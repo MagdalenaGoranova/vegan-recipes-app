@@ -1,4 +1,4 @@
-const baseUrl = 'https://vegan-recipes-blog.herokuapp.com';
+const baseUrl = 'https://softuni-server-practice.herokuapp.com';
 
 export const getAll = async () => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes`);
