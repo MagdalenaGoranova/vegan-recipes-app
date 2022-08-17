@@ -1,3 +1,4 @@
+
 .cascading-right {
     margin-right: -50px;
   }
@@ -7,9 +8,22 @@
     margin-right: 0;
     }
 }
+@media screen and (max-width: 1180px) {
+  .img-register {
+    width: 520px!important;
+    height: 630px!important;
+  }
+}
+@media screen and (max-width: 850px) {
+  .img-register {
+    display: none!important;
+  }
+}
+
+
 .img-register{
-  width: 500px;
-  height: 600px;
+  width: 650px;
+  height: 800px;
 }
 .fw-bold {
   color: #047A46;
@@ -36,7 +50,7 @@
 .is-invalid {
   border-color: #dc3545!important;
 }
-.register-form input{
+.register-form input, .profile-edit-form input{
   margin-bottom: 0px!important;
 }
 

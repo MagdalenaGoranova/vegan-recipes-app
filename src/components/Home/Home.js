@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Home.css';
-import HomeCard from './HomeCard';
+import HomeCarousel from './HomeCarousel';
 import * as recipeService from '../../services/recipeService';
 import { NavLink } from 'react-router-dom';
 
@@ -24,14 +24,12 @@ export default function Home() {
                 <a href="#main" className='home-btn'><i class="fa-solid fa-angle-down"></i></a>
             </section>
 
-            <section id="main" className='home-latest-recipes'>
-                <p className='latest-recipes-title'>Start with checking out our latest recipes</p>
-                <div className='latest-recipes-cards'>
-                    {cards.length > 0 
-                    ? cards.slice(-3).map(x => <HomeCard key={x._id} card={x}/>)
-                    : <p>No Recipes Available yet.</p>
-                    }   
+            <section id="main" className='home-recipes'>
+                <p className='home-recipes-title'>Here you can find...</p>
+                <div className='home-categories'>
+                     <HomeCarousel />
                 </div> 
+                  
                 <a href="#about-us" className='about-us-btn'>About us<i class="fa-solid fa-angle-down"></i></a>
                 
             </section>
@@ -56,17 +54,31 @@ export default function Home() {
             <section className='info-section' id='info'> 
                 <p className='info-title'>Useful information about veganism and plant-based diets</p>
                 <div className='info-text'>
-                    <div>
-                        <p>Nutritional facts</p>
+                    <div className='info-about'>
+                        <p>What is veganism? </p>
+                        <ul className='info-about-ul'>
+                        <li><i class="fa-solid fa-seedling"></i>Veganism is a way of living that excludes as far as is possible and practical all animal products. That means vegans eat plant-based foods and wear clothes that do not come from animals, such as fur, leather, silk, and feathers. It also means choosing cruelty-free household products and toiletries</li>
+                        <li><i class="fa-solid fa-seedling"></i>Today, people choose to become vegan for a variety of reasons but most common is that they do not want to cause suffering to animals, they want to reduce their climate impact and protect the planet, or they want to improve their health.</li>
+                        </ul>
                     </div>
-                    <div>
+                    <div className='info-about'>
                         <p>History</p>
+                        <ul className='info-about-ul'>
+                            <li><i class="fa-solid fa-seedling"></i>While veganism is a fairly recent concept designed to best protect animals, the history of eating plant-based food and refraining from harming animals unnecessarily goes back millenia.</li>
+                            <li><i class="fa-solid fa-seedling"></i>The term “vegan” was created in 1944 by Donald Watson — an English animal rights advocate and founder of The Vegan Society — to describe a person who avoids using animals for ethical reasons.</li>
+                            <li><i class="fa-solid fa-seedling"></i>Traces of vegan/plant-based diets and beliefs dat back to ancient Egipt, India, Japan, Greece and more</li>
+                        </ul>
                     </div>
-                    <div>
+                    <div className='info-about'>
                     <p>Plant-based VS Vegan</p>
+                    <ul className='info-about-ul'>
+                            <li><i class="fa-solid fa-seedling"></i>The diets of our ancestors, wherever they lived, may not have been vegan as we know that concept today, but in many cases they were plant-based.</li>
+                            <li><i class="fa-solid fa-seedling"></i>In the 1980s, Dr. T. Colin Campbell introduced the world of nutrition science to the term “plant-based diet” to define a low fat, high fiber, vegetable-based diet that focused on health and not ethics.</li>
+                            <li><i class="fa-solid fa-seedling"></i>Being plant-based typically refers specifically to ones diet alone while being vegan reaches beyond diet and also describes the lifestyle that one chooses to lead on a daily basis.</li>
+                        </ul>
                     </div>
                 </div>
-                <p className='more-info'> For more information and ideas: </p>
+                
                 <a href="#home" className='to-top-btn'><i class="fa-solid fa-arrow-up"></i></a>
             </section>
           

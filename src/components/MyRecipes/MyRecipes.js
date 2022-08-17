@@ -3,10 +3,11 @@ import MyRecipesCard from './MyRecipesCard';
 import * as recipeService from '../../services/recipeService';
 import { useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
-
+import './MyRecipes.css'
 
 
  function MyRecipes() {
+    
     const { user } = useContext(AuthContext);
     const [myRecipes, setMyRecipes] = useState([]);
     useEffect(() => {
@@ -29,9 +30,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 
     return (
         <div className="recipes-page">
-            <div className="recipes-header">
-                <h2 className='recipes-header-title'>My Recipes</h2>
-            </div>
             {myRecipes.length > 0
                 ? (
                     <section className="recipes-container">

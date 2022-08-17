@@ -1,6 +1,7 @@
 import Toast from 'react-bootstrap/Toast';
 
 import { useNotificationContext } from '../../contexts/NotificationsContext';
+import '../Home/Home.css';
 
 
 function Toasts() {
@@ -11,14 +12,15 @@ function Toasts() {
     return null;
   }
   function closeToast() {
-    hideToast()
+    hideToast();
   }
 
   return (
       <Toast
-          className="d-inline-block m-1"
+          className="d-inline-block m-1 "
           bg={toast.type}
           onClose={() => closeToast()}
+          dismissible={true}
         >
           <Toast.Header>
             <img

@@ -1,0 +1,31 @@
+.home-carousel img {
+    width: 200px;
+
+}
+.carousel-text {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin:0px;
+    width: 52%;
+    text-align: center;
+    margin:auto;
+    padding: 10px;
+    border: 2px solid black;
+    font-weight: bolder;
+}
+.img-container {
+    display: flex;
+
+}
+.img-container img {
+    object-fit: cover;
+
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-image:none!important;
+    text-decoration: none!important;
+    color: black !important;
+    
+}
+.chia-img {
+    object-position: 0px -135px;
+}

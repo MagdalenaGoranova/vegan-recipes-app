@@ -1,6 +1,8 @@
 import Alert from 'react-bootstrap/Alert';
 import { useNotificationContext } from '../../contexts/NotificationsContext';
 
+import '../Home/Home.css';
+
 
 function Alerts() {
   const { alert, hideAlert} = useNotificationContext();
@@ -14,7 +16,7 @@ function Alerts() {
 
   return (
 
-        <Alert onClose={() => closeAlert()} dismissible={true} variant={alert.type}>
+        <Alert className='alert-container' onClose={() => closeAlert()} dismissible={true} variant={alert.type}>
           {alert.message}
         </Alert>
   );

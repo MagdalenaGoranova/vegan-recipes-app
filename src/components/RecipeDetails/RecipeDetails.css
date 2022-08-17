@@ -40,6 +40,8 @@
 }
 .recipe-img img {
     object-fit: contain;
+    width: 400px;
+    height: 500px;
 }
 .rating, .stars, .stars i {
     display: inline-block;

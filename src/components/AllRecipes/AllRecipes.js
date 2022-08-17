@@ -16,9 +16,6 @@ export default function AllRecipes() {
     },[]);
     return (
         <div className="recipes-page">
-            <div className="recipes-header">
-                <h2 className='recipes-header-title'>All Recipes</h2>
-            </div>
             {cards.length > 0
                 ?  (
                 <section className="recipes-container">

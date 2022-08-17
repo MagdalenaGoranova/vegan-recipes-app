@@ -23,9 +23,9 @@ export const NotificationProvider = ({
     const addAlert = useCallback((message, type = types.error) => {
         setAlert({show:true, message, type});
 
-        setTimeout(() => {
-            setAlert({show: false, message: '', type: types.error});
-        }, 4000)
+        //setTimeout(() => {
+            //setAlert({show: false, message: '', type: types.error});
+       // }, 3500)
 
     }, []);
     const hideAlert = useCallback(() => {
@@ -36,9 +36,9 @@ export const NotificationProvider = ({
     const addToast = useCallback((message, type = types.error) => {
         setToast({show:true, message, type});
 
-        setTimeout(() => {
-            setAlert({show: false, message: '', type: types.error});
-        }, 4000)
+        //setTimeout(() => {
+           //setToast({show: false, message: '', type: types.error});
+       // }, 3500)
 
     }, []);
     const hideToast = useCallback(() => {

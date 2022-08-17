@@ -4,6 +4,103 @@
 html {
     scroll-behavior: smooth;
 }
+@media screen and (max-width: 1180px) {
+    .home-header-text {
+        bottom: 15%!important;
+        right: 32%!important;
+    }
+    .all-recipes-btn {
+        bottom: 10%!important;
+        right: 44%!important;
+    }
+    .about-us-list {
+        padding-left: 50px!important;
+    }
+    .about-us-title {
+        margin-left: 50px!important;
+
+    }
+    .info-text div {
+        height: 73%!important;
+    }
+    .header-nav {
+        width: 25%!important;
+    }
+}
+@media screen and (max-width: 850px) {
+    .header-nav {
+        width: 40%!important;
+    }
+    .home-header {
+        height: 91vh!important;
+    }
+    .home-header-text {
+        bottom: 14%!important;
+        right: 23%!important;
+    }
+    .all-recipes-btn {
+        bottom: 10%!important;
+        right: 40%!important;
+    }
+    .about-us-list {
+        padding-left: 50px!important;
+    }
+    .about-us-title {
+        margin-left: 50px!important;
+
+    }
+    .info-text div {
+        height: 73%!important;
+    }
+    .about-us-btn {
+        right: 42%!important;
+        width: 20%!important;
+    }
+    .about-us {
+        flex-direction: column-reverse;
+    }
+    .about-us-text {
+        width: 100%!important;
+        height: 46%!important;
+    }
+    .about-us-title {
+        text-align: center!important;
+    }
+    .about-us-list {
+        width: 78%!important;
+        margin: auto!important;
+        padding: 0px!important;
+    }
+    .about-us-img {
+        margin-left :0px!important;
+        width: 60%!important;
+        height: 65%!important;
+    }
+    .about-us-img img {
+        width: 500px;
+    }
+    .info-btn {
+       right: 25%!important;
+       width: 51%!important;
+
+    }
+    .info-text {
+        display: flex;
+        height: 90%;
+        flex-direction: column!important;
+        align-items: center!important; 
+        
+    }
+    .info-about {
+        width: 90%!important;
+        margin-left: 0px!important;
+        padding: 10px!important;
+        margin-bottom: 50px!important;
+    }
+
+    
+  }
+
 .home-page {
     width: 100vw;
     display: flex;
@@ -42,13 +139,16 @@ html {
     background-color: #D1F895;;
     
 }
-.home-latest-recipes {
+.home-recipes {
     width: 100%;
     height: 90vh;
 }
-.latest-recipes-div{
-    width: 100%;
+.home-categories{
+    width: 90%;
     height: 100%;
+    margin-left: 50px;
+    margin-top: 50px;
+    
 }
 .all-recipes-btn {
     display: flex;
@@ -87,28 +187,23 @@ html {
     font-size: 30px;
     font-family: 'Laila', sans-serif;
 }
-.latest-recipes-title {
+.home-recipes-title {
     text-align: center;
     font-size: 30px;
     font-family: 'Laila', sans-serif;
     padding-top: 30px;
     margin:0px;
 }
-.latest-recipes-cards {
+.home-categories article {
+    height: 60%;
+    width: 20%;
+    margin-right: 20px;
+}
+
+.home-categories img {
     width: 100%;
-    height: 90%;
-    display: flex;
-
-}
-.latest-recipes-cards ul{
-   margin-left: 10px;
-   padding: 0;
-   width: 100%;
-
-}
-.latest-recipes-cards ul p{
-    display: inline;
- 
+    height: 350px;
+    border: 1px solid black;
 }
 .fa-angle-down {
     color: #047A46;
@@ -131,7 +226,7 @@ html {
     display: flex;
     position: absolute;
     top: 180%;
-    right: 50%;
+    right: 47%;
     border: 1px solid #047A46;
     border-radius: 10%;
     width: 10%;
@@ -194,7 +289,7 @@ html {
     display: flex;
     position: absolute;
     top: 260%;
-    right: 36%;
+    right: 33%;
     border: 1px solid #047A46;
     border-radius: 10%;
     width: 37%;
@@ -277,5 +372,47 @@ html {
     margin: 0px 0px 20px 55px;
     font-size: 20px;
 }
+.info-about {
+    background-color: #D1F895;
+}
+
+.info-about p {
+    color:#047A46;
+    font-weight: bold;
+    
+}
+.info-about-ul {
+    padding-left: 7px;
+    list-style: none;
+    padding-right: 5px;
+   
+
+}
+.info-about-ul li {
+    margin-top: 20px;
+    line-height: 1.5;
+   
+}
+.info-about-ul li i{
+    color: #047A46;
+    margin-right: 4px;
+    
+
+}
+.alert-container {
+    position: absolute!important;
+    width: 100%;
+    margin: 0px!important;
+
+}
+.toast-container {
+    position: absolute!important;
+    width: 30%!important;
+}
+.toast-header {
+    margin-bottom: 0px!important;
+}
+
+
 
 

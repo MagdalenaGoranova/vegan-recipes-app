@@ -16,7 +16,7 @@ import Comments from './Comments';
 
     const [recipe, setRecipe] = useState({instructions:[], ingredients:[]});
 
-    const [rateRecipe, setRateRecipe] = useState('');
+    const [rateRecipe, setRateRecipe] = useState(0);
 
     const [rating, setRating] = useState(0);
 
@@ -26,7 +26,6 @@ import Comments from './Comments';
 
     const [commentsCount, setCommentsCount] = useState(0);
 
-    
 
     let { id } = useParams();
 
@@ -61,7 +60,7 @@ import Comments from './Comments';
             .catch(err => {
                 console.log(err);
             })
-    }, [id, user.accessToken, user._id, hasRated]);
+    }, [id, user.accessToken, user._id, hasRated, rateRecipe]);
 
     useEffect(() => {
         commentsService.getComments(user.accessToken, id)
@@ -150,7 +149,7 @@ import Comments from './Comments';
                             <div className='details'>
                                 <p className='details-text'><span>Author:</span>{recipe.author}</p>
                                 <p className='details-text'><span>Prep time:</span>
-                                {recipe.hours == 0 || recipe.hours == '' ? recipe.minutes + 'min' : recipe.hours + 'h' + ':' + recipe.minutes + 'min'}</p>
+                                {recipe.hours && recipe.hours !== 0 ? recipe.minutes && recipe.minutes !== 0 ? recipe.hours + ':' + recipe.minutes: recipe.hours + 'h': recipe.minutes + 'min'}</p>
                                 <p className='details-text'><span>Serving size:</span>{recipe.servingSize}</p>
                                 <p className='details-text'><span>Category:</span>{recipe.category}</p>
                                 <p className='details-text'><span>Level:</span>{recipe.level}</p>
