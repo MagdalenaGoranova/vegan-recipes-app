@@ -10,16 +10,11 @@ for (let number = 1; number <= 5; number++) {
   );
 }
 
-const paginationBasic = (
+export const PaginationBasic = (
   <div>
-    <Pagination>{items}</Pagination>
-    <br />
-
     <Pagination size="lg">{items}</Pagination>
-    <br />
-
-    <Pagination size="sm">{items}</Pagination>
   </div>
 );
+
 
     

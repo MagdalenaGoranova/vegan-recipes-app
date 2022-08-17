@@ -4,6 +4,7 @@ import HomeCarousel from './HomeCarousel';
 import * as recipeService from '../../services/recipeService';
 import { NavLink } from 'react-router-dom';
 
+
 export default function Home() {
 
     const  [cards, setCards] = useState({});
@@ -81,7 +82,8 @@ export default function Home() {
                 
                 <a href="#home" className='to-top-btn'><i class="fa-solid fa-arrow-up"></i></a>
             </section>
-          
+            
         </div>
+
     )
 }

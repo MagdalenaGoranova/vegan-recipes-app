@@ -405,13 +405,14 @@ html {
     margin: 0px!important;
 
 }
-.toast-container {
+
+.bg-success {
     position: absolute!important;
-    width: 30%!important;
+    z-index: 99;
+    left: 75%!important;
+
 }
-.toast-header {
-    margin-bottom: 0px!important;
-}
+
 
 
 

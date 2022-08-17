@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './AllRecipes.css';
 import AllRecipesCard from './AllRecipesCard';
 import * as recipeService from '../../services/recipeService';
+import { PaginationBasic } from '../Notifications/Pagination';
+
 
 export default function AllRecipes() {
 
@@ -14,6 +16,7 @@ export default function AllRecipes() {
         })
 
     },[]);
+    
     return (
         <div className="recipes-page">
             {cards.length > 0
@@ -23,7 +26,8 @@ export default function AllRecipes() {
                  </section>
                 )
                 : <h1 className='no-recipes'>No recipes available!</h1>
-            }     
+            }  
+            
         </div>
     )
 }
