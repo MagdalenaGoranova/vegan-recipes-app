@@ -41,10 +41,10 @@ function App() {
           <Route path='all-recipes' element={<AllRecipes/>}/>
           <Route path='login' element={<Login/> }/>
           <Route path='register' element={<Register/>}/>
+          <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
           
           <Route element={<PrivateRoute/>}>
             <Route path='create-recipe' element={<RecipeCreate/>}/>
-            <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
             <Route path='profile/:id' element={<Profile/>}/>
             <Route path='profile/:id/edit-profile' element={<ProfileEdit/>}/>
             <Route path='my-recipes' element={<MyRecipes/>}/>

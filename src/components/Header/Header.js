@@ -15,10 +15,9 @@ export default function Header() {
     const { user, logout } = useContext(AuthContext);
 
     const { addToast } = useNotificationContext();
-    
-    console.log(user);
 
     useEffect(() => {
+        if(user.accessToken) {
         profileService.getProfile(user.accessToken, user._id)
         .then(result => {
             setProfile(result[0]);
@@ -27,6 +26,7 @@ export default function Header() {
         .catch(err => {
             console.log(err);
         })
+        }
 
     }, [user._id, user.accessToken]);
 

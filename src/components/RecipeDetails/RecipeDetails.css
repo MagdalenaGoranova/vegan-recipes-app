@@ -26,11 +26,12 @@
     justify-content: center;
     align-items: center;
 }
-.initil-info {
+.initial-info {
     width: 55%;   
 }
 .recipe-img {
     width: 40%;
+    margin-top: 50px;
 }
 .recipe-title {
     font-family:'Laila', sans-serif;
@@ -39,7 +40,7 @@
     margin-right: 30px;
 }
 .recipe-img img {
-    object-fit: contain;
+    object-fit: cover;
     width: 400px;
     height: 500px;
 }
@@ -50,7 +51,7 @@
 }
 .rate-input  {
     margin-left: 20px;
-    width: 5%;
+    width: 7%;
     color:#047a46;
 }
 span {
@@ -66,6 +67,11 @@ span {
     background-color: #047a46;
     border: none;
     color: white;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+.rate-btn:hover{
+    opacity: 0.9;
 }
 .description-text {
     font-style: italic;
@@ -80,8 +86,12 @@ span {
 .details-text span {
     margin-right:5px
 }
-.recipe-rating {
-    margin-top: 20px;
+.recipe-rating .rating {
+    font-size: 25px;
+    margin-left: 10px;
+}
+.recipe-rating .stars i {
+    font-size: 25px;
 }
 .recipe-details-additional-info {
     display: flex;
@@ -226,6 +236,13 @@ span {
 .recipe-details-div a i {
     color:#047a46;
 
+}
+.no-user-message {
+    font-size: 20px;
+    font-family: Laila, sans-serif;
+    color: black;
+    font-weight: bold;
+    font-style: italic;
 }
 
 

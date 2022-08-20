@@ -73,7 +73,7 @@ function loginHandler(e) {
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="form2Example27">Password</label>
                     <input type="password" id="form2Example27" name="password" className="form-control form-control-lg" ref={ref}/>
-                    <i class="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
+                    <i className="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
                   </div>
 
                   <div className=" mb-4">

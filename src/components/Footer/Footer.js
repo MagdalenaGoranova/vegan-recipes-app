@@ -9,9 +9,9 @@ export default function Footer() {
             
            
             <ul className='footer-ul'>
-                <li><i class="fa-brands fa-square-facebook"></i></li>
-                <li><i class="fa-brands fa-square-instagram"></i></li>
-                <li><i class="fa-brands fa-square-twitter"></i></li>
+                <li><i className="fa-brands fa-square-facebook"></i></li>
+                <li><i className="fa-brands fa-square-instagram"></i></li>
+                <li><i className="fa-brands fa-square-twitter"></i></li>
             </ul>
         </div>
     )

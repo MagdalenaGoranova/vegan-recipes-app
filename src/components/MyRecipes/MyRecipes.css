@@ -1,11 +1,20 @@
 .recipes-container{
     width: 100%;
-    height: 90vh;
+    height: 100%;
     display:flex;
     justify-content:space-around;
     align-items:center;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.recipes-container-title {
+    color: #047A46;
+    font-size: 20px;
+    font-family: 'Laila', sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+
 }
   
 #recipes-card-wrapper{
@@ -13,7 +22,6 @@
     height:450px;
     box-shadow: 1px 0px 12px 0px black; 
     font-family: 'Laila', sans-serif;
-    margin-top:20px;
     border-radius: 20px;
     
 } 
@@ -39,6 +47,7 @@
     margin-top: 10px !important;
     margin-left: 10px;
     text-transform: uppercase;
+    height: 13%;
 
 }
 #recipes-top-details{
@@ -135,5 +144,10 @@
     margin-right: 20px;
     margin-top: 30px;
     font-size: 20px;
+
+}
+.recipes-page {
+    margin-bottom: 20px;
+    min-height: 80vh;
 
 }

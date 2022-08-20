@@ -42,6 +42,7 @@
     margin-top: 10px !important;
     margin-left: 10px;
     text-transform: uppercase;
+    height: 13%;
 
 }
 #recipes-top-details{
@@ -129,6 +130,17 @@
 }
 .rating-all-recipes {
     margin:0px;
+}
+.sort-by {
+    display: inline;
+}
+.dropdown-menu-categories {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.no-recipes-msg {
+    text-align: center;
+
 }
 
 

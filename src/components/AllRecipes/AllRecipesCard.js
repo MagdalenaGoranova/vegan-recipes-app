@@ -18,26 +18,27 @@ export default function AllRecipesCard({card}) {
     let { user } = useContext(AuthContext); 
 
     useEffect(() => {
-        ratingService.getRate(user.accessToken, card._id)
+        ratingService.getRate(card._id)
             .then(result => {
-                console.log(result);
-                let sum = result.reduce((x, y) => { 
-                    return x + Number(y.rateRecipe)
-                }, 0); 
-                let averageRating = sum / result.length;
-                setRating(averageRating.toFixed(2));   
+                if(result.length > 0) {
+                    let sum = result.reduce((x, y) => { 
+                        return x + Number(y.rateRecipe)
+                    }, 0); 
+                    let averageRating = sum / result.length;
+                    setRating(averageRating.toFixed(2));   
+                }
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [card._id, user.accessToken,]);
+    }, [card._id]);
 
     useEffect(() => {
-        commentsService.getCommentsCount(user.accessToken, card._id)
+        commentsService.getCommentsCount(card._id)
             .then(result => {
                 setCommentsCount(result);
             })
-    }, [card._id, user.accessToken]);
+    }, [card._id]);
 
     return (
     <div id="recipes-card-wrapper">
@@ -49,7 +50,7 @@ export default function AllRecipesCard({card}) {
             </div>
 
             <div id="all-recipes-title" className="all-recipes-title">
-                <h3>{card.title}</h3>
+                <h4>{card.title}</h4>
             </div>
 
             <div id="recipes-top-details">
@@ -71,7 +72,7 @@ export default function AllRecipesCard({card}) {
             <div id="recipes-bottom-details">
 
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{card.hours && card.hours !== 0 ? card.minutes && card.minutes !== 0 ? card.hours + ':' + card.minutes: card.hours + 'h': card.minutes + 'min'}</p>
+                <p><i className="fa-regular fa-clock"></i>{card.hours && card.hours !== 0 ? card.minutes && card.minutes !== 0 ? card.hours + 'h' + ':' + card.minutes + 'min': card.hours + 'h': card.minutes + 'min'}</p>
                 </div>
         
                 <div className="recipe-details">

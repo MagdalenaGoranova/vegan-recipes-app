@@ -9,11 +9,24 @@ import './MyRecipes.css'
  function MyRecipes() {
     
     const { user } = useContext(AuthContext);
+
     const [myRecipes, setMyRecipes] = useState([]);
+    
+    const [myRecipesCount, setMyRecipesCount] = useState(0);
+
     useEffect(() => {
         recipeService.getMyRecipes(user._id, user.accessToken)
             .then(result => {
                 setMyRecipes(result);
+            })
+
+    }, [user._id, user.accessToken]);
+
+    useEffect(() => {
+        recipeService.getMyRecipesCount(user._id, user.accessToken)
+            .then(result => {
+                console.log(result);
+                setMyRecipesCount(result);
             })
 
     }, [user._id, user.accessToken]);
@@ -31,12 +44,15 @@ import './MyRecipes.css'
     return (
         <div className="recipes-page">
             {myRecipes.length > 0
-                ? (
+                ? (<>
+                    <p className="recipes-container-title">You have created {myRecipesCount} recipes!</p>
                     <section className="recipes-container">
                         {myRecipes.map(recipe => <MyRecipesCard key={recipe._id} myRecipe={recipe} deleteMyRecipe={deleteMyRecipe} />)}
                     </section>
+                    </>
                 )
-                : <h1 className='no-recipes'>You don't have recipes!</h1>
+                : <h1 className='no-recipes-msg'>You don't have recipes yet!</h1>
+                
             }
         </div>
     )

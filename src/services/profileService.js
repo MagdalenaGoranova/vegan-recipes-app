@@ -9,7 +9,13 @@ export const createProfile = async(profileData, authToken) => {
         },
         body: JSON.stringify(profileData)
     })
-    return await response.json();
+    const result = await response.json()
+
+    if(response.ok) {
+        return result;
+    } else {
+        throw result.message;
+    }
 }
 export const getProfile = async(authToken, ownerId) => {
     const response = await fetch(`${baseUrl}/data/profiles?where=_ownerId%3D%22${ownerId}%22`, {

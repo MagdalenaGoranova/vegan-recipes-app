@@ -28,7 +28,7 @@ function Comments({comment}) {
     return (
         <div className="comment-container">
             <p><span>{profile.username}</span> says:</p>
-            <p>{comment.comment} <i class="fa-regular fa-trash-can" ></i></p>
+            <p>{comment.comment}</p>
            
         </div>
     )

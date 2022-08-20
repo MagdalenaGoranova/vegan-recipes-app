@@ -17,11 +17,8 @@ export const commentRecipe = async(authToken, commentData) => {
         throw result.message;
     }
 }
-export const getComments = async(authToken, recipeId) => {
+export const getComments = async(recipeId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=id%3D%22${recipeId}%22`, {
-        headers: {
-            'X-Authorization': authToken
-        }
     });
 
     const result = await response.json()
@@ -33,11 +30,9 @@ export const getComments = async(authToken, recipeId) => {
     }
 
 }
-export const getCommentsCount = async(authToken, recipeId) => {
+export const getCommentsCount = async(recipeId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=id%3D%22${recipeId}%22&count`, {
-        headers: {
-            'X-Authorization': authToken
-        }
+        
     });
     const result = await response.json()
 

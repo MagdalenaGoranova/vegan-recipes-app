@@ -1,20 +1,18 @@
 .profile-page {
-    width: 95vw;
-    height: 100vh;
-    margin: 30px;   
+    margin: 30px;
+    display: flex;
+    flex-direction: column; 
 }
 .side-profile-div {
     display: flex;
     width: 70%;
-    height: 60%;
     border: 2px solid #047A46;
     border-radius: 30px;
     align-items: center;
     margin: auto;
 }
 .profile-card img{
-    width: 300px;
-    height: 300px;
+    width: 75%;
     border-radius: 50%;
     object-fit: cover;
     
@@ -68,6 +66,24 @@
 .profile-edit-page {
     justify-content: center;
    
+}
+.hidden {
+    display: none;
+}
+.user-recipes-container {
+    min-height: 200px;
+    height: auto;
+    width: 100%;
+    margin-top: 50px;
+}
+.user-recipes-container-title {
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Laila', sans-serif;
+    color: #047A46;
+}
+.user-recipes-container-title i {
+    margin-left: 10px;
 }
 
 

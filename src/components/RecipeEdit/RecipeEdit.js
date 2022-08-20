@@ -143,11 +143,8 @@ function editSubmitHandler() {
     if(isValid) {
         recipeService.editRecipe(recipe._id, user.accessToken, recipe)
     .then(result => {
-        console.log(result);
         navigate(`/recipe/details/${recipe._id}`)
-        addAlert('You successfully edited your recipe!', 'success');
-        console.log(recipe);
-        
+        addAlert('You successfully edited your recipe!', 'success');    
     })
 
     }
@@ -191,6 +188,9 @@ function editSubmitHandler() {
                             <option value="dessert">Dessert</option>
                             <option value="snack">Snack</option>
                             <option value="salad">Salad</option>
+                            <option value="side">Side</option>
+                            <option value="bread">Breads</option>
+                            <option value="bevarage">Bevarages</option>
                         </Form.Select>
                     </Form.Group>
                 <Form.Group className="mb-3">
@@ -244,6 +244,8 @@ function editSubmitHandler() {
                             <option value="cups">Cups</option>
                             <option value="grams">Grams</option>
                             <option value="singles">Singles</option>
+                            <option value="teaspoons">Teaspoons</option>
+                            <option value="tablespoons">Tablespoons</option>
                             </Form.Select>
                         </Form.Group>
                    <Button variant="primary" type="submit" className="add-btn-edit" onClick={(e) => addNewIngredient(e)}>

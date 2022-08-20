@@ -219,7 +219,7 @@ export default function Register() {
                       <Form.Group className="form-outline mb-4">
                         <Form.Label className="form-label" htmlFor="form3Example4">Password</Form.Label>
                         <Form.Control type="password" id="form3Example4" className="form-control" name="password" ref={ref1} isValid={validate.password.isValid} isInvalid={validate.password.isInvalid} onBlur={(e) => validateInput(e)}/>
-                        <i class="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
+                        <i className="fa-solid fa-eye-slash" onClick={(e)=> togglePassword(e)}></i>
                         {validate.password.isInvalid 
                         ? <Form.Text id="not-required-img"className="form-text-error" muted>
                           Password should be at least 8 character
@@ -230,8 +230,8 @@ export default function Register() {
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example4"> Repeat password</Form.Label>
-                        <Form.Control type="password" id="form3Example4" className="form-control" name="re-password" ref={ref2} isValid={validate.repeatPass.isValid} isInvalid={validate.repeatPass.isInvalid}  onBlur={(e) => validateInput(e)}/>
-                        <i class="fa-solid fa-eye-slash" onClick={(e)=> toggleRePassword(e)}></i>
+                        <Form.Control type="password" id="form3Example5" className="form-control" name="re-password" ref={ref2} isValid={validate.repeatPass.isValid} isInvalid={validate.repeatPass.isInvalid}  onBlur={(e) => validateInput(e)}/>
+                        <i className="fa-solid fa-eye-slash" onClick={(e)=> toggleRePassword(e)}></i>
                         {validate.repeatPass.isInvalid 
                         ? <Form.Text id="not-required-img"className="form-text-error" muted>
                           Password should be at least 8 character
@@ -242,7 +242,7 @@ export default function Register() {
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example3">Username</Form.Label>
-                        <Form.Control type="text" id="form3Example3" className="form-control" name="username" isValid={validate.username.isValid} isInvalid={validate.username.isInvalid} onBlur={(e) => validateInput(e)}/>
+                        <Form.Control type="text" id="form3Example6" className="form-control" name="username" isValid={validate.username.isValid} isInvalid={validate.username.isInvalid} onBlur={(e) => validateInput(e)}/>
                         {validate.username.isInvalid 
                         ? <Form.Text id="not-required-img"className="form-text-error" muted>
                           Username should be at least 3 character
@@ -253,7 +253,7 @@ export default function Register() {
 
                       <Form.Group className="form-outline mb-4 names">
                         <Form.Label  className="form-label" htmlFor="form3Example3">Full name</Form.Label>
-                        <Form.Control type="text" id="form3Example3" className="form-control" name="fullName" isValid={validate.fullName.isValid} isInvalid={validate.fullName.isInvalid} onBlur={(e) => validateInput(e)}/>
+                        <Form.Control type="text" id="form3Example7" className="form-control" name="fullName" isValid={validate.fullName.isValid} isInvalid={validate.fullName.isInvalid} onBlur={(e) => validateInput(e)}/>
                         {validate.fullName.isInvalid 
                         ? <Form.Text id="not-required-img"className="form-text-error" muted>
                           Full name should be at least 3 character
@@ -264,7 +264,7 @@ export default function Register() {
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example3">Profile Picture</Form.Label>
-                        <Form.Control type="url" id="form3Example3" className="form-control" name="profile-img" />
+                        <Form.Control type="url" id="form3Example8" className="form-control" name="profile-img" />
                         <Form.Text id="not-required-img"className="form-text" muted>
                           * Not required
                         </Form.Text>
@@ -272,7 +272,7 @@ export default function Register() {
 
                       <Form.Group className="form-outline mb-4">
                         <Form.Label  className="form-label" htmlFor="form3Example3">About you</Form.Label>
-                        <Form.Control as='textarea' type="text" id="form3Example3" className="form-control" name="about-you" />
+                        <Form.Control as='textarea' type="text" id="form3Example9" className="form-control" name="about-you" />
                         <Form.Text id="not-required-info"  className="form-text" muted>
                           * Not required
                         </Form.Text>

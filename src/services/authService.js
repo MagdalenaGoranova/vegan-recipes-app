@@ -30,7 +30,6 @@ export const register = async (email, password, username, fullName, profileImg, 
 
     let jsonResult = await response.json();
     
-
     if(response.ok) {
         return jsonResult;
     } else {
@@ -59,14 +58,7 @@ export const logout = async(authToken) => {
         }
     });
     return response
-    // let jsonResult = await response.json();
-
-
-    // if(response.ok) {
-    //     return jsonResult;
-    // } else {
-    //     throw jsonResult.message;
-    // }
+   
    
 }
 

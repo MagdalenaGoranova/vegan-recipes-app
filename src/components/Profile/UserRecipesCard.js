@@ -1,13 +1,13 @@
-import { NavLink } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { NavLink, useParams  } from "react-router-dom";
+import { useState, useEffect, useContext} from "react";
 
 import * as ratingService from '../../services/ratingService';
 import * as commentsService from '../../services/commentsService';
 import { AuthContext } from '../../contexts/AuthContext';
 import * as ratingHandler from '../../helpers/RatingHandler';
-import './MyRecipes.css'
+import '../MyRecipes/MyRecipes.css'
 
-export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
+export default function UserRecipesCard ({userRecipe}) {
 
     const [rating, setRating] = useState(0);
 
@@ -16,7 +16,7 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
     const {user} = useContext(AuthContext);
 
     useEffect(() => {
-        ratingService.getRate(myRecipe._id)
+        ratingService.getRate(userRecipe._id)
             .then(result => {
                 console.log(result);
                 let sum = result.reduce((x, y) => { 
@@ -28,14 +28,14 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
             .catch(err => {
                 console.log(err);
             })
-    }, [myRecipe._id]);
+    }, [userRecipe._id]);
 
     useEffect(() => {
-        commentsService.getCommentsCount(myRecipe._id)
+        commentsService.getCommentsCount(userRecipe._id)
             .then(result => {
                 setCommentsCount(result);
             })
-    }, [myRecipe._id]);
+    }, [userRecipe._id]);
 
     return (
     <div id="recipes-card-wrapper">
@@ -43,25 +43,25 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
         <div className="recipes-inner-card">
 
             <div id="recipes-img-container">
-                <img src={myRecipe.img} alt='recipe-img'/>
+                <img src={userRecipe.img} alt='recipe-img'/>
             </div>
 
             <div id="all-recipe-title" className="all-recipes-title">
-                <h4>{myRecipe.title}</h4>
+                <h4>{userRecipe.title}</h4>
             </div>
 
             <div id="recipes-top-details">
 
                 <div className="recipe-author">
-                <NavLink to={`/profile/${myRecipe._ownerId}`}><i className="fa-solid fa-user"></i>{myRecipe.author}</NavLink>
+                <NavLink to={`/profile/${userRecipe._ownerId}`}><i className="fa-solid fa-user"></i>{userRecipe.author}</NavLink>
                 </div>
 
                 <div className="recipe-category">
-                <p><i className="fa-solid fa-tag"></i>{myRecipe.category}</p>
+                <p><i className="fa-solid fa-tag"></i>{userRecipe.category}</p>
                 </div>
 
                 <div className="recipe-level">
-                <p><i className="fa-solid fa-user-graduate"></i>{myRecipe.level}</p>
+                <p><i className="fa-solid fa-user-graduate"></i>{userRecipe.level}</p>
                 </div>
 
             </div>
@@ -70,11 +70,11 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
       
             
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{myRecipe.hours && myRecipe.hours !== 0 ? myRecipe.minutes && myRecipe.minutes !== 0 ? myRecipe.hours + 'h' + ':' + myRecipe.minutes + 'min': myRecipe.hours + 'h': myRecipe.minutes + 'min'}</p>
+                <p><i className="fa-regular fa-clock"></i>{userRecipe.hours && userRecipe.hours !== 0 ? userRecipe.minutes && userRecipe.minutes !== 0 ? userRecipe.hours + 'h' + ':' + userRecipe.minutes + 'min': userRecipe.hours + 'h': userRecipe.minutes + 'min'}</p>
                 </div>
         
                 <div className="recipe-details">
-                <p><i className="fa-solid fa-people-group"></i>{myRecipe.servingSize}</p>
+                <p><i className="fa-solid fa-people-group"></i>{userRecipe.servingSize}</p>
                 </div>
 
                 <div className="recipe-details">
@@ -86,9 +86,8 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
                 </div>
 
             </div>
-            <NavLink to={`/recipe/details/${myRecipe._id}`} className="my-recipes-details-btn">Details<i className="fas fa-long-arrow-alt-right"></i></NavLink>
+            <NavLink to={`/recipe/details/${userRecipe._id}`} className="my-recipes-details-btn">Details<i className="fas fa-long-arrow-alt-right"></i></NavLink>
             
-           <button onClick={() => deleteMyRecipe(myRecipe._id, user.accessToken)} className="delete-my-recipe-btn"><i className="fa-solid fa-trash-can"></i></button>
 
         </div>
 

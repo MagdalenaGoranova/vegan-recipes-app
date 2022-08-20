@@ -33,6 +33,7 @@ import Comments from './Comments';
 
 
     useEffect(() => {
+        console.log(id);
         recipeService.getOne(id)
             .then(result => {
                 console.log(result);
@@ -45,36 +46,40 @@ import Comments from './Comments';
     }, [id]);
 
     useEffect(() => {
-        ratingService.getRate(user.accessToken, id)
+        ratingService.getRate(id)
             .then(result => {
-                let sum = result.reduce((x, y) => { 
-                    return x + Number(y.rateRecipe)
-                }, 0); 
-                let averageRating = sum / result.length;
-                setRating(averageRating.toFixed(1));
-                let filtered = result.filter(x => x._ownerId == user._id); 
-                if(filtered.length > 0 ) {
-                    setHasRated(true);
+                console.log(result);
+                if(result.length > 0) {
+                    let sum = result.reduce((x, y) => { 
+                        return x + Number(y.rateRecipe)
+                    }, 0); 
+                    let averageRating = sum / result.length;
+                    setRating(averageRating.toFixed(1));
+                    let filtered = result.filter(x => x._ownerId == user._id); 
+                    if(filtered.length > 0 ) {
+                        setHasRated(true);
+                    }
                 }
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [id, user.accessToken, user._id, hasRated, rateRecipe]);
+    }, [id, user._id, hasRated, rating, rateRecipe]);
 
     useEffect(() => {
-        commentsService.getComments(user.accessToken, id)
+        commentsService.getComments(id)
             .then(result => {
+                console.log(result);
                 setComments(result)
             })
             .catch(err => {
                 console.log(err);
             })
-        commentsService.getCommentsCount(user.accessToken, id)
+        commentsService.getCommentsCount(id)
             .then(result => {
                 setCommentsCount(result);
             })
-    }, [id, user.accessToken]);
+    }, [id]);
 
 
     function saveRate(e) {
@@ -122,19 +127,18 @@ import Comments from './Comments';
 
                 <div className='recipe-details-div'>
                     {recipe._ownerId == user._id 
-                    ? (<>
-                    <h3 className="recipe-title">{recipe.title}</h3>
-                    <NavLink to={`/recipe/edit/${recipe._id}`}>Edit<i class="fa-solid fa-pen"></i></NavLink></>)
+                    ? 
+                    <h3 className="recipe-title">{recipe.title}<NavLink to={`/recipe/edit/${recipe._id}`}>Edit<i className="fa-solid fa-pen"></i></NavLink></h3>
                     : <h3 className="recipe-title">{recipe.title}</h3>}
 
                     <div className='recipe-details-initial-info'>
 
-                        <div className='initil-info'>
+                        <div className='initial-info'>
                             <div className="recipe-rating">
                                     <p className='stars'>{ratingHandler.stars(rating).map(x => x)}</p>
                                     <p className='rating'>{rating}/5</p>
 
-                                { recipe._ownerId != user._id 
+                                { recipe._ownerId != user._id && user._id
                                 ? !hasRated
                                     ? ( <>
                                         <input className="rate-input" onBlur={(e) => saveRate(e)} type="number" defaultValue={rateRecipe}/><span>/5</span>
@@ -149,7 +153,7 @@ import Comments from './Comments';
                             <div className='details'>
                                 <p className='details-text'><span>Author:</span>{recipe.author}</p>
                                 <p className='details-text'><span>Prep time:</span>
-                                {recipe.hours && recipe.hours !== 0 ? recipe.minutes && recipe.minutes !== 0 ? recipe.hours + ':' + recipe.minutes: recipe.hours + 'h': recipe.minutes + 'min'}</p>
+                                {recipe.hours && recipe.hours !== 0 ? recipe.minutes && recipe.minutes !== 0 ? recipe.hours + 'h' + ':' + recipe.minutes + 'min': recipe.hours + 'h': recipe.minutes + 'min'}</p>
                                 <p className='details-text'><span>Serving size:</span>{recipe.servingSize}</p>
                                 <p className='details-text'><span>Category:</span>{recipe.category}</p>
                                 <p className='details-text'><span>Level:</span>{recipe.level}</p>
@@ -171,7 +175,7 @@ import Comments from './Comments';
                             <ul>
                                 {recipe.ingredients.map(x => 
                                     <li key={x.ingredient}>
-                                    <i class="fa-solid fa-basket-shopping"></i>
+                                    <i className="fa-solid fa-basket-shopping"></i>
                                     <span>{x.quantity} {x.measures}</span>{x.ingredient}</li>
                                 )}
                             </ul>      
@@ -196,15 +200,16 @@ import Comments from './Comments';
                     <div className='comments'>{comments.map(x => <Comments key={x._id} comment={x}/> )}</div>
                    
                 </section>
-
-                <section className='comment-input'>
-                    <p>Leave a comment<i class="fa-solid fa-comment-medical" onClick={(e) => showInputField(e)}></i></p>
+                {user._id 
+                    ? <section className='comment-input'>
+                    <p>Leave a comment<i className="fa-solid fa-comment-medical" onClick={(e) => showInputField(e)}></i></p>
                     <div className='input-field hidden'>
                     <textarea></textarea>
                     <button onClick={e=> comment(e)}>Comment</button>
                     </div>
-                    
-                </section>
+                    </section>
+                : <p className='no-user-message'>You need to register or login to leave a comment and rate this recipe!</p> }
+                
             </div>
         </div>
        

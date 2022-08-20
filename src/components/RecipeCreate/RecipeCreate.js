@@ -332,6 +332,9 @@ function RecipeCreate() {
                             <option value="dessert">Dessert</option>
                             <option value="snack">Snack</option>
                             <option value="salad">Salad</option>
+                            <option value="side">Side</option>
+                            <option value="bread">Breads</option>
+                            <option value="bevarage">Bevarages</option>
                             </Form.Select>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail" >
@@ -363,6 +366,8 @@ function RecipeCreate() {
                                 <option value="cups">Cups</option>
                                 <option value="grams">Grams</option>
                                 <option value="singles">Singles</option>
+                                <option value="teaspoons">Teaspoons</option>
+                                <option value="tablespoons">Tablespoons</option>
                                 </Form.Select>
                     </Form.Group>
                     <Button variant="primary" type="submit" className="add-btn" onClick={(e) => addIngredientsHandler(e)}>

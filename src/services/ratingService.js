@@ -17,11 +17,8 @@ export const rateRecipe = async(authToken, ratingData) => {
         throw result.message;
     }
 }
-export const getRate = async(authToken, recipeId) => {
+export const getRate = async(recipeId) => {
     const response = await fetch(`${baseUrl}/data/ratings?where=id%3D%22${recipeId}%22`, {
-        headers: {
-            'X-Authorization': authToken
-        }
     });
 
     const result = await response.json()
