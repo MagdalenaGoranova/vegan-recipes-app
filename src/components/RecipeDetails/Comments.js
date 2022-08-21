@@ -22,9 +22,6 @@ function Comments({comment}) {
     if(profile == undefined) {
         return <p>Loading..</p>
     }
-
-   
-
     return (
         <div className="comment-container">
             <p><span>{profile.username}</span> says:</p>

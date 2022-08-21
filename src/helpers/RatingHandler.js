@@ -3,10 +3,10 @@ export function stars(number) {
    
     for (let index = 1; index < 6; index++) {
         if(number < index) {
-            starsArr.push(<i className="far fa-star"></i>)
+            starsArr.push(<i key={index} className="far fa-star"></i>)
 
         } else {
-            starsArr.push(<i className="fas fa-star"></i>);
+            starsArr.push(<i key={index} className="fas fa-star"></i>);
               
         }  
     }

@@ -73,8 +73,8 @@ function RecipeCreate() {
                 addToast('Image url is required!');
                 isValid = false; 
             }
-            if(minutes > 59  && minutes < 0) {
-                addToast('Minutes range should be between 0 and 59');
+            if(minutes > 59  ||  minutes < 0) {
+                addToast('Minutes range should be between 1 and 59');
                 isValid = false; 
             }
             if (isValid) {
@@ -181,13 +181,10 @@ function RecipeCreate() {
     }
     function createRecipeHandler(e) {
         e.preventDefault();
-        console.log(recipe);
-
         recipeService.createRecipe(recipe, user.accessToken)
             .then((result) => {
-                console.log(result);
                 navigate('/all-recipes');
-                addAlert('You have sucessfully created a recipe!', 'success');
+                addAlert('You successfully created a recipe!', 'success');
             })
             .catch(err => {
                 console.log(err);
@@ -195,14 +192,12 @@ function RecipeCreate() {
     }
     function deleteInstruction(e) {
         e.preventDefault();
-        console.log(e.currentTarget.parentElement.textContent);
         let currentInstruction = e.currentTarget.parentElement.textContent;
         setRecipe(oldState => ({...oldState, instructions: recipe.instructions.filter(x =>  x !== currentInstruction)}))   
          
     }
     function deleteIngredient(e) {
         e.preventDefault();
-        console.log(e.currentTarget.parentElement.childNodes[0].textContent);
         let currentIngredient = e.currentTarget.parentElement.childNodes[0].textContent;
         setRecipe(oldState => ({...oldState, ingredients: recipe.ingredients.filter(x =>  x.ingredient !== currentIngredient)}))  
     }
@@ -333,8 +328,8 @@ function RecipeCreate() {
                             <option value="snack">Snack</option>
                             <option value="salad">Salad</option>
                             <option value="side">Side</option>
-                            <option value="bread">Breads</option>
-                            <option value="bevarage">Bevarages</option>
+                            <option value="bread">Bread</option>
+                            <option value="bevarage">Bevarage</option>
                             </Form.Select>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail" >

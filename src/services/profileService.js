@@ -23,12 +23,15 @@ export const getProfile = async(authToken, ownerId) => {
             'X-Authorization': authToken
         }
     })
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 }
 export const editProfile = async(profileId, authToken, profileData) => {

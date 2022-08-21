@@ -21,12 +21,15 @@ export const getComments = async(recipeId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=id%3D%22${recipeId}%22`, {
     });
 
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 
 }
@@ -34,12 +37,15 @@ export const getCommentsCount = async(recipeId) => {
     const response = await fetch(`${baseUrl}/data/comments?where=id%3D%22${recipeId}%22&count`, {
         
     });
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 
 }

@@ -54,6 +54,11 @@
   margin-bottom: 0px!important;
 }
 
+.style-img {
+    background-color: hsla(0, 0%, 100%, 0.55)!important;
+    backdrop-filter: blur(30px)!important;
+}
+
 
 
 

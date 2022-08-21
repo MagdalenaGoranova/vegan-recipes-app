@@ -1,22 +1,11 @@
-import { useState, useEffect } from 'react';
+
 import './Home.css';
 import HomeCarousel from './HomeCarousel';
-import * as recipeService from '../../services/recipeService';
+
 import { NavLink } from 'react-router-dom';
 
 
 export default function Home() {
-
-    const  [cards, setCards] = useState({});
-
-    useEffect(() => {
-        recipeService.getAll()
-        .then(result => {
-            setCards(result);
-        })
-
-    },[]);
-
     return (
         <div className="home-page">
             <section className='home-header' id="home"> 

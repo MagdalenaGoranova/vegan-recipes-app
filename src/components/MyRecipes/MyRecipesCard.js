@@ -18,7 +18,6 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
     useEffect(() => {
         ratingService.getRate(myRecipe._id)
             .then(result => {
-                console.log(result);
                 let sum = result.reduce((x, y) => { 
                     return x + Number(y.rateRecipe)
                 }, 0); 
@@ -34,6 +33,9 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
         commentsService.getCommentsCount(myRecipe._id)
             .then(result => {
                 setCommentsCount(result);
+            })
+            .catch(err => {
+                console.log(err);
             })
     }, [myRecipe._id]);
 
@@ -70,7 +72,7 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
       
             
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{myRecipe.hours && myRecipe.hours !== 0 ? myRecipe.minutes && myRecipe.minutes !== 0 ? myRecipe.hours + 'h' + ':' + myRecipe.minutes + 'min': myRecipe.hours + 'h': myRecipe.minutes + 'min'}</p>
+                <p><i className="fa-regular fa-clock"></i>{myRecipe.hours && myRecipe.hours > 0 ? myRecipe.minutes && myRecipe.minutes > 0 ? myRecipe.hours + 'h' + ':' + myRecipe.minutes + 'min': myRecipe.hours + 'h': myRecipe.minutes + 'min'}</p>
                 </div>
         
                 <div className="recipe-details">

@@ -18,12 +18,15 @@ export default function UserRecipesCard ({userRecipe}) {
     useEffect(() => {
         ratingService.getRate(userRecipe._id)
             .then(result => {
-                console.log(result);
-                let sum = result.reduce((x, y) => { 
-                    return x + Number(y.rateRecipe)
-                }, 0); 
-                let averageRating = sum / result.length;
-                setRating(averageRating.toFixed(2));   
+                if(result.length > 0 || result !== 'undefind') {
+                    let sum = result.reduce((x, y) => { 
+                        return x + Number(y.rateRecipe)
+                    }, 0); 
+                    let averageRating = sum / result.length;
+                    setRating(averageRating.toFixed(2));      
+                } else {
+
+                }  
             })
             .catch(err => {
                 console.log(err);
@@ -70,7 +73,7 @@ export default function UserRecipesCard ({userRecipe}) {
       
             
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{userRecipe.hours && userRecipe.hours !== 0 ? userRecipe.minutes && userRecipe.minutes !== 0 ? userRecipe.hours + 'h' + ':' + userRecipe.minutes + 'min': userRecipe.hours + 'h': userRecipe.minutes + 'min'}</p>
+                <p><i className="fa-regular fa-clock"></i>{userRecipe.hours && userRecipe.hours > 0 ? userRecipe.minutes && userRecipe.minutes > 0 ? userRecipe.hours + 'h' + ':' + userRecipe.minutes + 'min': userRecipe.hours + 'h': userRecipe.minutes + 'min'}</p>
                 </div>
         
                 <div className="recipe-details">

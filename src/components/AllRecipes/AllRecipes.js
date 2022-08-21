@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import './AllRecipes.css';
 import AllRecipesCard from './AllRecipesCard';
 import * as recipeService from '../../services/recipeService';
-import { PaginationBasic } from '../Notifications/Pagination';
 import CategoriesNav from './CategoriesNav';
 
 

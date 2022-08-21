@@ -3,12 +3,15 @@ const baseUrl = 'https://softuni-server-practice.herokuapp.com';
 export const getAll = async () => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes`);
 
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 }
 export const createRecipe = async(recipeData, authToken) => {
@@ -30,12 +33,16 @@ export const createRecipe = async(recipeData, authToken) => {
 }
 export const getOne = async (recipeId) => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes/${recipeId}`);
-    const result = await response.json()
 
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 }
 export const getMyRecipes = async(ownerId, authToken) => {
@@ -44,12 +51,15 @@ export const getMyRecipes = async(ownerId, authToken) => {
             'X-Authorization': authToken
         }
     });
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
     
 }
@@ -59,12 +69,15 @@ export const getUserRecipes = async(ownerId, authToken) => {
             'X-Authorization': authToken
         }
     });
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
     
 }
@@ -74,12 +87,15 @@ export const getMyRecipesCount = async(ownerId, authToken,) => {
             'X-Authorization': authToken
         }
     });
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 
 }
@@ -121,15 +137,33 @@ export const editRecipe = async(recipeId, authToken, recipeData) => {
 export const getRecipeByCategory = async(category) => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes?where=category%3D%22${category}%22`, {
     });
-    const result = await response.json()
-
-    if(response.ok) {
-        return result;
+    if(response.status !== 200) {
+        console.log(response.status);
     } else {
-        throw result.message;
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
     }
 
 }
+export const getAllDummy = async () => {
+    const response = await fetch(`${baseUrl}/jsonstore/vegan-recipes`);
+
+    if(response.status !== 200) {
+        console.log(response.status);
+    } else {
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
+    }
+}
+
 
 
 

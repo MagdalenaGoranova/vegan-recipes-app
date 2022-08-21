@@ -2,6 +2,7 @@ import * as recipeService from '../../services/recipeService';
 import * as ratingService from '../../services/ratingService';
 import * as commentsService from '../../services/commentsService';
 import * as ratingHandler from '../../helpers/RatingHandler';
+import { useNotificationContext } from '../../contexts/NotificationsContext'; 
 
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -26,17 +27,16 @@ import Comments from './Comments';
 
     const [commentsCount, setCommentsCount] = useState(0);
 
-
     let { id } = useParams();
 
     let { user } = useContext(AuthContext); 
 
+    const { addAlert, addToast } = useNotificationContext();
+
 
     useEffect(() => {
-        console.log(id);
         recipeService.getOne(id)
             .then(result => {
-                console.log(result);
                 setRecipe(result);
                 
             })
@@ -48,7 +48,6 @@ import Comments from './Comments';
     useEffect(() => {
         ratingService.getRate(id)
             .then(result => {
-                console.log(result);
                 if(result.length > 0) {
                     let sum = result.reduce((x, y) => { 
                         return x + Number(y.rateRecipe)
@@ -61,15 +60,11 @@ import Comments from './Comments';
                     }
                 }
             })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [id, user._id, hasRated, rating, rateRecipe]);
+    }, [id, user._id, hasRated, rating]);
 
     useEffect(() => {
         commentsService.getComments(id)
             .then(result => {
-                console.log(result);
                 setComments(result)
             })
             .catch(err => {
@@ -78,6 +73,9 @@ import Comments from './Comments';
         commentsService.getCommentsCount(id)
             .then(result => {
                 setCommentsCount(result);
+            })
+            .catch(err => {
+                console.log(err);
             })
     }, [id]);
 
@@ -90,10 +88,12 @@ import Comments from './Comments';
        if(rateRecipe > 0 && rateRecipe <= 5){
         ratingService.rateRecipe(user.accessToken, {id, rateRecipe})
             .then(result => {
+                setHasRated(true);
+                addAlert('You sucessfully rated this recipe!', 'success')
             })
-            setHasRated(true);
+
         } else {
-            alert('Rating should be a number between 1 and 5');
+            addToast('Rating should be a number between 1 and 5');
         }
     }
 
@@ -102,12 +102,16 @@ import Comments from './Comments';
 
        commentsService.commentRecipe(user.accessToken, {id, comment})
        .then(result => {
-        setComments(oldState => ([
-            ...oldState, 
-            result, 
-        ]))
-        setCommentsCount(oldState => oldState + 1);
-       })
+            setComments(oldState => ([
+                ...oldState, 
+                result, 
+            ]))
+            setCommentsCount(oldState => oldState + 1);
+            addAlert('You sucessfully left a comment!', 'success');
+        })
+        .catch(err => {
+        })
+
        e.currentTarget.parentElement.childNodes[0].value = '';
        
     }
@@ -153,7 +157,7 @@ import Comments from './Comments';
                             <div className='details'>
                                 <p className='details-text'><span>Author:</span>{recipe.author}</p>
                                 <p className='details-text'><span>Prep time:</span>
-                                {recipe.hours && recipe.hours !== 0 ? recipe.minutes && recipe.minutes !== 0 ? recipe.hours + 'h' + ':' + recipe.minutes + 'min': recipe.hours + 'h': recipe.minutes + 'min'}</p>
+                                {recipe.hours && recipe.hours > 0 ? recipe.minutes && recipe.minutes > 0 ? recipe.hours + 'h' + ':' + recipe.minutes + 'min': recipe.hours + 'h': recipe.minutes + 'min'}</p>
                                 <p className='details-text'><span>Serving size:</span>{recipe.servingSize}</p>
                                 <p className='details-text'><span>Category:</span>{recipe.category}</p>
                                 <p className='details-text'><span>Level:</span>{recipe.level}</p>

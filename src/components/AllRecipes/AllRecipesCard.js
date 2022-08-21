@@ -29,7 +29,6 @@ export default function AllRecipesCard({card}) {
                 }
             })
             .catch(err => {
-                console.log(err);
             })
     }, [card._id]);
 
@@ -72,7 +71,7 @@ export default function AllRecipesCard({card}) {
             <div id="recipes-bottom-details">
 
                 <div className="recipe-details">
-                <p><i className="fa-regular fa-clock"></i>{card.hours && card.hours !== 0 ? card.minutes && card.minutes !== 0 ? card.hours + 'h' + ':' + card.minutes + 'min': card.hours + 'h': card.minutes + 'min'}</p>
+                <p><i className="fa-regular fa-clock"></i>{card.hours && card.hours > 0 ? card.minutes && card.minutes > 0 ? card.hours + 'h' + ':' + card.minutes + 'min': card.hours + 'h': card.minutes + 'min'}</p>
                 </div>
         
                 <div className="recipe-details">

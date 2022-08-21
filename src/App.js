@@ -22,7 +22,6 @@ import Footer from './components/Footer/Footer';
 
 
 
-
 function App() {
 
   return (
@@ -42,7 +41,7 @@ function App() {
           <Route path='login' element={<Login/> }/>
           <Route path='register' element={<Register/>}/>
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
-          
+        
           <Route element={<PrivateRoute/>}>
             <Route path='create-recipe' element={<RecipeCreate/>}/>
             <Route path='profile/:id' element={<Profile/>}/>

@@ -74,8 +74,6 @@ function ProfileEdit() {
 
     function profileEditHandler(e) {
         e.preventDefault();
-        console.log(e.currentTarget.parentElement);
-
         let formData = new FormData(e.currentTarget.parentElement);
         
         let username = formData.get('username');
@@ -86,7 +84,6 @@ function ProfileEdit() {
         if(validate.username.isValid && validate.fullName.isValid) {
         profileService.editProfile(profile._id, user.accessToken, {username, fullName, info, profileImg})
         .then(result => {
-            console.log(result);
             navigate(`/profile/${profile._ownerId}`)
             
         })
@@ -94,7 +91,6 @@ function ProfileEdit() {
 
 
     }
-
 
     return (
         <section className="text-center text-lg-start">

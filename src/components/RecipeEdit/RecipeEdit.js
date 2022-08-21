@@ -126,7 +126,7 @@ function editSubmitHandler() {
         addToast('Image url is required!');
         isValid = false; 
     }
-    if(recipe.minutes > 59  && recipe.minutes < 0) {
+    if(recipe.minutes > 59  || recipe.minutes < 0) {
         addToast('Minutes range should be between 0 and 59');
         isValid = false; 
     }
@@ -189,8 +189,8 @@ function editSubmitHandler() {
                             <option value="snack">Snack</option>
                             <option value="salad">Salad</option>
                             <option value="side">Side</option>
-                            <option value="bread">Breads</option>
-                            <option value="bevarage">Bevarages</option>
+                            <option value="bread">Bread</option>
+                            <option value="bevarage">Bevarage</option>
                         </Form.Select>
                     </Form.Group>
                 <Form.Group className="mb-3">

@@ -26,4 +26,11 @@
     transition: none!important;
     box-shadow: none!important;
 }
+.style-br {
+    border-radius: 1rem!important;
+
+}
+.img-fluid {
+    border-radius: '1rem 0 0 1rem'!important;
+}
 

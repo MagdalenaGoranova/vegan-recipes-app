@@ -19,14 +19,19 @@ import './MyRecipes.css'
             .then(result => {
                 setMyRecipes(result);
             })
+            .catch(err => {
+                console.log(err);
+            })
 
     }, [user._id, user.accessToken]);
 
     useEffect(() => {
         recipeService.getMyRecipesCount(user._id, user.accessToken)
             .then(result => {
-                console.log(result);
                 setMyRecipesCount(result);
+            })
+            .catch(err => {
+                console.log(err);
             })
 
     }, [user._id, user.accessToken]);
@@ -38,6 +43,17 @@ import './MyRecipes.css'
                     .then(result => {
                         setMyRecipes(result);
                     })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                recipeService.getMyRecipesCount(user._id, user.accessToken)
+                    .then(result => {
+                        setMyRecipesCount(result);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                
             })
     }
 

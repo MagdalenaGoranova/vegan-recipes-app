@@ -160,8 +160,6 @@ export default function Register() {
 
     let formData = new FormData(e.currentTarget);
 
-    console.log(e.currentTarget);
-
     let email = formData.get('email');  
     let password = formData.get('password');
     let repeatPass = formData.get('re-password');
@@ -195,11 +193,7 @@ export default function Register() {
           <div className="container py-4">
             <div className="row g-0 align-items-center">
               <div className="col-lg-6 mb-5 mb-lg-0">
-                <div className="card cascading-right" 
-                style={{
-                    background: 'hsla(0, 0%, 100%, 0.55)',
-                    backdropFilter: 'blur(30px)'
-                }}>
+                <div className="card cascading-right style-img">
                   <div className="card-body p-5 shadow-5 text-center">
                     <h2 className="fw-bold mb-5">Register</h2>
                     <Form method='POST' onSubmit={(e) => registerHandler(e)} className="register-form">

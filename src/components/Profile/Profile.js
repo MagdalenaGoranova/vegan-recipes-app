@@ -29,22 +29,21 @@ function Profile() {
     useEffect(() => {
         profileService.getProfile(user.accessToken, id)
         .then(result => {
-            console.log(result);
             setProfile(result[0]);
             
         })
         .catch(err => {
-            console.log(err);
+            
         })
 
     }, [id, user.accessToken])
-    console.log(profile);
-
 
     useEffect(() => {
         recipeService.getMyRecipesCount(id, user.accessToken)
             .then(result => {
                 setMyRecipesCount(result);
+            })
+            .catch(err => {  
             })
 
     }, [id, user.accessToken]);
@@ -53,19 +52,17 @@ function Profile() {
     useEffect(() => {
         recipeService.getUserRecipes(id, user.accessToken)
             .then(result => {
-                console.log(result);
                 setUserRecipes(result);
+            })
+            .catch(err => {
             })
 
     }, [id, user.accessToken]);
 
     function showRecipes() {
         setIsHidden(!isHidden);
-       
-
     }
 
-    // TODO: Check if own profile to show different info and buttons 
     return (
          <div className="profile-page">
                 <section className="side-profile-div">

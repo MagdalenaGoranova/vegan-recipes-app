@@ -20,7 +20,6 @@ function Toasts() {
           className="d-inline-block m-1"
           bg={toast.type}
           onClose={() => closeToast()}
-          dismissible={true}
         >
           <Toast.Header>
             <img
