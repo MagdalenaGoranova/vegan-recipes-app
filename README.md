@@ -4,7 +4,7 @@ The website is deployed at: https://vegan-recipes-blog.herokuapp.com
 
 In this app: 
 
-# /home 
+### /home 
 
 1. There are Home and All Recipes pages available for both logged in user and guest. 
 2. Users can Register/Log In and their information will be saved on the server.
