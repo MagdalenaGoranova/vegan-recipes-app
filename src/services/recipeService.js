@@ -3,16 +3,14 @@ const baseUrl = 'https://softuni-server-practice.herokuapp.com';
 export const getAll = async () => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes`);
 
-    if(response.status !== 200) {
-        console.log(response.status);
-    } else {
-        const result = await response.json()
+        const result = await response.json();
+
         if(response.ok) {
             return result;
         } else {
             throw result.message;
         }
-    }
+    
 }
 export const createRecipe = async(recipeData, authToken) => {
     const response = await fetch(`${baseUrl}/data/vegan-recipes`, {
@@ -162,6 +160,21 @@ export const getAllDummy = async () => {
             throw result.message;
         }
     }
+}
+export const getRecipeByCategoryDummy = async(category) => {
+    const response = await fetch(`${baseUrl}/jsonstore/vegan-recipes?where=category%3D%22${category}%22`, {
+    });
+    if(response.status !== 200) {
+        console.log(response.status);
+    } else {
+        const result = await response.json()
+        if(response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
+    }
+
 }
 
 

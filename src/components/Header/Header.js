@@ -28,7 +28,7 @@ export default function Header() {
         })
         }
 
-    }, [user._id, user.accessToken]);
+    }, [user._id, user.accessToken, profile.profileImg]);
 
     function logoutHandler() {
         authService.logout(user.accessToken)

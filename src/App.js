@@ -19,6 +19,9 @@ import Alerts from './components/Notifications/Alerts';
 import Toasts from './components/Notifications/Toasts';
 import PrivateRoute from './components/PrivateRoute';
 import Footer from './components/Footer/Footer';
+import AllRecipesDummy from './components/DummyDataComponents/AllRecipesDummy/AllRecipesDummy';
+
+
 
 
 
@@ -41,6 +44,8 @@ function App() {
           <Route path='login' element={<Login/> }/>
           <Route path='register' element={<Register/>}/>
           <Route path='recipe/details/:id' element={<RecipeDetails/>}/>
+
+          <Route path='all-recipes-dummy' element={<AllRecipesDummy/>}/>
         
           <Route element={<PrivateRoute/>}>
             <Route path='create-recipe' element={<RecipeCreate/>}/>

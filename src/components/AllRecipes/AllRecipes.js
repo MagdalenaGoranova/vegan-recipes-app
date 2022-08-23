@@ -12,6 +12,7 @@ export default function AllRecipes() {
     useEffect(() => {
         recipeService.getAll()
         .then(result => {
+            console.log(result);
             setCards(result);
         })
     },[]);

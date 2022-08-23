@@ -85,6 +85,10 @@ function ProfileEdit() {
         profileService.editProfile(profile._id, user.accessToken, {username, fullName, info, profileImg})
         .then(result => {
             navigate(`/profile/${profile._ownerId}`)
+            profileService.getProfile(user.accessToken, user._id)
+            .then(result => {
+                setProfile(result[0]);
+            })
             
         })
       }

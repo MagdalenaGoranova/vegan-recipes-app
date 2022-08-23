@@ -18,11 +18,13 @@ export default function MyRecipesCard ({myRecipe, deleteMyRecipe}) {
     useEffect(() => {
         ratingService.getRate(myRecipe._id)
             .then(result => {
-                let sum = result.reduce((x, y) => { 
-                    return x + Number(y.rateRecipe)
-                }, 0); 
-                let averageRating = sum / result.length;
-                setRating(averageRating.toFixed(2));   
+                if(result.length > 0) {
+                    let sum = result.reduce((x, y) => { 
+                        return x + Number(y.rateRecipe)
+                    }, 0); 
+                    let averageRating = sum / result.length;
+                    setRating(averageRating.toFixed(2));   
+                }
             })
             .catch(err => {
                 console.log(err);
