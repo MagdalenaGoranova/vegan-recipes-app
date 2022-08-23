@@ -1,6 +1,7 @@
 # SoftUni ReactJS Final Project Assignment - Vegan Recipes Blog using ReactJS and SoftUni practice server(Node.js)
 
-The website is deployed at: https://vegan-recipes-blog.herokuapp.com
+The website is deployed at: 
+### https://vegan-recipes-blog.herokuapp.com
 
 In this app: 
 
