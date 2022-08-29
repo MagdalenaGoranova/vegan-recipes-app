@@ -29,5 +29,6 @@ Each recipes also has details page.
 Every registered user has a profile page. 
 Users are able to see their own profile page and edit it as well as other users profile pages which will include their recipes. 
 
-To test the application: There is currently hardcoded data for demonstation of how the website looks and works. User can also login with 2 test account: peter@abv.bg or george.abv.bg
+### To test the application: 
+There is currently hardcoded data for demonstation of how the website looks and works. User can also login with 2 test account: peter@abv.bg or george@abv.bg
  
